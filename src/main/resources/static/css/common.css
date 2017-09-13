@@ -1,0 +1,14 @@
+/* a {
+    color: black;
+    text-decoration: none;
+} */
+
+.dropbox {
+    width: 40%;
+    height: auto;
+    max-height: 150px;
+    border: 2px dashed rgba(34, 36, 38, 0.15);
+    /*border: 2px dashed #0087F7;*/
+    border-radius: 5px;
+    background: white;
+}

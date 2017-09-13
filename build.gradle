@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven{url "http://maven.apache.org"}
+}
+
+ext {
+    slf4jVersion = '1.7.25'
+    log4j2Version = '2.8.1'
+}
+
+dependencies {
+    compile("org.apache.logging.log4j:log4j-jcl:${log4j2Version}")
+    compile("org.slf4j:slf4j-api:${slf4jVersion}")
+    compile("org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}")
+    compile("org.apache.logging.log4j:log4j-api:${log4j2Version}")
+    compile("org.apache.logging.log4j:log4j-core:${log4j2Version}")
+
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-cache')
+    compile('org.springframework.boot:spring-boot-starter-mail')
+    //compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
+    compile('org.mybatis:mybatis-typehandlers-jsr310:1.0.2')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.apache.commons:commons-lang3:3.6')
+    compile('commons-io:commons-io:2.5')
+    compile('org.ehcache:ehcache')
+    compile('org.apache.shiro:shiro-core:1.3.2')
+    compile('org.apache.shiro:shiro-web:1.3.2')
+    compile('org.apache.shiro:shiro-spring:1.3.2')
+    compile('org.apache.shiro:shiro-ehcache:1.3.2')
+    compile('com.alibaba:druid:1.1.2')
+    //compile('redis.clients:jedis:2.5.2')
+    compileOnly('org.projectlombok:lombok')
+    runtime('org.postgresql:postgresql')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations {
+    compile.exclude module:'spring-boot-starter-logging'
+    compile.exclude module:'jcl-over-slf4j'
+    compile.exclude group:'ch.qos.logback'
+}
+
+jar {
+   baseName = 'EStore'
+
+   from('src/main/java') {
+        include '**/*.xml'
+   }
+}

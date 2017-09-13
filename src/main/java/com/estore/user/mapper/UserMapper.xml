@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.estore.user.mapper.UserMapper">
+
+    <resultMap id="user" type="com.estore.user.entity.User">
+        <result property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <result property="enabled" column="enabled"/>
+        <result property="enabledBy" column="enabled_by"/>
+        <result property="roleCode" column="role_code"/>
+    </resultMap>
+
+    <resultMap id="loginAccount" type="com.estore.user.dto.LoginAccount">
+        <result property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="name" column="name"/>
+        <result property="aliasName" column="alias_name"/>
+        <result property="wechatNumber" column="wechat_number"/>
+        <result property="idCard" column="id_card"/>
+        <result property="bankCard" column="bank_card"/>
+    </resultMap>
+
+    <resultMap id="lowerAgent" type="com.estore.user.dto.LowerAgent">
+        <result property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="name" column="name"/>
+        <result property="wechatNumber" column="wechat_number"/>
+    </resultMap>
+
+    <select id="getLoginAccountByPhoneNumberAndPassword" resultMap="loginAccount">
+        SELECT  id,
+                phone_number,
+                name,
+                alias_name,
+                wechat_number,
+                id_card,
+                bank_card
+        FROM t_user 
+        WHERE phone_number = #{phoneNumber} 
+        AND password = #{password}
+    </select>
+
+    <select id="selectAllLowerAgents" resultMap="lowerAgent">
+        SELECT  id,
+                phone_number,
+                name,
+                wechat_number
+        FROM t_user 
+        WHERE supper_agent_id = #{supperAgentId} 
+    </select>
+
+    <select id="findByPhoneNumber" resultMap="user">
+        SELECT  id, 
+                phone_number, 
+                password, 
+                enabled,
+                role_code 
+        FROM t_user 
+        WHERE phone_number = #{phoneNumber}
+    </select>
+
+    <select id="selectAll" resultMap="user">
+        SELECT  id, 
+                phone_number,
+                role_code, 
+                name, 
+                sex, 
+                age, 
+                address, 
+                enabled_by, 
+                enabled_time, 
+                enabled,
+                version
+        FROM t_user
+        <where>
+            <if test="phoneNumber != null and phoneNumber != ''">
+            phone_number = #{phoneNumber}
+            </if>
+            <if test="name != null and name != ''">
+            AND name LIKE '%'||#{name}||'%'
+            </if>
+            <if test="sex != null and sex != ''">
+            AND sex = #{sex}
+            </if>
+            <if test="age > 0">
+            AND age = #{age}
+            </if>
+            <if test="address != null and address != ''">
+            AND address LIKE '%'||#{address}||'%'
+            </if>
+        </where>
+        ORDER BY created_time DESC
+    </select>
+
+    <insert id="insert" parameterType="com.estore.user.entity.User" 
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+            INSERT INTO t_user(phone_number, 
+                               password, 
+                               name, 
+                               enabled, 
+                               role_code, 
+                               sex, 
+                               age, 
+                               address, 
+                               enabled_by, 
+                               enabled_time, 
+                               updated_by, 
+                               updated_time, 
+                               version)
+            VALUES (#{phoneNumber}, 
+                    #{password}, 
+                    #{name}, 
+                    #{enabled}, 
+                    #{roleCode}, 
+                    #{sex}, 
+                    #{age}, 
+                    #{address}, 
+                    #{enabledBy}, 
+                    #{enabledTime}, 
+                    #{updatedBy}, 
+                    NOW(), 
+                    1)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_user WHERE id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.estore.user.entity.User">
+        UPDATE t_user
+        SET name = #{name}, 
+            sex = #{sex}, 
+            age = #{age}, 
+            address = #{address}, 
+            enabled_by = #{enabledBy}, 
+            enabled = #{enabled}, 
+            role_code = #{roleCode}, 
+            enabled_time = #{enabledTime}, 
+            updated_by = #{updatedBy}, 
+            updated_time = NOW(), 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="updatePassword" parameterType="com.estore.user.dto.UserPasswordDto">
+        UPDATE t_user
+        SET password = #{password},
+            updated_by = #{updatedBy}, 
+            updated_time = NOW(), 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+</mapper>

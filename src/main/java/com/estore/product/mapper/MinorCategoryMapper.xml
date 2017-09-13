@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.estore.product.mapper.MinorCategoryMapper">
+    <resultMap id="minorCategory" type="com.estore.product.entity.MinorCategory">
+        <result property="id" column="id"/>
+        <result property="MinorCategoryId" column="major_category_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="minorCategory">
+        SELECT  id,
+                name,
+                description,
+                version
+        FROM t_minor_category
+        <where> 
+        <if test="searchCondition != null and searchCondition != ''">
+        name LIKE '%'||#{searchCondition}||'%' OR description LIKE '%'||#{searchCondition}||'%'
+        </if>
+        </where>
+    </select>
+
+    <select id="select" resultMap="minorCategory">
+        SELECT  id,
+                name,
+                description,
+                version
+        FROM t_minor_category
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.estore.product.entity.MinorCategory" 
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_minor_category(
+                    major_class_id, 
+                    name, 
+                    description, 
+                    created_by, c
+                    created_time, 
+                    updated_by, 
+                    updated_time, 
+                    version)
+        VALUES (#{majorCategoryId}, #{name}, #{description}, #{createdBy}, NOW(), #{updatedBy}, NOW(), 1)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_minor_category WHERE id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByMajorCategoryIds" parameterType="int">
+        DELETE FROM t_minor_category WHERE major_category_id IN
+        <foreach item="majorCategoryId" collection="majorCategoryIds" open="(" separator="," close=")">
+        #{majorCategoryId}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.estore.product.entity.MinorCategory">
+        UPDATE t_minor_category
+        SET major_category_id = #{majorCategoryId}, 
+            name = #{name}, 
+            description = #{description}, 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+</mapper>

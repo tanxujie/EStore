@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration>
+<Configuration name="LonganLogConfiguration" status="WARN"><!-- monitorInterval="600" -->
+    <!-- Log Properties START -->
+    <Properties>
+        <!-- 系统日志目录 -->
+        <Property name="LOG_DIRECTORY">./Logs/</Property>
+        <Property name="LOG_LAYOUT_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+    <!-- Log Properties END -->
+
+    <!-- Log Appenders START -->
+    <Appenders>
+        <!-- 控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_LAYOUT_PATTERN}"/>
+        </Console>
+        <!-- 控制台信息输出日志文件 -->
+        <RollingRandomAccessFile name="ConsoleFile" fileName="${LOG_DIRECTORY}/Console.log"
+            filePattern="${LOG_DIRECTORY}/Console-%d{yyyy-MM-dd-HH}-%i.log"
+            immediateFlush="true" append="true">
+            <!-- immediateFlush="false" in released product -->
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_LAYOUT_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <!-- Log Appenders END -->
+
+    <!-- Loggers START -->
+    <Loggers>
+        <logger name="com.estore.user.mapper" level="DEBUG"/>
+        <logger name="com.estore.product.mapper" level="DEBUG"/>
+        <logger name="com.estore.microclass.mapper" level="DEBUG"/>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ConsoleFile"/>
+        </Root>
+    </Loggers>
+    <!-- Loggers END -->
+</Configuration>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>阿坤珠宝</title>
+<link rel="stylesheet" type="text/css" href="/css/semantic.css">
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/dropzone.css">
+<link rel="stylesheet" type="text/css" href="/css/dataTables.semanticui.css">
+<link rel="stylesheet" type="text/css" href="/css/editor.dataTables.css">
+<link rel="stylesheet" type="text/css" href="/css/editor.semanticui.css">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/dropzone.js"></script>
+<script type="text/javascript" src="./js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="./js/dataTables.semanticui.js"></script>
+<script type="text/javascript" src="./js/dataTables.editor.js"></script>
+<script type="text/javascript" src="./js/editor.semanticui.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/app/microclass.js"></script>
+</head>
+<body>
+    <div id="menuArea" class="ui fixed menu">
+        <div class="header item">阿坤珠宝</div>
+        <div class="ui dropdown item">产品
+            <i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <div class="item"><a href="./product.html">产品</a></div>
+                <div class="item"><a href="./majorcategory.html">大分类</a></div>
+                <div class="item"><a href="./minorcategory.html">小分类</a></div>
+            </div>
+        </div>
+        <div class="ui dropdown item">微课堂
+            <i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <div class="active item"><a href="./microclass.html">微课堂</a></div>
+                <div class="item"><a href="./microclassvideo.html">微课堂视频</a></div>
+            </div>
+        </div>
+<!--         <div class="right menu">
+            <div class="item">
+                <div class="ui action left input">
+                    <input type="text" class="ui input" placeholder="产品信息" style="width:300px;" id="txtCondition">
+                    <div id="btnSearch" class="ui blue tiny submit button"><i class="search icon"></i>查询</div>
+                    <div id="btnAdd" class="ui teal tiny submit button"><i class="add icon"></i>添加</div>
+                </div>
+                </div>
+                <div class="item"></div>
+        </div> -->
+    </div>
+    <div class="ui middle aligned center aligned grid" style="margin-top:60px;">
+    <!-- <div id="btnAdd" class="ui teal tiny submit button" style="height:30px;width:80px;"><i class="add icon"></i>添加</div> -->
+<!--         <div id="searchArea" style="margin-top: 60px;">
+                <div class="ui action left input">
+                    <input type="text" class="ui input" placeholder="产品信息" style="width:300px;" id="txtCondition">
+                    <div id="btnSearch" class="ui blue tiny submit button"><i class="search icon"></i>查询</div>
+                    <div id="btnAdd" class="ui teal tiny submit button"><i class="add icon"></i>添加</div>
+                </div>
+        </div> -->
+        <table id="resultsTbl"></table>
+    </div>
+<!--     <form action="/product/uploadimage" class="dropzone" id="imagesDropZone"
+          method="post" enctype="multipart/form-data">
+        <div class="fallback">
+            <input name="image" type="file" multiple />
+        </div>
+    </form> -->
+</body>
+</html>

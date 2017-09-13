@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>阿坤珠宝</title>
+<link rel="stylesheet" type="text/css" href="/css/semantic.css">
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/dropzone.css">
+<link rel="stylesheet" type="text/css" href="/css/dataTables.semanticui.css">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/dropzone.js"></script>
+<script type="text/javascript" src="./js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="./js/dataTables.semanticui.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/app/microclassvideo.js"></script>
+</head>
+<body>
+    <div id="menuArea" class="ui fixed menu">
+        <div class="header item">阿坤珠宝</div>
+        <div class="ui dropdown item">产品
+            <i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <div class="item"><a href="./product.html">产品</a></div>
+                <div class="item"><a href="./majorcategory.html">大分类</a></div>
+                <div class="item"><a href="./minorcategory.html">小分类</a></div>
+            </div>
+        </div>
+        <div class="ui dropdown item">微课堂
+            <i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <div class="item"><a href="./microclass.html">微课堂</a></div>
+                <div class="active item"><a href="./microclassvideo.html">微课堂视频</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="ui container" style="margin-top:50px;">
+        <div class="ui center aligned basic segment">
+            <div class="ui left large icon input focus">
+                <input type="text" class="ui input" placeholder="视频信息" style="width:450px;" id="txtCondition">
+                <i class="search icon"></i>
+            </div>
+            <div id="btnSearch" class="ui large blue submit button">查询</div>
+            <div id="btnAdd" class="ui large teal submit button">添加</div>
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="grid layout icon"></i>
+        </h4>
+        <div class="scrolling content">
+<!--             <div id="videoContainer" class="ui four cards">
+            </div> -->
+            <table id="resultsTbl"></table>
+        </div>
+    </div>
+    <div id="modalAdd" class="ui modal">
+        <div class="header">微客堂视频</div>
+        <div class="scrolling content">
+            <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data">
+                <div class="two fields">
+                    <div class="field">
+                        <label>微课堂</label>
+                        <input name="microClassId" type="text" id="txtMicroClassId">
+                    </div>
+                    <div class="field">
+                        <label>标题</label>
+                        <input name="title" type="text" id="txtTitle">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>描述</label>
+                        <input name="description" type="text" id="txtDescription">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div id="videoDropZone" class="dropbox">
+                        <div class="dz-message">上传视频</div>
+                    </div>
+                </div>
+                <div id="hiddenUploadFile"></div>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui ok button" id="btnSave1">保存</div>
+            <div class="ui cancel button" id="btnCancel1">取消</div>
+        </div>
+    </div>
+</body>
+</html>

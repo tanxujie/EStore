@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.estore.microclass.mapper.MicroClassVideoMapper">
+    <resultMap id="microClassVideo" type="com.estore.microclass.entity.MicroClassVideo">
+        <result property="id" column="id"/>
+        <result property="microClassId" column="microclass_id"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="oldName" column="old_name"/>
+        <result property="newName" column="new_name"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="microClassVideo">
+        SELECT  id, 
+                microclass_id, 
+                title, 
+                description, 
+                old_name, 
+                new_name, 
+                video_date, 
+                version
+        FROM t_microclass_video
+        <where> 
+        <if test="condition != null and condition != ''">
+        title LIKE '%'||#{condition}||'%' OR description LIKE '%'||#{condition}||'%'
+        </if>
+        </where>
+    </select>
+
+    <select id="select" resultMap="microClassVideo">
+        SELECT  id, 
+                microclass_id, 
+                title, 
+                description, 
+                old_name, 
+                new_name, 
+                video_date, 
+                version
+        FROM t_microclass_video
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAllByMicroClassId" resultMap="microClassVideo">
+        SELECT  id, 
+                microclass_id, 
+                title, 
+                description, 
+                old_name, 
+                new_name, 
+                video_date, 
+                version
+        FROM t_microclass_video
+        WHERE microclass_id = #{microClassId}
+    </select>
+
+    <insert id="insert" parameterType="com.estore.microclass.entity.MicroClassVideo" 
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_microclass_video(
+                        microclass_id, 
+                        title, 
+                        description, 
+                        old_name, 
+                        new_name, 
+                        video_date, 
+                        created_by, 
+                        created_time, 
+                        updated_by, 
+                        updated_time, 
+                        version
+                        )
+        VALUES (#{microClassId}, 
+                #{title}, 
+                #{description}, 
+                #{oldName}, 
+                #{newName}, 
+                NOW(), 
+                #{createdBy}, 
+                NOW(), 
+                #{updatedBy}, 
+                NOW(), 
+                1)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_microclass_video WHERE id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.estore.microclass.entity.MicroClassVideo">
+        UPDATE t_microclass_video
+        SET microclass_id = #{microClassId},
+            title = #{title}, 
+            description = #{description},
+            old_name = #{oldName}, 
+            new_name = #{newName},
+            video_date = NOW(),
+            updated_by = #{updatedBy}, 
+            updated_time = NOW(), 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+</mapper>

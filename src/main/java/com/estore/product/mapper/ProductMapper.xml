@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.estore.product.mapper.ProductMapper">
+
+    <resultMap id="productListDto" type="com.estore.product.dto.ProductListDto">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="exFactoryPrice" column="ex_factory_price"/>
+        <result property="imageName" column="new_name"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <resultMap id="productDto" type="com.estore.product.dto.ProductDto">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="majorCategoryId" column="major_category_id"/>
+        <result property="minorCategoryId" column="minor_category_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="exFactoryPrice" column="ex_factory_price"/>
+        <result property="favorablePrice" column="favorable_price"/>
+        <result property="primaryPrice" column="primary_price"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="wechatNumber" column="wechat_number"/>
+        <result property="color" column="color"/>
+        <result property="category" column="category"/>
+        <result property="style" column="style"/>
+        <result property="theme" column="theme"/>
+        <result property="priceRangeFrom" column="price_range_from"/>
+        <result property="priceRangeTo" column="price_range_to"/>
+        <result property="circleRation" column="circle_ration"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <resultMap id="product" type="com.estore.product.entity.Product">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="majorCategoryId" column="major_category_id"/>
+        <result property="minorCategoryId" column="minor_category_id"/>
+        <result property="majorCategoryName" column="major_category_name"/>
+        <result property="minorCategoryName" column="minor_category_name"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="exFactoryPrice" column="ex_factory_price"/>
+        <result property="favorablePrice" column="favorable_price"/>
+        <result property="primaryPrice" column="primary_price"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="wechatNumber" column="wechat_number"/>
+        <result property="color" column="color"/>
+        <result property="category" column="category"/>
+        <result property="style" column="style"/>
+        <result property="theme" column="theme"/>
+        <result property="priceRangeFrom" column="price_range_from"/>
+        <result property="priceRangeTo" column="price_range_to"/>
+        <result property="circleRation" column="circle_ration"/>
+        <result property="version" column="version"/>
+        <result property="imageName" column="new_name"/>
+        <result property="videoName" column="video_name"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="productListDto" parameterType="com.estore.product.dto.ProductSearchDto">
+        SELECT  A.id, 
+                A.code,
+                A.name,
+                A.description,
+                A.ex_factory_price, 
+                A.version,
+                B.new_name
+        FROM t_product A
+        LEFT JOIN
+             t_product_image B
+        ON A.id = B.product_id 
+        AND B.display_order = 1
+        <where> 
+        <if test="condition != null and condition != ''">
+        AND (A.code LIKE '%'||#{condition}||'%' OR A.name LIKE '%'||#{condition}||'%' OR A.description LIKE '%'||#{condition}||'%')
+        </if>
+        <if test="newProduct">
+        AND A.created_time &gt;= (NOW()-INTERVAL'5 day')
+        </if>
+        <if test="majorCategoryId > 0">
+        AND A.major_category_id = #{majorCategoryId}
+        </if>
+        <if test="minorCategoryId > 0">
+        AND A.minor_category_id = #{minorCategoryId}
+        </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                <choose>
+                    <when test="orderDirection == 'ASC'">
+                    ORDER BY ${orderBy} ASC
+                    </when>
+                    <otherwise>
+                    ORDER BY ${orderBy} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+            ORDER BY A.created_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectAllForApp" resultMap="product" parameterType="com.estore.product.dto.ProductSearchDto">
+        SELECT  A.id, 
+                A.code, 
+                A.major_category_id, 
+                A.minor_category_id, 
+                C.name AS major_category_name,
+                D.name AS minor_category_name,
+                A.name, 
+                A.description, 
+                A.ex_factory_price, 
+                A.favorable_price, 
+                A.primary_price, 
+                A.phone_number, 
+                A.wechat_number, 
+                A.color, 
+                A.category, 
+                A.style, 
+                A.theme, 
+                A.price_range_from, 
+                A.price_range_to, 
+                A.cricle_ration, 
+                A.version,
+                B.new_name,
+                E.name AS video_name
+        FROM t_product A
+        LEFT JOIN
+             t_product_image B
+        ON A.id = B.product_id 
+        AND B.display_order = 1
+        LEFT JOIN
+             t_product_video E
+        ON A.id = E.product_id 
+        LEFT JOIN 
+             t_major_category C
+        ON A.major_category_id = C.id
+        LEFT JOIN 
+             t_minor_category D
+        ON A.minor_category_id = D.id
+        <where> 
+        <if test="condition != null and condition != ''">
+        AND (A.code LIKE '%'||#{condition}||'%' OR A.name LIKE '%'||#{condition}||'%' OR A.description LIKE '%'||#{condition}||'%')
+        </if>
+        <if test="newProduct">
+        AND A.created_time &gt;= (NOW()-INTERVAL'5 day')
+        </if>
+        <if test="majorCategoryId > 0">
+        AND A.major_category_id = #{majorCategoryId}
+        </if>
+        <if test="minorCategoryId > 0">
+        AND A.minor_category_id = #{minorCategoryId}
+        </if>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                <choose>
+                    <when test="orderDirection == 'ASC'">
+                    ORDER BY ${orderBy} ASC
+                    </when>
+                    <otherwise>
+                    ORDER BY ${orderBy} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+            ORDER BY A.created_time DESC
+            </otherwise>
+        </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="select" parameterType="int" resultMap="productDto">
+        SELECT  id, 
+                code, 
+                major_category_id, 
+                minor_category_id, 
+                name, 
+                description, 
+                ex_factory_price, 
+                favorable_price, 
+                primary_price, 
+                phone_number, 
+                wechat_number, 
+                color, 
+                category, 
+                style, 
+                theme, 
+                price_range_from, 
+                price_range_to, 
+                cricle_ration, 
+                version
+        FROM t_product
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.estore.product.entity.Product" 
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    INSERT INTO t_product(code, 
+                          major_category_id, 
+                          minor_category_id, 
+                          name, 
+                          description, 
+                          ex_factory_price, 
+                          favorable_price, 
+                          primary_price, 
+                          phone_number, 
+                          wechat_number, 
+                          color, 
+                          category, 
+                          style, 
+                          theme, 
+                          price_range_from, 
+                          price_range_to, 
+                          cricle_ration, 
+                          created_by, 
+                          created_time, 
+                          updated_by, 
+                          updated_time, 
+                          version)
+    VALUES (#{code}, 
+            #{majorCategoryId}, 
+            #{minorCategoryId}, 
+            #{name}, 
+            #{description}, 
+            #{exFactoryPrice}, 
+            #{favorablePrice}, 
+            #{primaryPrice}, 
+            #{phoneNumber}, 
+            #{wechatNumber}, 
+            #{color}, 
+            #{category}, 
+            #{style}, 
+            #{theme}, 
+            #{priceRangeFrom}, 
+            #{priceRangeTo}, 
+            #{circleRation}, 
+            #{createdBy}, 
+            NOW(), 
+            #{updatedBy}, 
+            NOW(), 
+            1)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_product WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.estore.product.entity.Product">
+        UPDATE t_product
+        SET major_category_id = #{majorCategoryId}, 
+            minor_category_id = #{minorCategoryId}, 
+            name = #{name}, 
+            description = #{description}, 
+            ex_factory_price = #{exFactoryPrice}, 
+            favorable_price = #{favorablePrice}, 
+            primary_price = #{primaryPrice}, 
+            phone_number = #{phoneNumber}, 
+            wechat_number = #{wechatNumber}, 
+            color = #{color}, 
+            category = #{category}, 
+            style = #{style}, 
+            theme = #{theme}, 
+            price_range_from = #{priceRangeFrom}, 
+            price_range_to = #{priceRangeTo}, 
+            cricle_ration = #{circleRation}, 
+            updated_by = #{updatedBy}, 
+            updated_time = NOW(), 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+</mapper>

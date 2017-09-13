@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/estore
+    username: akunzhubao
+    password: Akunzhubao@789
+    //url: jdbc:postgresql://localhost/estore
+    //username: postgres
+    //password: simontan1981
+    driver-class-name: org.postgresql.Driver
+  http: 
+    multipart:
+      enabled: true
+      max-file-size: 256MB
+      max-request-size: 256MB

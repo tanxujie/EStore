@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.estore.microclass.mapper.MicroClassMapper">
+    <resultMap id="microClass" type="com.estore.microclass.entity.MicroClass">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="microClass">
+        SELECT  id,
+                title,
+                description,
+                version
+        FROM t_microclass
+        <where> 
+        <if test="condition != null and condition != ''">
+        title LIKE '%'||#{condition}||'%' OR description LIKE '%'||#{condition}||'%'
+        </if>
+        </where>
+    </select>
+
+    <select id="select" resultMap="microClass">
+        SELECT  id,
+                title,
+                description,
+                version
+        FROM t_microclass
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.estore.microclass.entity.MicroClass" 
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_microclass(title, 
+                                 description, 
+                                 created_by, 
+                                 created_time, 
+                                 updated_by, 
+                                 updated_time, 
+                                 version)
+        VALUES (#{title}, #{description}, #{createdBy}, NOW(), #{updatedBy}, NOW(), 1)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_microclass WHERE id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.estore.microclass.entity.MicroClass">
+        UPDATE t_microclass
+        SET title = #{title}, 
+            description = #{description}, 
+            updated_by = #{updatedBy}, 
+            updated_time = NOW(), 
+            version = version + 1
+        WHERE id = #{id}
+    </update>
+</mapper>
