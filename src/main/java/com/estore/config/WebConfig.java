@@ -5,7 +5,6 @@
 package com.estore.config;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,16 +69,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
+        registrationBean.setFilter(httpBasicFilter);
         //registrationBean.setFilter(new MobileAppAuthRequestFilter());
         //registrationBean.addUrlPatterns("/app/*");
         Map<String,String> m = new HashMap<String,String>();
         m.put("targetBeanName","mobileAppAuthRequestFilter");
         m.put("targetFilterLifecycle","true");
         registrationBean.setInitParameters(m);
-        List<String> urlPatterns = new ArrayList<String>();
-        urlPatterns.add("/app/*");
-        registrationBean.setUrlPatterns(urlPatterns);
-        registrationBean.setFilter(httpBasicFilter);
+        registrationBean.addUrlPatterns("/app/*");
         registrationBean.setOrder(1);
         return registrationBean;
     }

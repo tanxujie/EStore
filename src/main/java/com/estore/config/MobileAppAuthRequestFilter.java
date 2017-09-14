@@ -37,7 +37,9 @@ public class MobileAppAuthRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (StringUtils.endsWith(uri, LOGIN_URL) 
+        if (!StringUtils.contains(uri, "/app/")) {
+            filterChain.doFilter(request, response);
+        } else if (StringUtils.endsWith(uri, LOGIN_URL) 
                 || StringUtils.endsWith(uri, LOGOUT_URL)) {
             filterChain.doFilter(request, response);
         } else {
