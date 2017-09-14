@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 public class MicroClassVideo extends AbstractBaseEntity {
     private static final long serialVersionUID = -4233773005101034566L;
 
+    private String authToken;
     /**
      * 微课堂ID
      */
@@ -56,6 +57,6 @@ public class MicroClassVideo extends AbstractBaseEntity {
      * @return
      */
     public String getVideoSrc() {
-        return Constants.WEB_SERVICE_ROOT_URL + "/download/video/" + this.newName;
+        return Constants.WEB_SERVICE_ROOT_URL + "/download/video/" + this.newName + "?authToken=" + this.authToken;
     }
 }

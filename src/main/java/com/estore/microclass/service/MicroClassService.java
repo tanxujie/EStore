@@ -42,7 +42,7 @@ public interface MicroClassService {
      * 
      * @return
      */
-    List<MicroClass> searchForApp();
+    List<MicroClass> searchForApp(String authToken);
 
     /**
      * 

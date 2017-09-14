@@ -28,6 +28,7 @@ import lombok.EqualsAndHashCode;
 public class Product extends AbstractBaseEntity {
     private static final long serialVersionUID = -3214818790707735952L;
 
+    private String authToken;
     /**
      * 产品编码
      */
@@ -181,11 +182,11 @@ public class Product extends AbstractBaseEntity {
      * @return
      */
     public String getImageSrc() {
-        return Constants.WEB_SERVICE_ROOT_URL + "/download/image/" + this.imageName;
+        return Constants.WEB_SERVICE_ROOT_URL + "/download/image/" + this.imageName + "?authToken=" + this.authToken;
     }
 
     public String getVideoSrc() {
-        return Constants.WEB_SERVICE_ROOT_URL + "/download/video/" + this.videoName;
+        return Constants.WEB_SERVICE_ROOT_URL + "/download/video/" + this.videoName + "?authToken=" + this.authToken;
     }
 
     public String getExFactoryPriceStr() {
@@ -220,7 +221,7 @@ public class Product extends AbstractBaseEntity {
 
         List<String> list = new ArrayList<>(this.imageNames.length);
         for (String imageName : this.imageNames) {
-            list.add(Constants.WEB_SERVICE_ROOT_URL + "/download/image/" + imageName);
+            list.add(Constants.WEB_SERVICE_ROOT_URL + "/download/image/" + imageName + "?authToken=" + this.authToken);
         }
         return list;
     }

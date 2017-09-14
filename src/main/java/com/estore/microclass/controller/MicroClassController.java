@@ -112,8 +112,8 @@ public class MicroClassController {
      */
     @RequestMapping(path = "/app/microclass/search")
     @CrossOrigin
-    public ResponseResult searchForApp() {
-        List<MicroClass> results = this.microClassService.searchForApp();
+    public ResponseResult searchForApp(String authToken) {
+        List<MicroClass> results = this.microClassService.searchForApp(authToken);
         if (CollectionUtils.isEmpty(results)) {
             return new ResponseResult(false, new ArrayList<>(0));
         }

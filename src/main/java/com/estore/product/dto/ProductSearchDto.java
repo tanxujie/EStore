@@ -15,6 +15,8 @@ import lombok.Data;
 @Data
 public class ProductSearchDto {
 
+    private String authToken;
+
     /**
      * 通用检索条件
      */

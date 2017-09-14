@@ -103,6 +103,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> results = this.productMapper.selectAllForApp(sdata);
         if (CollectionUtils.isNotEmpty(results)) {
             for (Product result : results) {
+                result.setAuthToken(sdata.getAuthToken());
                 List<String> imageNames = this.productImageMapper.selectImageNamesByProductId(result.getId());
                 if (CollectionUtils.isNotEmpty(imageNames)) {
                     result.setImageNames(imageNames.toArray(new String[0]));

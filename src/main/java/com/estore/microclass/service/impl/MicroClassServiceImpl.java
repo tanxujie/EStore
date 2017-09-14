@@ -57,11 +57,16 @@ public class MicroClassServiceImpl implements MicroClassService {
      * 为手机端查询微客堂视频
      */
     @Override
-    public List<MicroClass> searchForApp() {
+    public List<MicroClass> searchForApp(String authToken) {
         List<MicroClass> results = this.microClassMapper.selectAll(null);
         if (CollectionUtils.isNotEmpty(results)) {
             for (MicroClass result : results) {
                 List<MicroClassVideo> videos = this.microClassVideoMapper.selectAllByMicroClassId(result.getId());
+                if (CollectionUtils.isNotEmpty(videos)) {
+                    for (MicroClassVideo video : videos) {
+                        video.setAuthToken(authToken);
+                    }
+                }
                 result.setMicroClassVideos(videos);
             }
         }
