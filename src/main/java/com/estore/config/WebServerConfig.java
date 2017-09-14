@@ -19,8 +19,8 @@ public class WebServerConfig {
     public EmbeddedServletContainerFactory createEmbeddedServletContainerFactory()  
     {  
         TomcatEmbeddedServletContainerFactory tomcatFactory = new TomcatEmbeddedServletContainerFactory();  
-        tomcatFactory.setPort(80);
-        //tomcatFactory.setPort(8080);
+        //tomcatFactory.setPort(80);
+        tomcatFactory.setPort(8080);
         tomcatFactory.addConnectorCustomizers(new MyTomcatConnectorCustomizer());  
         return tomcatFactory;  
     }

@@ -5,8 +5,11 @@
 package com.estore.config;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +18,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceRegionHttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -62,13 +66,27 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return registrationBean;
     }
 
-    @Bean(name="mobileAppAuthRequestFilter")
-    public FilterRegistrationBean mobileAppAuthRequestFilter() {
+    @Bean(name="mobileAppAuthDelegatingFilterProxy")
+    public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(new MobileAppAuthRequestFilter());
-        registrationBean.addUrlPatterns("/app/*");
+        DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
+        //registrationBean.setFilter(new MobileAppAuthRequestFilter());
+        //registrationBean.addUrlPatterns("/app/*");
+        Map<String,String> m = new HashMap<String,String>();
+        m.put("targetBeanName","mobileAppAuthRequestFilter");
+        m.put("targetFilterLifecycle","true");
+        registrationBean.setInitParameters(m);
+        List<String> urlPatterns = new ArrayList<String>();
+        urlPatterns.add("/app/*");
+        registrationBean.setUrlPatterns(urlPatterns);
+        registrationBean.setFilter(httpBasicFilter);
         registrationBean.setOrder(1);
         return registrationBean;
+    }
+
+    @Bean(name="mobileAppAuthRequestFilter")
+    public MobileAppAuthRequestFilter mobileAppAuthRequestFilter() {
+        return new MobileAppAuthRequestFilter();
     }
 
 //    @Bean
