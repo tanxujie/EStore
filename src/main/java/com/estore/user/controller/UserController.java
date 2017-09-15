@@ -13,7 +13,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -130,9 +132,9 @@ public class UserController {
         return new ResponseResult(true, agents);
     }
 
-    @RequestMapping(path = "/app/user/saveLowerAgent")
+    @RequestMapping(path = "/app/user/saveLowerAgent", method = RequestMethod.POST)
     @CrossOrigin
-    public ResponseResult saveLowerAgent(@Valid LowerAgent agent) {
+    public ResponseResult saveLowerAgent(@Valid @RequestBody LowerAgent agent) {
         this.userService.save(agent);
         return new ResponseResult(true, "保存成功");
     }

@@ -27,6 +27,8 @@ public class User extends AbstractBaseEntity {
 
     private String wechatNumber;
 
+    private int supperAgentId;
+    
     /**
      * 密码
      */

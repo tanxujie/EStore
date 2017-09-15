@@ -93,6 +93,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(agent.getPhoneNumber());
         user.setWechatNumber(agent.getWechatNumber());
         user.setName(agent.getName());
+        user.setSupperAgentId(1);
         this.userMapper.insert(user);
     }
 }
