@@ -2,10 +2,11 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="ehcache.xsd"
          updateCheck="false" monitoring="autodetect"
-         dynamicConfig="true" >
+         dynamicConfig="true" name="estorecache">
          
     <diskStore path="java.io.tmpdir/ehcache"/>
 
+    <!-- 
     <defaultCache
             maxElementsInMemory="50000"
             eternal="false"
@@ -15,9 +16,10 @@
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
     />
+     -->
 
     <!-- 全局变量：永不过期-->
-    <cache name="GlobalAuthTokensCache"
+    <cache name="EStoreAuthTokensCache"
     	   maxElementsInMemory="50000"
            eternal="true"
     	   clearOnFlush="false"
