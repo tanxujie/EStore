@@ -51,6 +51,9 @@
                 wechat_number
         FROM t_user 
         WHERE supper_agent_id = #{supperAgentId} 
+        <if test="condition != null and condition != ''">
+        AND (name LIKE '%'||#{condition}||'%' OR phone_number LIKE '%'||#{condition}||'%' OR wechat_number LIKE '%'||#{condition}||'%')
+        </if>
     </select>
 
     <select id="findByPhoneNumber" resultMap="user">
@@ -101,6 +104,7 @@
             INSERT INTO t_user(phone_number, 
                                password, 
                                name, 
+                               wechat_number,
                                enabled, 
                                role_code, 
                                sex, 
@@ -114,6 +118,7 @@
             VALUES (#{phoneNumber}, 
                     #{password}, 
                     #{name}, 
+                    #{wechatNumber},
                     #{enabled}, 
                     #{roleCode}, 
                     #{sex}, 

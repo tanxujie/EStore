@@ -31,6 +31,8 @@ public interface UserService {
      */
     void save(User data);
 
+    void save(LowerAgent agent);
+
     /**
      * 
      * @param ids
@@ -75,5 +77,5 @@ public interface UserService {
      * @param supperAgentId
      * @return
      */
-    List<LowerAgent> searchLowerAgents(int supperAgentId);
+    List<LowerAgent> searchLowerAgents(int supperAgentId, String condition);
 }

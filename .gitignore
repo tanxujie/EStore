@@ -4,6 +4,8 @@
 /.gradle/
 /bin/
 
+*.log
+
 ### STS ###
 .apt_generated
 .classpath

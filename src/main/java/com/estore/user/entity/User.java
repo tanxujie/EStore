@@ -25,6 +25,8 @@ public class User extends AbstractBaseEntity {
      */
     private String phoneNumber;
 
+    private String wechatNumber;
+
     /**
      * 密码
      */

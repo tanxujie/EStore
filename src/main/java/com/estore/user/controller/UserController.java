@@ -120,11 +120,20 @@ public class UserController {
     /* ------------------ 移动端数据处理相关方法 ------------------------------------------------------------*/
     @RequestMapping(path = "/app/user/searchLowerAgents")
     @CrossOrigin
-    public ResponseResult searchLowerAgents(@RequestParam("supperAgentId") int supperAgentId) {
-        List<LowerAgent> agents = this.userService.searchLowerAgents(supperAgentId);
+    public ResponseResult searchLowerAgents(
+            @RequestParam("supperAgentId") int supperAgentId, 
+            @RequestParam("condition") String condition) {
+        List<LowerAgent> agents = this.userService.searchLowerAgents(supperAgentId, condition);
         if (CollectionUtils.isEmpty(agents)) {
             return new ResponseResult(false, new ArrayList<LowerAgent>(0));
         }
         return new ResponseResult(true, agents);
+    }
+
+    @RequestMapping(path = "/app/user/saveLowerAgent")
+    @CrossOrigin
+    public ResponseResult saveLowerAgent(@Valid LowerAgent agent) {
+        this.userService.save(agent);
+        return new ResponseResult(true, "保存成功");
     }
 }

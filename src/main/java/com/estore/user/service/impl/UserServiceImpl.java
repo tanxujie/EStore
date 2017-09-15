@@ -82,7 +82,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<LowerAgent> searchLowerAgents(int supperAgentId) {
-        return this.userMapper.selectAllLowerAgents(supperAgentId);
+    public List<LowerAgent> searchLowerAgents(int supperAgentId, String condition) {
+        return this.userMapper.selectAllLowerAgents(supperAgentId, condition);
+    }
+
+    @Override
+    public void save(LowerAgent agent) {
+        User user = new User();
+        user.setPhoneNumber(agent.getPhoneNumber());
+        user.setPassword(agent.getPhoneNumber());
+        user.setWechatNumber(agent.getWechatNumber());
+        user.setName(agent.getName());
+        this.userMapper.insert(user);
     }
 }
