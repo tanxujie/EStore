@@ -46,4 +46,32 @@ public class AuthController {
         }
         return new ResponseResult(false, "用户名或密码不正确");
     }
+
+    @RequestMapping(path = "/app/checkAuthToken", method = RequestMethod.GET)
+    @CrossOrigin
+    public ResponseResult checkAuthToken(String authToken) {
+        if (StringUtils.isBlank(authToken)) {
+            return new ResponseResult(false, "认证失败");
+        }
+
+        boolean result = userService.checkAuthToken(authToken);
+        if (result) {
+            return new ResponseResult(true, "认证成功");
+        }
+        return new ResponseResult(false, "用户名或密码不正确");
+    }
+
+    @RequestMapping(path = "/app/logout", method = RequestMethod.GET)
+    @CrossOrigin
+    public ResponseResult logout(String authToken) {
+        if (StringUtils.isBlank(authToken)) {
+            return new ResponseResult(false, "退出失败");
+        }
+
+        boolean result = userService.logout(authToken);
+        if (result) {
+            return new ResponseResult(true, "退出成功");
+        }
+        return new ResponseResult(false, "退出失败");
+    }
 }

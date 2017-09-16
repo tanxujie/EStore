@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +102,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getLowerAgentsCount(int supperAgentId) {
         return this.userMapper.countLowerAgents(supperAgentId);
+    }
+
+    @Override
+    public boolean checkAuthToken(String authToken) {
+        ValueWrapper vw = this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).get(authToken);
+        if (vw != null && ((LocalDate)vw.get()).isAfter(LocalDate.now())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean logout(String authToken) {
+        if (StringUtils.isNotBlank(authToken)) {
+            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).evict(authToken);
+            return true;
+        }
+        return false;
     }
 }

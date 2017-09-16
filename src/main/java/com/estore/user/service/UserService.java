@@ -25,6 +25,9 @@ public interface UserService {
      */
     LoginAccount authenticate(String phoneNumber, String password);
 
+    boolean checkAuthToken(String authToken);
+
+    boolean logout(String authToken);
     /**
      * 
      * @param data
