@@ -30,4 +30,6 @@ public class LowerAgent implements Serializable {
      * 微信号码
      */
     private String wechatNumber;
+
+    private int superAgentId;
 }
