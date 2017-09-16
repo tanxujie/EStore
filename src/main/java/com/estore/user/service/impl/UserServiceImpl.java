@@ -14,6 +14,7 @@ import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.stereotype.Service;
 
+import com.estore.base.ResponseResult;
 import com.estore.user.dto.LoginAccount;
 import com.estore.user.dto.LowerAgent;
 import com.estore.user.dto.UserPasswordDto;
@@ -66,8 +67,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void modifyPassword(UserPasswordDto data) {
+    public ResponseResult modifyPassword(UserPasswordDto data) {
+        int count = this.userMapper.countByIdAndPassword(data);
+        if (count != 1) {
+            return new ResponseResult(false, "旧密码不正确，请重新输入。");
+        }
         this.userMapper.updatePassword(data);
+        return new ResponseResult(true, "密码更新成功.");
     }
 
     @Override

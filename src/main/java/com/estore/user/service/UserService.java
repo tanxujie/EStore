@@ -6,6 +6,7 @@ package com.estore.user.service;
 
 import java.util.List;
 
+import com.estore.base.ResponseResult;
 import com.estore.user.dto.LoginAccount;
 import com.estore.user.dto.LowerAgent;
 import com.estore.user.dto.UserPasswordDto;
@@ -52,7 +53,7 @@ public interface UserService {
      * 
      * @param data
      */
-    void modifyPassword(UserPasswordDto data);
+    ResponseResult modifyPassword(UserPasswordDto data);
 
     /**
      * 

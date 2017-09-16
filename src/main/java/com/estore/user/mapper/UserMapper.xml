@@ -162,12 +162,19 @@
         WHERE id = #{id}
     </update>
 
+    <select id="countByIdAndPassword" resultType="int">
+        SELECT COUNT(1)
+        FROM t_user 
+        WHERE id = #{userId}
+        AND password = #{oldPassword} 
+    </select>
+
     <update id="updatePassword" parameterType="com.estore.user.dto.UserPasswordDto">
         UPDATE t_user
-        SET password = #{password},
+        SET password = #{newPassword},
             updated_by = #{updatedBy}, 
             updated_time = NOW(), 
             version = version + 1
-        WHERE id = #{id}
+        WHERE id = #{userId}
     </update>
 </mapper>

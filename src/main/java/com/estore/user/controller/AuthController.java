@@ -4,15 +4,19 @@
  */
 package com.estore.user.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.base.ResponseResult;
 import com.estore.user.dto.LoginAccount;
+import com.estore.user.dto.UserPasswordDto;
 import com.estore.user.service.UserService;
 
 /**
@@ -73,5 +77,11 @@ public class AuthController {
             return new ResponseResult(true, "退出成功");
         }
         return new ResponseResult(false, "退出失败");
+    }
+
+    @RequestMapping(path = "/app/modifyPassword", method = RequestMethod.POST)
+    @CrossOrigin
+    public ResponseResult modifyPassword(@Valid @RequestBody UserPasswordDto data) {
+        return this.userService.modifyPassword(data);
     }
 }
