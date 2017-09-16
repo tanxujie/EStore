@@ -5,16 +5,6 @@ $(function(){
         $(this).addClass('active').siblings().removeClass('active');
     });
 
-    var editor = new $.fn.dataTable.Editor({
-        //ajax: "/microclass/edit",
-        table: "#resultsTbl",
-        display: 'envelope',
-        fields: [
-            { label : "标题", name : "title" },
-            { label : "描述", name : "description" }
-        ]
-    });
-
     // 初始化查询表格
     $("#resultsTbl").DataTable({
         dom: "Bfrtip",
@@ -67,6 +57,5 @@ $(function(){
     });
     
     $("#btnAdd").click(function(){
-        editor.bubble(this);
     });
 });
