@@ -89,4 +89,6 @@ public interface UserMapper {
      * @return
      */
     int countLowerAgents(@Param("supperAgentId") int supperAgentId);
+
+    int countByIdAndPassword(UserPasswordDto data);
 }
