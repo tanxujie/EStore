@@ -58,6 +58,7 @@
         <result property="version" column="version"/>
         <result property="imageName" column="new_name"/>
         <result property="videoName" column="video_name"/>
+        <result property="innerDetail" column="inner_detail"/>
     </resultMap>
 
     <select id="selectAll" resultMap="productListDto" parameterType="com.estore.product.dto.ProductSearchDto">
@@ -125,6 +126,7 @@
                 A.price_range_from, 
                 A.price_range_to, 
                 A.cricle_ration, 
+                A.inner_detail,
                 A.version,
                 B.new_name,
                 E.name AS video_name
@@ -217,6 +219,7 @@
                           price_range_from, 
                           price_range_to, 
                           cricle_ration, 
+                          inner_detail,
                           created_by, 
                           created_time, 
                           updated_by, 
@@ -239,6 +242,7 @@
             #{priceRangeFrom}, 
             #{priceRangeTo}, 
             #{circleRation}, 
+            #{innerDetail},
             #{createdBy}, 
             NOW(), 
             #{updatedBy}, 
@@ -268,6 +272,7 @@
             price_range_from = #{priceRangeFrom}, 
             price_range_to = #{priceRangeTo}, 
             cricle_ration = #{circleRation}, 
+            inner_detail = #{innerDetail},
             updated_by = #{updatedBy}, 
             updated_time = NOW(), 
             version = version + 1

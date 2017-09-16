@@ -173,6 +173,11 @@ public class Product extends AbstractBaseEntity {
 
     private String videoName;
 
+    /**
+     * 产品内部详情，不可以转发给别人看。
+     */
+    private String innerDetail;
+
     public boolean isHasVideo() {
         return StringUtils.endsWith(this.videoName, "mp4");
     }
