@@ -78,4 +78,11 @@ public interface UserService {
      * @return
      */
     List<LowerAgent> searchLowerAgents(int supperAgentId, String condition);
+
+    /**
+     * 
+     * @param supperAgentId
+     * @return
+     */
+    int getLowerAgentsCount(int supperAgentId);
 }

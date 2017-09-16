@@ -82,4 +82,11 @@ public interface UserMapper {
      * @return
      */
     List<LowerAgent> selectAllLowerAgents(@Param("supperAgentId") int supperAgentId, @Param("condition") String condition);
+
+    /**
+     * 
+     * @param supperAgentId
+     * @return
+     */
+    int countLowerAgents(@Param("supperAgentId") int supperAgentId);
 }

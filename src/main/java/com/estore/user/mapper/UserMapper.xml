@@ -56,6 +56,12 @@
         </if>
     </select>
 
+    <select id="countLowerAgents" resultType="int">
+        SELECT COUNT(1)
+        FROM t_user 
+        WHERE supper_agent_id = #{supperAgentId} 
+    </select>
+
     <select id="findByPhoneNumber" resultMap="user">
         SELECT  id, 
                 phone_number, 

@@ -120,7 +120,7 @@ public class UserController {
     }
 
     /* ------------------ 移动端数据处理相关方法 ------------------------------------------------------------*/
-    @RequestMapping(path = "/app/user/searchLowerAgents")
+    @RequestMapping(path = "/app/user/searchLowerAgents", method = RequestMethod.GET)
     @CrossOrigin
     public ResponseResult searchLowerAgents(
             @RequestParam("supperAgentId") int supperAgentId, 
@@ -130,6 +130,12 @@ public class UserController {
             return new ResponseResult(false, new ArrayList<LowerAgent>(0));
         }
         return new ResponseResult(true, agents);
+    }
+
+    @RequestMapping(path = "/app/user/getLowerAgentCount", method = RequestMethod.GET)
+    @CrossOrigin
+    public ResponseResult getLowerAgentsCount(@RequestParam("supperAgentId") int supperAgentId) {
+        return new ResponseResult(true, this.userService.getLowerAgentsCount(supperAgentId));
     }
 
     @RequestMapping(path = "/app/user/saveLowerAgent", method = RequestMethod.POST)

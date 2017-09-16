@@ -96,4 +96,9 @@ public class UserServiceImpl implements UserService {
         user.setSupperAgentId(1);
         this.userMapper.insert(user);
     }
+
+    @Override
+    public int getLowerAgentsCount(int supperAgentId) {
+        return this.userMapper.countLowerAgents(supperAgentId);
+    }
 }
