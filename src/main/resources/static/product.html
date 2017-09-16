@@ -73,11 +73,11 @@
                 <div class="two fields">
                     <div class="field">
                         <label>编码</label>
-                        <input name="code" type="text" id="txtCode">
+                        <input name="code" type="text" id="txtCode" maxlength="10">
                     </div>
                     <div class="field">
                         <label>名称</label>
-                        <input name="name" type="text" id="txtName">
+                        <input name="name" type="text" id="txtName" maxlength="30">
                     </div>
                 </div>
                 <div class="two fields">
@@ -93,47 +93,53 @@
                 <div class="three fields">
                     <div class="field">
                         <label>出厂价</label>
-                        <input name="exFactoryPrice" type="text">
+                        <input name="exFactoryPrice" type="text" maxlength="8">
                     </div>
                     <div class="field">
                         <label>优惠价</label>
-                        <input name="favorablePrice" type="text">
+                        <input name="favorablePrice" type="text" maxlength="8">
                     </div>
                     <div class="field">
                         <label>一级价</label>
-                        <input name="primaryPrice" type="text">
+                        <input name="primaryPrice" type="text" maxlength="8">
                     </div>
                 </div>
                 <div class="two fields">
                     <div class="field">
                         <label>电话</label>
-                        <input name="phoneNumber" type="text">
+                        <input name="phoneNumber" type="text" maxlength="11">
                     </div>
                     <div class="field">
                         <label>微信</label>
-                        <input name="wechatNumber" type="text">
+                        <input name="wechatNumber" type="text" maxlength="20">
                     </div>
                 </div>
                 <div class="six fields">
                     <div class="field">
                             <label>颜色</label>
-                            <input name="color" type="text">
+                            <input name="color" type="text" maxlength="10">
                     </div>
                     <div class="field">
                             <label>种水</label>
-                            <input name="category" type="text">
+                            <input name="category" type="text" maxlength="10">
                     </div>
                     <div class="field">
                             <label>款式</label>
-                            <input name="style" type="text">
+                            <input name="style" type="text" maxlength="10">
                     </div>
                     <div class="field">
                             <label>题材</label>
-                            <input name="theme" type="text">
+                            <input name="theme" type="text" maxlength="10">
                     </div>
                     <div class="field">
                             <label>圈比</label>
-                            <input name="circleRation" type="text">
+                            <input name="circleRation" type="text" maxlength="10">
+                    </div>
+                </div>
+                <div class="one fields">
+                    <div class="field">
+                        <label>宝贝详情</label>
+                        <textarea name="innerDetail" rows="4" cols="80" maxlength="200"></textarea>
                     </div>
                 </div>
                 <div class="six fields">
@@ -165,7 +171,7 @@
             </form> -->
         </div>
         <div class="actions">
-            <div class="ui ok button" id="btnSave1">保存</div>
+            <div class="ui teal ok button" id="btnSave1">保存</div>
             <div class="ui cancel button" id="btnCancel1">取消</div>
         </div>
     </div>

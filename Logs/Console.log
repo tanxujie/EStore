@@ -255,3 +255,10 @@ Verify the connector's configuration, identify and stop any process that's liste
 2017-09-16 22:49:47.965 [http-nio-8080-exec-3] DEBUG com.estore.microclass.mapper.MicroClassVideoMapper.selectAll - ==>  Preparing: SELECT id, microclass_id, title, description, old_name, new_name, video_date, version FROM t_microclass_video 
 2017-09-16 22:49:47.967 [http-nio-8080-exec-3] DEBUG com.estore.microclass.mapper.MicroClassVideoMapper.selectAll - ==> Parameters: 
 2017-09-16 22:49:47.969 [http-nio-8080-exec-3] DEBUG com.estore.microclass.mapper.MicroClassVideoMapper.selectAll - <==      Total: 0
+2017-09-16 23:08:25.379 [http-nio-8080-exec-2] ERROR com.estore.product.controller.ProductController - Data validation failed.
+2017-09-16 23:08:25.401 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-16 23:08:25.402 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-16 23:08:25.404 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
+2017-09-16 23:08:28.388 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.select - ==>  Preparing: SELECT id, code, major_category_id, minor_category_id, name, description, ex_factory_price, favorable_price, primary_price, phone_number, wechat_number, color, category, style, theme, price_range_from, price_range_to, cricle_ration, version FROM t_product WHERE id = ? 
+2017-09-16 23:08:28.388 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.select - ==> Parameters: 28(Integer)
+2017-09-16 23:08:28.391 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.select - <==      Total: 1
