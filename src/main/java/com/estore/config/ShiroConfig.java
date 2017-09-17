@@ -94,6 +94,7 @@ public class ShiroConfig {
         // filter settings
         Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/app/**","anon"); // DO NOT check request from mobile application
+        filterChainDefinitionMap.put("/privacypolicy.html", "anon");
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("unauthenticated.html", "anon");
         filterChainDefinitionMap.put("unauthorized.html", "anon");
