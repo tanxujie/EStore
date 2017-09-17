@@ -86,7 +86,7 @@ public class AuthController {
 
     @RequestMapping(path = "/app/modifyPassword", method = RequestMethod.POST)
     @CrossOrigin
-    public ResponseResult modifyPassword(@Valid @RequestBody UserPasswordDto data) {
+    public ResponseResult modifyPassword(@RequestBody UserPasswordDto data) {
         return this.userService.modifyPassword(data);
     }
 }

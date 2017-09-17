@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -141,7 +142,13 @@ public class UserController {
 
     @RequestMapping(path = "/app/user/saveLowerAgent", method = RequestMethod.POST)
     @CrossOrigin
-    public ResponseResult saveLowerAgent(@Valid @RequestBody LowerAgent agent) {
+    public ResponseResult saveLowerAgent(@RequestBody LowerAgent agent) {
+        if (StringUtils.isBlank(agent.getPhoneNumber())) {
+            return new ResponseResult(false, "请输入手机号码。"); 
+        }
+        if (StringUtils.isBlank(agent.getName())) {
+            return new ResponseResult(false, "请输入姓名。"); 
+        }
         if (PhoneUtils.isNotValid(agent.getPhoneNumber())) {
             return new ResponseResult(false, agent.getPhoneNumber() + "不是有效的手机号码，请重新输入。");
         }
