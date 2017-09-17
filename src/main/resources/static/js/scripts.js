@@ -1,4 +1,12 @@
 
+$(function(){
+
+    $("#btnLogin").click(function(e){
+        e.preventDefault();
+        $("#frmLogin").submit();
+    });
+});
+/*
 jQuery(document).ready(function() {
 
     $('.page-container form').submit(function(){
@@ -28,4 +36,4 @@ jQuery(document).ready(function() {
         $(this).parent().find('.error').fadeOut('fast');
     });
 
-});
+});*/

@@ -89,12 +89,18 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         shiroFilter.setLoginUrl("/login");
-        shiroFilter.setSuccessUrl("/");
-        shiroFilter.setUnauthorizedUrl("/error");
+        shiroFilter.setSuccessUrl("/index.html");
+        shiroFilter.setUnauthorizedUrl("/unauthorized.html");
         // filter settings
         Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/app/*","anon"); // DO NOT check request from mobile application
         filterChainDefinitionMap.put("/login.html", "anon");
+        filterChainDefinitionMap.put("unauthenticated.html", "anon");
+        filterChainDefinitionMap.put("unauthorized.html", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/img/**", "anon");
+        filterChainDefinitionMap.put("/download/**", "anon");
         //filterChainDefinitionMap.put("/logout*","anon");
         filterChainDefinitionMap.put("/error.html","anon");
         filterChainDefinitionMap.put("/*", "authc");

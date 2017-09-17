@@ -28,6 +28,11 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(path = "/welcome")
+    public String welcome() {
+        return "/static/index.html";
+    }
+
     /**
      * 
      * @param phoneNumber
