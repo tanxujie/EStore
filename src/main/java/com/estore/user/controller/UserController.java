@@ -147,7 +147,7 @@ public class UserController {
         }
         User user = this.userService.findByPhoneNumber(agent.getPhoneNumber());
         if (null != user) {
-            return new ResponseResult(false, "手机号码:" + agent.getPhoneNumber() + "已经开过户，请使用其他手机号码开户。");
+            return new ResponseResult(false, "号码" + agent.getPhoneNumber() + "已经被注册，请使用其他手机号码开户。");
         }
         this.userService.save(agent);
         return new ResponseResult(true, "新代理已成功开户");
