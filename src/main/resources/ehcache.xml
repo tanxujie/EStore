@@ -6,7 +6,6 @@
          
     <diskStore path="java.io.tmpdir/ehcache"/>
 
-    <!-- 
     <defaultCache
             maxElementsInMemory="50000"
             eternal="false"
@@ -16,7 +15,6 @@
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
     />
-     -->
 
     <!-- 全局变量：永不过期-->
     <cache name="EStoreAuthTokensCache"
