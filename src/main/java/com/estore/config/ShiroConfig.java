@@ -93,7 +93,7 @@ public class ShiroConfig {
         shiroFilter.setUnauthorizedUrl("/unauthorized.html");
         // filter settings
         Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/app/*","anon"); // DO NOT check request from mobile application
+        filterChainDefinitionMap.put("/app/**","anon"); // DO NOT check request from mobile application
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("unauthenticated.html", "anon");
         filterChainDefinitionMap.put("unauthorized.html", "anon");
