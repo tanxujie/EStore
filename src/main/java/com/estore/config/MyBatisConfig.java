@@ -29,7 +29,7 @@ public class MyBatisConfig {
      * @param sqlSessionFactory
      * @return
      */
-    @Bean
+    @Bean("sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
@@ -39,7 +39,7 @@ public class MyBatisConfig {
      * @param dataSource
      * @return
      */
-    @Bean
+    @Bean("annotationDrivenTransactionManager")
     public PlatformTransactionManager annotationDrivenTransactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }

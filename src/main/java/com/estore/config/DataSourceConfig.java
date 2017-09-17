@@ -29,7 +29,7 @@ public class DataSourceConfig {
      * @param password
      * @return
      */
-    @Bean
+    @Bean("dataSource")
     public DataSource dataSource(@Value("${spring.datasource.driver-class-name}") String driverClassName, 
                                  @Value("${spring.datasource.url}") String url, 
                                  @Value("${spring.datasource.username}") String username,
