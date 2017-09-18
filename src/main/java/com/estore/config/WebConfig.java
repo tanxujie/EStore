@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +22,10 @@ import org.springframework.http.converter.ResourceRegionHttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -86,6 +94,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new MobileAppAuthRequestFilter();
     }
 
+    @Override
+    public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+        exceptionResolvers.add(new HandlerExceptionResolver(){
+
+            @Override
+            public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
+                    Object handler, Exception ex) {
+                if (ex instanceof IncorrectCredentialsException) {
+                    return new ModelAndView("unauthenticated.html");
+                }
+                return null;
+            }});
+    }
+
 //    @Bean
 //    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
 //        return new ByteArrayHttpMessageConverter();
@@ -131,6 +153,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new ResourceRegionHttpMessageConverter());
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", "index.html");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 
 //    @Override

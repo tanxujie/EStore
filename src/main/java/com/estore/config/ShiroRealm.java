@@ -49,6 +49,6 @@ public class ShiroRealm extends AuthorizingRealm {
         if (null == user) {
             throw new AuthenticationException("None user exists.");
         }
-        return new SimpleAuthenticationInfo(user, user.getPassword(), null);
+        return new SimpleAuthenticationInfo(user, user.getPassword(), "estorerealm");
     }
 }

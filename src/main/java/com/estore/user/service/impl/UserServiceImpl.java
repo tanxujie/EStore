@@ -68,12 +68,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseResult modifyPassword(UserPasswordDto data) {
+        if (StringUtils.isBlank(data.getOldPassword())) {
+            return new ResponseResult(false, "请输入旧密码.");
+        }
+        if (StringUtils.isBlank(data.getNewPassword())) {
+            return new ResponseResult(false, "请输入新密码.");
+        }
+        if (StringUtils.isBlank(data.getNewConfirmPassword())) {
+            return new ResponseResult(false, "请输入确认新密码.");
+        }
         int count = this.userMapper.countByIdAndPassword(data);
         if (count != 1) {
             return new ResponseResult(false, "旧密码不正确，请重新输入。");
         }
         this.userMapper.updatePassword(data);
-        return new ResponseResult(true, "密码更新成功.");
+        return new ResponseResult(true, "密码修改成功.");
     }
 
     @Override

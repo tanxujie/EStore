@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,7 @@ import com.estore.user.dto.LowerAgent;
 import com.estore.user.dto.UserPasswordDto;
 import com.estore.user.entity.User;
 import com.estore.user.service.UserService;
+import com.estore.utils.PhoneUtils;
 
 /**
  * @author Tan XuJie
@@ -140,8 +142,21 @@ public class UserController {
 
     @RequestMapping(path = "/app/user/saveLowerAgent", method = RequestMethod.POST)
     @CrossOrigin
-    public ResponseResult saveLowerAgent(@Valid @RequestBody LowerAgent agent) {
+    public ResponseResult saveLowerAgent(@RequestBody LowerAgent agent) {
+        if (StringUtils.isBlank(agent.getPhoneNumber())) {
+            return new ResponseResult(false, "请输入手机号码。"); 
+        }
+        if (StringUtils.isBlank(agent.getName())) {
+            return new ResponseResult(false, "请输入姓名。"); 
+        }
+        if (PhoneUtils.isNotValid(agent.getPhoneNumber())) {
+            return new ResponseResult(false, agent.getPhoneNumber() + "不是有效的手机号码，请重新输入。");
+        }
+        User user = this.userService.findByPhoneNumber(agent.getPhoneNumber());
+        if (null != user) {
+            return new ResponseResult(false, "号码" + agent.getPhoneNumber() + "已经被注册，请使用其他手机号码开户。");
+        }
         this.userService.save(agent);
-        return new ResponseResult(true, "保存成功");
+        return new ResponseResult(true, "新代理已成功开户");
     }
 }

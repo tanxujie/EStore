@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebServerConfig {
 
-    @Bean  
-    public EmbeddedServletContainerFactory createEmbeddedServletContainerFactory()  
+    @Bean("embeddedServletContainerFactory")
+    public EmbeddedServletContainerFactory embeddedServletContainerFactory()  
     {  
         TomcatEmbeddedServletContainerFactory tomcatFactory = new TomcatEmbeddedServletContainerFactory();  
         tomcatFactory.setPort(80);

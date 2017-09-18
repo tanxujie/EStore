@@ -123,6 +123,5 @@ public final class Constants {
      * 将来会替换为域名。
      */
     public static final String WEB_SERVICE_ROOT_URL = "http://www.akunzhubao.com";
-    //public static final String WEB_SERVICE_ROOT_URL = "http://123.56.11.216:80";
     //public static final String WEB_SERVICE_ROOT_URL = "http://192.168.1.102:8080";
 }

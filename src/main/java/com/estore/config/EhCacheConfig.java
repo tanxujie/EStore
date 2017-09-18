@@ -23,7 +23,7 @@ public class EhCacheConfig {
     /**
      * EhCache的配置
      */
-    @Bean(name = "cacheManager")
+    @Bean("cacheManager")
     public EhCacheCacheManager cacheManager(CacheManager cacheManager) {
         return new EhCacheCacheManager(cacheManager);
     }
@@ -31,7 +31,7 @@ public class EhCacheConfig {
     /**
      * EhCache的配置
      */
-    @Bean(name = "ehcache")
+    @Bean("ehcache")
     public EhCacheManagerFactoryBean ehcache() {
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
         ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
