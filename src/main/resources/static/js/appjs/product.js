@@ -127,6 +127,7 @@ $(function(){
 
     $("#btnCancel1").click(function(event){
         clearForm();
+        $("#txtCode").removeAttr("readonly").
         $addModal.modal('close');
     });
 
@@ -148,7 +149,13 @@ $(function(){
                     $container.append($(imgStr));
                     $(".remove.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
-                        removeProduct(id);
+                        $("#btnDelConfirm").click(function(e){
+                          e.preventDefault();
+                          $.post('/product/remove', {productId: id}, function(){
+                              searchProduct();
+                          });
+                        });
+                        removeProduct();
                     });
                     $(".edit.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
@@ -167,11 +174,10 @@ $(function(){
             if (data.success) {
                 var d = data.data;
                 if (d) {
-                    $("#txtCode").val(d.code);
+                    $("#txtCode").val(d.code).attr("readonly", "readonly");
                     $("#txtName").val(d.name);
                     $majorCategory.dropdown('set value', 3);
                     $addModal.modal('setting', 'closable', false).modal('show');
-                    
                 }
             } else {
                 alert(data.data);
@@ -179,14 +185,12 @@ $(function(){
         });
     }
 
-    function removeProduct(pid) {
-        $.post('/product/remove', {productId: pid}, function(){
-            searchProduct();
-        });
+    function removeProduct() {
+        $("#modalConfirm").modal('show');
     }
 
     function clearForm() {
-        $("#formAdd input").val("");
+        $("#formAdd input, #formAdd textarea").val("");
         $hiddenUploadFile.empty();
         dz.removeAllFiles();
     }
