@@ -9,12 +9,10 @@ import java.util.Map;
 
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.codec.Base64;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +33,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(this.shiroDbRealm());
         securityManager.setCacheManager(cacheShiroManager);
-        securityManager.setRememberMeManager(rememberMeManager);
+//        securityManager.setRememberMeManager(rememberMeManager);
         securityManager.setSessionManager(sessionManager);
         return securityManager;
     }
@@ -55,27 +53,27 @@ public class ShiroConfig {
         return new ShiroRealm();
     }
 
-    /**
-     * rememberMe管理器, cipherKey生成见{@code Base64Test.java}
-     */
-    @Bean
-    public CookieRememberMeManager rememberMeManager(SimpleCookie rememberMeCookie) {
-        CookieRememberMeManager manager = new CookieRememberMeManager();
-        manager.setCipherKey(Base64.decode("Z3VucwAAAAAAAAAAAAAAAA=="));
-        manager.setCookie(rememberMeCookie);
-        return manager;
-    }
-
-    /**
-     * 记住密码Cookie
-     */
-    @Bean
-    public SimpleCookie rememberMeCookie() {
-        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        simpleCookie.setHttpOnly(true);
-        simpleCookie.setMaxAge(7 * 24 * 60 * 60);//7天
-        return simpleCookie;
-    }
+//    /**
+//     * rememberMe管理器, cipherKey生成见{@code Base64Test.java}
+//     */
+//    @Bean
+//    public CookieRememberMeManager rememberMeManager(SimpleCookie rememberMeCookie) {
+//        CookieRememberMeManager manager = new CookieRememberMeManager();
+//        manager.setCipherKey(Base64.decode("Z3VucwAAAAAAAAAAAAAAAA=="));
+//        manager.setCookie(rememberMeCookie);
+//        return manager;
+//    }
+//
+//    /**
+//     * 记住密码Cookie
+//     */
+//    @Bean
+//    public SimpleCookie rememberMeCookie() {
+//        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+//        simpleCookie.setHttpOnly(true);
+//        simpleCookie.setMaxAge(7 * 24 * 60 * 60);//7天
+//        return simpleCookie;
+//    }
 
     @Bean
     public DefaultWebSessionManager sessionManager(CacheManager cacheShiroManager) {
