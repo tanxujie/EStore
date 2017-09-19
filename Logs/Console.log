@@ -622,3 +622,78 @@ Consider defining a bean of type 'org.apache.shiro.web.mgt.CookieRememberMeManag
 2017-09-19 23:40:40.425 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
 2017-09-19 23:40:40.425 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 1(Integer)
 2017-09-19 23:40:40.431 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 10
+2017-09-19 23:44:02.679 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==>  Preparing: SELECT id, name, description, version FROM t_major_category 
+2017-09-19 23:44:02.681 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==> Parameters: 
+2017-09-19 23:44:02.683 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - <==      Total: 14
+2017-09-19 23:44:02.746 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:44:02.747 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 1(Integer)
+2017-09-19 23:44:02.748 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 10
+2017-09-19 23:46:37.134 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.insert - ==>  Preparing: INSERT INTO t_product(code, major_category_id, minor_category_id, name, description, ex_factory_price, favorable_price, primary_price, phone_number, wechat_number, color, category, style, theme, price_range_from, price_range_to, cricle_ration, inner_detail, created_by, created_time, updated_by, updated_time, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW(), 1) 
+2017-09-19 23:46:37.154 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.insert - ==> Parameters: A008(String), 1(Integer), 5(Integer), ASFAf(String), null, 2123(BigDecimal), 12313(BigDecimal), 12313(BigDecimal), (String), (String), null, null, null, null, null, null, null, AFASFAF(String), 0(Integer), 0(Integer)
+2017-09-19 23:46:37.179 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.insert - <==    Updates: 1
+2017-09-19 23:46:37.215 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:46:37.216 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:46:37.218 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 2
+2017-09-19 23:46:39.888 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.select - ==>  Preparing: SELECT id, code, major_category_id, minor_category_id, name, description, ex_factory_price, favorable_price, primary_price, phone_number, wechat_number, color, category, style, theme, price_range_from, price_range_to, cricle_ration, version FROM t_product WHERE id = ? 
+2017-09-19 23:46:39.889 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.select - ==> Parameters: 30(Integer)
+2017-09-19 23:46:39.890 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.select - <==      Total: 1
+2017-09-19 23:46:39.931 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:46:39.931 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 3(Integer)
+2017-09-19 23:46:39.932 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 7
+2017-09-19 23:46:43.979 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.select - ==>  Preparing: SELECT id, code, major_category_id, minor_category_id, name, description, ex_factory_price, favorable_price, primary_price, phone_number, wechat_number, color, category, style, theme, price_range_from, price_range_to, cricle_ration, version FROM t_product WHERE id = ? 
+2017-09-19 23:46:43.979 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.select - ==> Parameters: 28(Integer)
+2017-09-19 23:46:43.980 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.select - <==      Total: 1
+2017-09-19 23:46:51.793 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.selectImageNamesByProductId - ==>  Preparing: SELECT new_name FROM t_product_image WHERE product_id = ? 
+2017-09-19 23:46:51.795 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.selectImageNamesByProductId - ==> Parameters: 30(Integer)
+2017-09-19 23:46:51.796 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.selectImageNamesByProductId - <==      Total: 0
+2017-09-19 23:46:51.797 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.delete - ==>  Preparing: DELETE FROM t_product WHERE id = ? 
+2017-09-19 23:46:51.797 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.delete - ==> Parameters: 30(Integer)
+2017-09-19 23:46:51.799 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductMapper.delete - <==    Updates: 1
+2017-09-19 23:46:51.800 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.deleteByProductId - ==>  Preparing: DELETE FROM t_product_image WHERE product_id = ? 
+2017-09-19 23:46:51.800 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.deleteByProductId - ==> Parameters: 30(Integer)
+2017-09-19 23:46:51.801 [http-nio-8080-exec-5] DEBUG com.estore.product.mapper.ProductImageMapper.deleteByProductId - <==    Updates: 0
+2017-09-19 23:46:51.818 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:46:51.819 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:46:51.820 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
+2017-09-19 23:47:50.048 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==>  Preparing: SELECT id, name, description, version FROM t_major_category 
+2017-09-19 23:47:50.050 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==> Parameters: 
+2017-09-19 23:47:50.051 [http-nio-8080-exec-8] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - <==      Total: 14
+2017-09-19 23:47:50.076 [http-nio-8080-exec-4] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:47:50.077 [http-nio-8080-exec-4] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 1(Integer)
+2017-09-19 23:47:50.078 [http-nio-8080-exec-4] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 10
+2017-09-19 23:47:52.187 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:47:52.188 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:47:52.190 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
+2017-09-19 23:48:05.608 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.ProductMapper.select - ==>  Preparing: SELECT id, code, major_category_id, minor_category_id, name, description, ex_factory_price, favorable_price, primary_price, phone_number, wechat_number, color, category, style, theme, price_range_from, price_range_to, cricle_ration, version FROM t_product WHERE id = ? 
+2017-09-19 23:48:05.610 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.ProductMapper.select - ==> Parameters: 28(Integer)
+2017-09-19 23:48:05.613 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.ProductMapper.select - <==      Total: 1
+2017-09-19 23:48:05.633 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:48:05.633 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 3(Integer)
+2017-09-19 23:48:05.634 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 7
+2017-09-19 23:48:48.491 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==>  Preparing: SELECT id, name, description, version FROM t_major_category 
+2017-09-19 23:48:48.497 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==> Parameters: 
+2017-09-19 23:48:48.498 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - <==      Total: 14
+2017-09-19 23:48:48.544 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:48:48.545 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 1(Integer)
+2017-09-19 23:48:48.547 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 10
+2017-09-19 23:49:09.985 [http-nio-8080-exec-2] DEBUG com.estore.microclass.mapper.MicroClassMapper.selectAll - ==>  Preparing: SELECT id, title, description, version FROM t_microclass 
+2017-09-19 23:49:09.987 [http-nio-8080-exec-2] DEBUG com.estore.microclass.mapper.MicroClassMapper.selectAll - ==> Parameters: 
+2017-09-19 23:49:10.039 [http-nio-8080-exec-2] DEBUG com.estore.microclass.mapper.MicroClassMapper.selectAll - <==      Total: 0
+2017-09-19 23:49:12.756 [http-nio-8080-exec-1] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==>  Preparing: SELECT id, name, description, version FROM t_major_category 
+2017-09-19 23:49:12.756 [http-nio-8080-exec-1] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - ==> Parameters: 
+2017-09-19 23:49:12.757 [http-nio-8080-exec-1] DEBUG com.estore.product.mapper.MajorCategoryMapper.selectAll - <==      Total: 14
+2017-09-19 23:49:12.767 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==>  Preparing: SELECT id, name FROM t_minor_category WHERE major_category_id = ? 
+2017-09-19 23:49:12.767 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - ==> Parameters: 1(Integer)
+2017-09-19 23:49:12.768 [http-nio-8080-exec-7] DEBUG com.estore.product.mapper.MinorCategoryMapper.selectAllByMajorCategoryId - <==      Total: 10
+2017-09-19 23:49:15.026 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:49:15.027 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:49:15.028 [http-nio-8080-exec-9] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
+2017-09-19 23:49:38.040 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:49:38.043 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:49:38.044 [http-nio-8080-exec-10] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
+2017-09-19 23:49:40.521 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 WHERE (A.code LIKE '%'||?||'%' OR A.name LIKE '%'||?||'%' OR A.description LIKE '%'||?||'%') ORDER BY A.created_time DESC 
+2017-09-19 23:49:40.524 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: we(String), we(String), we(String)
+2017-09-19 23:49:40.557 [http-nio-8080-exec-6] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 0
+2017-09-19 23:49:43.653 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==>  Preparing: SELECT A.id, A.code, A.name, A.description, A.ex_factory_price, A.version, B.new_name FROM t_product A LEFT JOIN t_product_image B ON A.id = B.product_id AND B.display_order = 1 ORDER BY A.created_time DESC 
+2017-09-19 23:49:43.654 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - ==> Parameters: 
+2017-09-19 23:49:43.656 [http-nio-8080-exec-3] DEBUG com.estore.product.mapper.ProductMapper.selectAll - <==      Total: 1
