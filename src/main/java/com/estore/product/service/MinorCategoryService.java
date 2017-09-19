@@ -7,11 +7,14 @@ package com.estore.product.service;
 import java.util.List;
 
 import com.estore.product.entity.MinorCategory;
+import com.estore.utils.Option;
 
 /**
  * @author  <a href="mailto:tanxujie@gmail.com">Tan XuJie</a>
  */
 public interface MinorCategoryService {
+
+    List<Option> getAllOptions(int majorCategoryId);
 
     /**
      * 保存小分类信息

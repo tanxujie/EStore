@@ -8,6 +8,51 @@ $(function(){
         $(this).addClass('active').siblings().removeClass('active');
     });
 
+    // auto load major category
+    var $majorCategory;
+    function loadMajorCategory() {
+        var md = $("#selMajorCategory").empty();
+        $.getJSON("/majorcategory/getAllOptions", function(data){
+            var str = "";
+            if (data && data.success) {
+                var items = data.data;
+                for (var i = 0; i < items.length; i++) {
+                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
+                }
+                loadMinorCategory(items[0].value);
+            }
+
+            $majorCategory = md.append(str).dropdown({
+                onChange: function(val) {
+                    loadMinorCategory(val);
+                }
+            });
+        });
+    }
+
+    var $minorCategory = $("#selMinorCategory");
+    function loadMinorCategory(majorCategoryId) {
+        $minorCategory.empty();
+        $.getJSON("/minorcategory/getAllOptions", {majorCategoryId: majorCategoryId}, function(data){
+            var str = "";
+            if (data && data.success) {
+                var items = data.data;
+                for (var i = 0; i < items.length; i++) {
+                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
+                }
+            }
+            $minorCategory.append(str).dropdown();
+        });
+    }
+
+    loadMajorCategory();
+
+//    $("#selMajorCategory").dropdown({
+//        apiSetting: {
+//            url: "//majorcategory/getAllOptions"
+//        }
+//    });
+
     var dz = new Dropzone("#videoDropZone", {
         paramName: "videos",
         maxFilesize: 50,
@@ -124,7 +169,9 @@ $(function(){
                 if (d) {
                     $("#txtCode").val(d.code);
                     $("#txtName").val(d.name);
+                    $majorCategory.dropdown('set value', 3);
                     $addModal.modal('setting', 'closable', false).modal('show');
+                    
                 }
             } else {
                 alert(data.data);

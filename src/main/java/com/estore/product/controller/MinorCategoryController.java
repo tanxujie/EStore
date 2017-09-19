@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.druid.util.StringUtils;
 import com.estore.base.ResponseResult;
 import com.estore.product.entity.MinorCategory;
 import com.estore.product.service.MinorCategoryService;
@@ -31,6 +32,15 @@ public class MinorCategoryController {
 
     @Autowired
     private MinorCategoryService minorCategoryService;
+
+    @RequestMapping(path = "/getAllOptions")
+    public ResponseResult getAllOptions(String majorCategoryId) {
+        if (!StringUtils.isNumber(majorCategoryId)) {
+            return new ResponseResult(false, "大分类ID无效");
+        }
+        return new ResponseResult(true, this.minorCategoryService.getAllOptions(
+                StringUtils.stringToInteger(majorCategoryId)));
+    }
 
     /**
      * 

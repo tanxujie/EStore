@@ -70,51 +70,60 @@
         <div class="header">产品信息</div>
         <div class="scrolling content">
             <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:auto;">
-                <div class="two fields">
+                <div class="one fields">
                     <div class="field">
                         <label>编码</label>
-                        <input name="code" type="text" id="txtCode" maxlength="10">
-                    </div>
-                    <div class="field">
-                        <label>名称</label>
-                        <input name="name" type="text" id="txtName" maxlength="30">
+                        <input name="code" type="text" id="txtCode" style="width:120px;" maxlength="6">
                     </div>
                 </div>
-                <div class="two fields">
+                <div class="one fields">
+                    <div class="field">
+                        <label>描述</label>
+                        <textarea id="txtName" name="name" rows="2" cols="60" maxlength="200"></textarea>
+                    </div>
+                </div>
+                <div class="one fields">
+                    <div class="field">
+                        <label>宝贝详情</label>
+                        <textarea name="innerDetail" rows="3" cols="60" maxlength="200"></textarea>
+                    </div>
+                </div>
+                <div class="one fields">
                     <div class="field">
                         <label>大分类</label>
-                        <input name="majorCategoryId" type="text">
+                        <select id="selMajorCategory" name="majorCategoryId" style="width:140px;"></select>
                     </div>
                     <div class="field">
                         <label>小分类</label>
-                        <input name="minorCategoryId" type="text">
+                        <select id="selMinorCategory" name="minorCategoryId" style="width:140px;"></select>
                     </div>
                 </div>
-                <div class="three fields">
+                <div class="one fields">
                     <div class="field">
                         <label>出厂价</label>
-                        <input name="exFactoryPrice" type="text" maxlength="8">
+                        <input name="exFactoryPrice" type="text" maxlength="8" style="width:125px;">
                     </div>
                     <div class="field">
                         <label>优惠价</label>
-                        <input name="favorablePrice" type="text" maxlength="8">
+                        <input name="favorablePrice" type="text" maxlength="8" style="width:125px;">
                     </div>
                     <div class="field">
                         <label>一级价</label>
-                        <input name="primaryPrice" type="text" maxlength="8">
+                        <input name="primaryPrice" type="text" maxlength="8" style="width:125px;">
                     </div>
                 </div>
-                <div class="two fields">
+                <div class="one fields">
                     <div class="field">
                         <label>电话</label>
-                        <input name="phoneNumber" type="text" maxlength="11">
+                        <input name="phoneNumber" type="text" maxlength="11" style="width:180px;">
                     </div>
                     <div class="field">
                         <label>微信</label>
-                        <input name="wechatNumber" type="text" maxlength="20">
+                        <input name="wechatNumber" type="text" maxlength="20" style="width:210px;">
                     </div>
                 </div>
-                <div class="six fields">
+                <!-- 
+                <div class="one fields">
                     <div class="field">
                             <label>颜色</label>
                             <input name="color" type="text" maxlength="10">
@@ -136,12 +145,7 @@
                             <input name="circleRation" type="text" maxlength="10">
                     </div>
                 </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>宝贝详情</label>
-                        <textarea name="innerDetail" rows="4" cols="80" maxlength="200"></textarea>
-                    </div>
-                </div>
+                 -->
                 <div class="six fields">
                     <div id="videoDropZone" class="dropbox">
                         <div class="dz-message">上传视频</div>

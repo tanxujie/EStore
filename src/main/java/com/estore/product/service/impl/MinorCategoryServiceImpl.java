@@ -4,14 +4,17 @@
  */
 package com.estore.product.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estore.product.entity.MinorCategory;
 import com.estore.product.mapper.MinorCategoryMapper;
 import com.estore.product.service.MinorCategoryService;
+import com.estore.utils.Option;
 
 /**
  *
@@ -46,5 +49,19 @@ public class MinorCategoryServiceImpl implements MinorCategoryService {
     @Override
     public MinorCategory getDetail(int id) {
         return this.minorCategoryMapper.select(id);
+    }
+
+    @Override
+    public List<Option> getAllOptions(int majorCategoryId) {
+        List<MinorCategory> results = this.minorCategoryMapper.selectAllByMajorCategoryId(majorCategoryId);
+        if (CollectionUtils.isEmpty(results)) {
+            return new ArrayList<>(0);
+        }
+
+        List<Option> options = new ArrayList<>(results.size());
+        for (MinorCategory result : results) {
+            options.add(new Option(result.getId(), result.getName()));
+        }
+        return options;
     }
 }

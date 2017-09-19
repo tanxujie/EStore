@@ -11,7 +11,6 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
@@ -27,7 +26,6 @@ public class ShiroConfig {
 
     @Bean
     public DefaultWebSecurityManager securityManager(
-            CookieRememberMeManager rememberMeManager, 
             CacheManager cacheShiroManager, 
             SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();

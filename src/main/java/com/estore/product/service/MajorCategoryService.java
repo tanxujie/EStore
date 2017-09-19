@@ -7,11 +7,14 @@ package com.estore.product.service;
 import java.util.List;
 
 import com.estore.product.entity.MajorCategory;
+import com.estore.utils.Option;
 
 /**
  * @author  <a href="mailto:tanxujie@gmail.com">Tan XuJie</a>
  */
 public interface MajorCategoryService {
+
+    List<Option> getAllOptions();
 
     /**
      * 
