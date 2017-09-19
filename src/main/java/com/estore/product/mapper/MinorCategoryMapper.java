@@ -20,6 +20,8 @@ public interface MinorCategoryMapper {
      */
     List<MinorCategory> selectAll(String searchCondition);
 
+    List<MinorCategory> selectAllByMajorCategoryId(int majorCategoryId);
+
     /**
      * 
      * @param id

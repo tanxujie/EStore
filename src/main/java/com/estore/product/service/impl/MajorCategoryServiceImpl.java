@@ -4,14 +4,17 @@
  */
 package com.estore.product.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estore.product.entity.MajorCategory;
 import com.estore.product.mapper.MajorCategoryMapper;
 import com.estore.product.service.MajorCategoryService;
+import com.estore.utils.Option;
 
 /**
  * @author  <a href="mailto:tanxujie@gmail.com">Tan XuJie</a>
@@ -45,5 +48,20 @@ public class MajorCategoryServiceImpl implements MajorCategoryService {
     @Override
     public MajorCategory getDetail(int id) {
         return this.majorCategoryMapper.select(id);
+    }
+
+    @Override
+    public List<Option> getAllOptions() {
+        List<MajorCategory> results = this.majorCategoryMapper.selectAll(null);
+        if (CollectionUtils.isEmpty(results)) {
+            return new ArrayList<>(0);
+        }
+
+        List<Option> options = new ArrayList<>(results.size());
+        for (MajorCategory result : results) {
+            Option option = new Option(result.getId(), result.getName());
+            options.add(option);
+        }
+        return options;
     }
 }

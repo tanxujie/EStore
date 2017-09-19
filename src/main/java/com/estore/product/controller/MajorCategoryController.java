@@ -32,6 +32,11 @@ public class MajorCategoryController {
     @Autowired
     private MajorCategoryService majorCategoryService;
 
+    @RequestMapping(path = "/getAllOptions")
+    public ResponseResult getAllOptions() {
+        return new ResponseResult(true, this.majorCategoryService.getAllOptions());
+    }
+
     /**
      * 
      * @param data

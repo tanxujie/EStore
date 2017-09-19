@@ -21,6 +21,13 @@
         </where>
     </select>
 
+    <select id="selectAllByMajorCategoryId" resultMap="minorCategory">
+        SELECT  id,
+                name
+        FROM t_minor_category
+        WHERE major_category_id = #{majorCategoryId}
+    </select>
+
     <select id="select" resultMap="minorCategory">
         SELECT  id,
                 name,
