@@ -117,16 +117,51 @@ $(function(){
         $addModal.modal('setting', 'closable', false).modal('show');
     });
 
-    $("#btnSave1").click(function(event){
+    $("#formAdd").form({
+//        inline: true,
+        on: 'submit',
+        onSuccess: function() {
+            //alert("OK");
+        },
+        onFailure: function() {
+            alert(122);
+        },
+        fields: {
+            code: {
+                identifier: 'txtCode',
+                rules:[
+                    {
+                        type:'empty',
+                        prompt: '请输入编码'
+                    }
+                ]
+            },
+            name: {
+                identifier: 'txtName',
+                rules:[
+                    {
+                        type:'empty',
+                        prompt: '请输入描述'
+                    }
+                ]
+            }
+        }
+    });
+
+    $("#btnSave1").click(function(event) {
+        //event.preventDefault();
+        event.stopPropagation();
+        /*
         $.post("/product/save", $("#formAdd").serialize()).done(function(event){
             clearForm();
             $addModal.modal('close');
             searchProduct();
-        });
+        });*/
     });
 
     $("#btnCancel1").click(function(event){
         clearForm();
+        $("#formAdd").form("reset");
         $("#txtCode").removeAttr("readonly").
         $addModal.modal('close');
     });
@@ -195,6 +230,7 @@ $(function(){
         dz.removeAllFiles();
     }
 
+    /*
     function validate() {
         $("#formAdd").form({
             fields: {
@@ -212,4 +248,5 @@ $(function(){
     }
     
     validate();
+    */
 });
