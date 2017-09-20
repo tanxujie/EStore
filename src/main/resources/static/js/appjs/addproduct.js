@@ -119,7 +119,7 @@ $(function(){
 
     $("#formAdd").form({
 //        inline: true,
-        on: 'submit',
+        on: 'blur',
         onSuccess: function() {
             //alert("OK");
         },
