@@ -1,8 +1,6 @@
-$(function(){
-    var $addModal = $("#modalAdd");
+$(function() {
     var $hiddenVideoFile = $("#hiddenVideoFile");
     var $hiddenUploadFile = $("#hiddenUploadFile");
-    $("#messageArea").hide();
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
@@ -46,12 +44,6 @@ $(function(){
     }
 
     loadMajorCategory();
-
-//    $("#selMajorCategory").dropdown({
-//        apiSetting: {
-//            url: "//majorcategory/getAllOptions"
-//        }
-//    });
 
     var dz = new Dropzone("#videoDropZone", {
         paramName: "videos",
@@ -109,26 +101,10 @@ $(function(){
         }*/
     });
 
-    $("#btnSearch").click(function(event) {
-        searchProduct();
-    });
-
-//    $("#btnAdd").click(function(event){
-//        $addModal.modal('setting', 'closable', false).modal('show');
-//    });
-
     $("#formAdd").form({
-//        inline: true,
-        on: 'blur',
-        onSuccess: function() {
-            //alert("OK");
-        },
-        onFailure: function() {
-            alert(122);
-        },
         fields: {
             code: {
-                identifier: 'txtCode',
+                identifier: 'code',
                 rules:[
                     {
                         type:'empty',
@@ -137,116 +113,70 @@ $(function(){
                 ]
             },
             name: {
-                identifier: 'txtName',
+                identifier: 'name',
                 rules:[
                     {
                         type:'empty',
                         prompt: '请输入描述'
                     }
                 ]
+            },
+            exFactoryPrice: {
+                identifier: 'exFactoryPrice',
+                rules:[
+                    {
+                        type:'number',
+                        prompt: '请输入正确的出厂价格'
+                    }
+                ]
+            },
+            favorablePrice: {
+                identifier: 'favorablePrice',
+                rules:[
+                    {
+                        type:'number',
+                        prompt: '请输入正确的一级代理价格'
+                    }
+                ]
+            },
+            primaryPrice: {
+                identifier: 'primaryPrice',
+                rules:[
+                    {
+                        type:'number',
+                        prompt: '请输入正确的二级代理价格'
+                    }
+                ]
+            },
+            phoneNumber: {
+                identifier: 'phoneNumber',
+                rules:[
+                    {
+                        type:'regExp[^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$]',
+                        prompt: '请输入正确的手机号码'
+                    }
+                ]
+            },
+            imageNames: {
+                identifier: 'imageNames',
+                rules:[
+                    {
+                        type:'empty',
+                        prompt: '请上传图片'
+                    }
+                ]
             }
         }
     });
 
-    $("#btnSave1").click(function(event) {
-        //event.preventDefault();
-        event.stopPropagation();
-        /*
-        $.post("/product/save", $("#formAdd").serialize()).done(function(event){
-            clearForm();
-            $addModal.modal('close');
-            searchProduct();
-        });*/
+    $("#btnSave").click(function(event) {
+        event.preventDefault();
+        if ($("#formAdd").form('is valid')) {
+            $.post("/product/save", 
+                    $("#formAdd").serialize(), 
+                    function() {
+                window.location = './product.html';
+            });
+        }
     });
-
-    $("#btnCancel1").click(function(event){
-        clearForm();
-        $("#formAdd").form("reset");
-        $("#txtCode").removeAttr("readonly").
-        $addModal.modal('close');
-    });
-
-    function searchProduct() {
-        var condition = $("#txtCondition").val();
-        var $container = $("#imageContainer");
-        $container.empty();
-        $("#message").text("");
-        $("#messageArea").hide();
-        $.getJSON("/product/search", { condition: condition }, function(data, textStatus, req) {
-            if (data && data.success) {
-                var pinfos = data.data;
-                if (pinfos && pinfos.length) {
-                    var imgStr = '';
-                    $.each(pinfos, function(i, d) {
-                        imgStr = imgStr + '<div class="card" style="width:260px;height:300px;"><div class="image" style="height:200px;"><img class="ui wireframe image" style="width:260px;height:200px;" src="'+d.imageName+'"></div><div class="content" style="height:50px;"><div class="header">'+(d.code||'')+'</div><div class="meta">'+(d.name||'')+'</div></div><div class="extra content"><div class="left aligned">价格：'+(d.price||'')+'</div><div class="right aligned"><i class="large edit icon" style="cursor:pointer;" pid="'+d.id+'"></i><i class="large remove icon" style="cursor:pointer;" pid="'+d.id+'"></i></div></div></div>';
-                    });
-                    
-                    $container.append($(imgStr));
-                    $(".remove.icon", $container).click(function(event){
-                        var id = $(this).attr("pid");
-                        $("#btnDelConfirm").click(function(e){
-                          e.preventDefault();
-                          $.post('/product/remove', {productId: id}, function(){
-                              searchProduct();
-                          });
-                        });
-                        removeProduct();
-                    });
-                    $(".edit.icon", $container).click(function(event){
-                        var id = $(this).attr("pid");
-                        openProductEdit(id);
-                    });
-                }
-            } else {
-                $("#message").text(data.data);
-                $("#messageArea").show();
-            }
-        });
-    }
-
-    function openProductEdit(pid) {
-        $.getJSON("/product/getDetail", {productId: pid}, function(data, textStatus, req) {
-            if (data.success) {
-                var d = data.data;
-                if (d) {
-                    $("#txtCode").val(d.code).attr("readonly", "readonly");
-                    $("#txtName").val(d.name);
-                    $majorCategory.dropdown('set value', 3);
-                    $addModal.modal('setting', 'closable', false).modal('show');
-                }
-            } else {
-                alert(data.data);
-            }
-        });
-    }
-
-    function removeProduct() {
-        $("#modalConfirm").modal('show');
-    }
-
-    function clearForm() {
-        $("#formAdd input, #formAdd textarea").val("");
-        $hiddenUploadFile.empty();
-        dz.removeAllFiles();
-    }
-
-    /*
-    function validate() {
-        $("#formAdd").form({
-            fields: {
-                code : {
-                    identifier: 'code',
-                    rules: [
-                        {
-                            type: 'number',
-                            prompt: 'Only Number'
-                        }
-                    ]
-                }
-            }
-        });
-    }
-    
-    validate();
-    */
 });
