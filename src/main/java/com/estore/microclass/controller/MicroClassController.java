@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.base.ResponseResult;
@@ -50,9 +51,9 @@ public class MicroClassController {
      * @param ids
      * @return
      */
-    @RequestMapping(path = "/microclass/remove")
-    public ResponseResult remove(int[] ids) {
-        this.microClassService.remove(ids);
+    @RequestMapping(path = "/microclass/remove", method = RequestMethod.POST)
+    public ResponseResult remove(int id) {
+        this.microClassService.remove(id);
         return new ResponseResult(true, "微课堂数据删除成功");
     }
 

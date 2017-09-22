@@ -34,8 +34,8 @@ public class MicroClassServiceImpl implements MicroClassService {
     }
 
     @Override
-    public void remove(int[] ids) {
-        this.microClassMapper.delete(ids);
+    public void remove(int id) {
+        this.microClassMapper.delete(id);
     }
 
     @Override

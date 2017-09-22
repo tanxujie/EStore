@@ -43,10 +43,7 @@
     </insert>
 
     <delete id="delete" parameterType="int">
-        DELETE FROM t_microclass WHERE id IN
-        <foreach item="id" collection="ids" open="(" separator="," close=")">
-        #{id}
-        </foreach>
+        DELETE FROM t_microclass WHERE id = #{id}
     </delete>
 
     <update id="update" parameterType="com.estore.microclass.entity.MicroClass">

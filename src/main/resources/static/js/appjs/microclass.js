@@ -55,12 +55,39 @@ $(function(){
         });
         if (ids && ids.length) {
             window.location = './editmicroclass.html?id='+ids[0];
+        } else {
+            $("#selectDataModal").modal('show');
         }
     });
 
     $("#btnDelete").click(function(event){
         event.preventDefault();
         event.stopPropagation();
-        alert(213);
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            $("#deleteModal").modal('show');
+        } else {
+            $("#selectDataModal").modal('show');
+        }
+    });
+
+    $("#btnDeleteConfirm").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            $.post('/microclass/remove', 
+                    {'id': ids[0]}, 
+                    function(data){
+                        if (data.success) {
+                            $table.row('.selected').remove().draw( false );
+                            $("#deleteModal").modal('hide');
+                        }
+                    });
+        }
     });
 });
