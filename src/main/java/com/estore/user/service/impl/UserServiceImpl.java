@@ -74,9 +74,6 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isBlank(data.getNewPassword())) {
             return new ResponseResult(false, "请输入新密码.");
         }
-        if (StringUtils.isBlank(data.getNewConfirmPassword())) {
-            return new ResponseResult(false, "请输入确认新密码.");
-        }
         int count = this.userMapper.countByIdAndPassword(data);
         if (count != 1) {
             return new ResponseResult(false, "旧密码不正确，请重新输入。");
