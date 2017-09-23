@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>阿坤珠宝</title>
+<link rel="stylesheet" type="text/css" href="/css/semantic.css">
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/dropzone.css">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/dropzone.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/appjs/editagent.js"></script>
+</head>
+<body>
+    <div id="menuArea" class="ui fixed menu">
+        <div class="header item">阿坤珠宝</div>
+        <div class="ui item"><a href="./product.html">产品</a></div>
+        <div class="ui item"><a href="./microclass.html">微课堂</a></div>
+        <div class="ui active item"><a href="./agent.html">代理</a></div>
+    </div>
+    <div class="ui container" style="margin-top:75px;">
+        <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
+            <div class="ui error message"></div>
+            <div class="one fields">
+                <div class="field">
+                    <label>标题</label>
+                    <input name="title" type="text" id="txtTitle" style="width:300px;" maxlength="50">
+                </div>
+            </div>
+            <div class="one fields">
+                <div class="field">
+                    <label>说明</label>
+                    <textarea id="txtDescription" name="description" rows="3" cols="60" maxlength="190"></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="id" id="txtId">
+            <div class="actions">
+                <div class="ui primary submit button" id="btnSave">保存</div>
+                <a href="./microclass.html" class="ui cancel button">取消</a>
+            </div>
+        </form>
+    </div>
+</body>

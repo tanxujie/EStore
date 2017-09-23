@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>阿坤珠宝</title>
+<link rel="stylesheet" type="text/css" href="/css/semantic.css">
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/dropzone.css">
+<link rel="stylesheet" type="text/css" href="/css/datatables.css">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/dropzone.js"></script>
+<script type="text/javascript" src="./js/datatables.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/appjs/agent.js"></script>
+</head>
+<body>
+    <div id="menuArea" class="ui fixed menu">
+        <div class="header item">阿坤珠宝</div>
+        <div class="ui item"><a href="./product.html">产品</a></div>
+        <div class="ui item"><a href="./microclass.html">微课堂</a></div>
+        <div class="ui active item"><a href="./agent.html">代理</a></div>
+    </div>
+    <div class="ui middle aligned center aligned grid" style="margin-top:0px;">
+        <div id="searchArea" style="margin-top: 60px;">
+                <div class="ui action left input">
+                    <input type="text" class="ui input" placeholder="代理信息" style="width:300px;" id="txtCondition">
+                    <div id="btnSearch" class="ui blue tiny submit button"><i class="search icon"></i>查询</div>
+                    <div id="btnAdd" class="ui teal tiny button"><i class="add icon"></i>添加</div>
+                    <div id="btnEdit" class="ui teal tiny button"><i class="edit icon"></i>编辑</div>
+                    <div id="btnDelete" class="ui grey tiny button"><i class="delete icon"></i>删除</div>
+                </div>
+        </div>
+    </div>
+    <div class="ui center aligned grid" style="margin-top:60px;">
+        <table id="resultsTbl"></table>
+    </div>
+    <div id="selectDataModal" class="ui mini modal">
+        <div class="header"><i class="blue large info circle icon"></i>提示</div>
+        <div class="content">
+            <p>请先选择一条数据</p>
+        </div>
+        <div class="actions">
+            <div class="ui ok button">确认</div>
+        </div>
+    </div>
+    <div id="deleteModal" class="ui mini modal">
+        <div class="header"><i class="red large warning circle icon"></i>删除</div>
+        <div class="content">
+            <p>确定要删除该条数据吗?</p>
+        </div>
+        <div class="actions">
+            <div id="btnDeleteConfirm" class="ui blue button">确定</div>
+            <div class="ui cancel button">Cancel</div>
+        </div>
+    </div>
+</body>
+</html>
