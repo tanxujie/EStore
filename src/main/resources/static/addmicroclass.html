@@ -21,8 +21,10 @@
         <div class="ui item"><a href="./product.html">产品</a></div>
         <div class="ui active item"><a href="./microclass.html">微课堂</a></div>
     </div>
-    <div class="ui container" style="margin-top:75px;">
-        <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
+    <div class="ui text container" style="margin-top:75px;">
+        <h4 class="ui top attached block header">追加课堂信息</h4>
+        <div class="ui bottom attached segment">
+        <form class="ui form" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
             <div class="ui error message"></div>
             <div class="one fields">
                 <div class="field">
@@ -36,11 +38,14 @@
                     <textarea id="txtDescription" name="description" rows="3" cols="60" maxlength="190"></textarea>
                 </div>
             </div>
+            <div class="one fields">
             <input id="fileupload" type="file" name="files[]" data-url="/upload/image" multiple>
+            </div>
             <div class="actions">
                 <div class="ui primary submit button" id="btnSave">保存</div>
                 <a href="./microclass.html" class="ui cancel button">取消</a>
             </div>
         </form>
+        </div>
     </div>
 </body>
