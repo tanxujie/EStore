@@ -1,8 +1,10 @@
 $(function() {
     var id = getUrlParam('id');
-    if (!id) {
+    if (!isNumber(id)) {
         window.location = './microclass.html';
+        return;
     }
+
     // load details
     $.get('/microclass/getDetail', 
             {'id': id}, 
@@ -14,6 +16,7 @@ $(function() {
                 }
             }
          );
+
     var $hiddenVideoFile = $("#hiddenVideoFile");
     var $hiddenUploadFile = $("#hiddenUploadFile");
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
