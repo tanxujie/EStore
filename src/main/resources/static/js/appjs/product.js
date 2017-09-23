@@ -38,6 +38,7 @@ $(function(){
                     $(".edit.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
                         window.location = './editproduct.html?id=' + id;
+                        return;
                     });
                 }
             } else {

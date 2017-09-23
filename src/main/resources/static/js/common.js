@@ -13,5 +13,5 @@ function getUrlParam(name) {
 }
 
 function isNumber(val) {
-    return typeof val === 'number' && !isNaN(val); 
+    return /^-?[\d.]+(?:e-?\d+)?$/.test(val);; 
 }

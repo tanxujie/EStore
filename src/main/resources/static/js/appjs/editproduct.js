@@ -5,7 +5,7 @@ $(function() {
         return;
     }
 
-    // load details
+    // load product detail
     $.get('/product/getDetail', 
             {'productId': id}, 
             function(data){
