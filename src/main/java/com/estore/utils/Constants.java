@@ -98,10 +98,16 @@ public final class Constants {
 
     public static final int RECORD_COUNT_PER_PAGE = 24;
 
-    public static final int MAJOR_CATEGORY_HAND_ON = 2;
-    public static final int MAJOR_CATEGORY_WATER_DROP = 3;
-    public static final int MAJOR_CATEGORY_NOTHING_CARDS = 4;
-    public static final int MAJOR_CATEGORY_108_PRODUCTS = 5;
+    //public static final int MAJOR_CATEGORY_HAND_ON = 2;
+    //public static final int MAJOR_CATEGORY_WATER_DROP = 3;
+    //public static final int MAJOR_CATEGORY_NOTHING_CARDS = 4;
+    //public static final int MAJOR_CATEGORY_108_PRODUCTS = 5;
+    //public static final int MAJOR_CATEGORY_ENGRAVING = 6;
+    
+    public static final int MAJOR_CATEGORY_HAND_ON = 1;
+    public static final int MAJOR_CATEGORY_WATER_DROP = 5;
+    public static final int MAJOR_CATEGORY_NOTHING_CARDS = 11;
+    public static final int MAJOR_CATEGORY_108_PRODUCTS = 2;
     public static final int MAJOR_CATEGORY_ENGRAVING = 6;
 
     public static final String GLOBAL_AUTH_TOKENS_CACHE = "EStoreAuthTokensCache";
