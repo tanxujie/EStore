@@ -16,37 +16,21 @@
 <body>
     <div id="menuArea" class="ui fixed menu">
         <div class="header item">阿坤珠宝</div>
-        <div class="ui dropdown item">产品
-            <i class="dropdown icon"></i>
-            <div class="menu transition hidden">
-                <div class="active item"><a href="./product.html">产品</a></div>
-                <!-- 
-                <div class="item"><a href="./majorcategory.html">大分类</a></div>
-                <div class="item"><a href="./minorcategory.html">小分类</a></div>
-                 -->
-            </div>
-        </div>
-        <div class="ui dropdown item">微课堂
-            <i class="dropdown icon"></i>
-            <div class="menu transition hidden">
-                <div class="item"><a href="./microclass.html">微课堂</a></div>
-                <div class="item"><a href="./microclassvideo.html">微课堂视频</a></div>
-            </div>
-        </div>
-        <!-- 
+        <div class="ui active item"><a href="./product.html">产品</a></div>
+        <div class="ui item"><a href="./microclass.html">微课堂</a></div>
         <div class="right menu">
             <div class="item">
                 <div class="ui action left input">
                     <input type="text" class="ui input" placeholder="产品信息" style="width:300px;" id="txtCondition">
                     <div id="btnSearch" class="ui blue tiny submit button"><i class="search icon"></i>查询</div>
-                    <div id="btnAdd" class="ui teal tiny submit button"><i class="add icon"></i>添加</div>
+                    <a href="./addproduct.html" class="ui teal tiny submit button"><i class="add icon"></i>添加</a>
                 </div>
             </div>
             <div class="item"></div>
         </div>
-         -->
     </div>
     <div class="ui container" style="margin-top:75px;">
+    <!-- 
             <div class="item">
                 <div class="ui action left input">
                     <input type="text" class="ui input" placeholder="产品信息" style="width:450px;" id="txtCondition">
@@ -54,6 +38,7 @@
                     <div id="btnAdd" class="ui teal tiny submit button"><i class="add icon"></i>添加</div>
                 </div>
             </div>
+             -->
         <h4 class="ui horizontal divider header">
             <i class="grid layout icon"></i>
         </h4>
@@ -66,123 +51,15 @@
             </div>
         </div>
     </div>
-    <div id="modalAdd" class="ui modal">
-        <div class="header">产品信息</div>
-        <div class="scrolling content">
-            <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:auto;">
-                <div class="one fields">
-                    <div class="field">
-                        <label>编码</label>
-                        <input name="code" type="text" id="txtCode" style="width:120px;" maxlength="6">
-                    </div>
-                </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>描述</label>
-                        <textarea id="txtName" name="name" rows="2" cols="60" maxlength="200"></textarea>
-                    </div>
-                </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>宝贝详情</label>
-                        <textarea name="innerDetail" rows="3" cols="60" maxlength="200"></textarea>
-                    </div>
-                </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>大分类</label>
-                        <select id="selMajorCategory" name="majorCategoryId" style="width:140px;"></select>
-                    </div>
-                    <div class="field">
-                        <label>小分类</label>
-                        <select id="selMinorCategory" name="minorCategoryId" style="width:140px;"></select>
-                    </div>
-                </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>出厂价</label>
-                        <input name="exFactoryPrice" type="text" maxlength="8" style="width:125px;">
-                    </div>
-                    <div class="field">
-                        <label>优惠价</label>
-                        <input name="favorablePrice" type="text" maxlength="8" style="width:125px;">
-                    </div>
-                    <div class="field">
-                        <label>一级价</label>
-                        <input name="primaryPrice" type="text" maxlength="8" style="width:125px;">
-                    </div>
-                </div>
-                <div class="one fields">
-                    <div class="field">
-                        <label>电话</label>
-                        <input name="phoneNumber" type="text" maxlength="11" style="width:180px;">
-                    </div>
-                    <div class="field">
-                        <label>微信</label>
-                        <input name="wechatNumber" type="text" maxlength="20" style="width:210px;">
-                    </div>
-                </div>
-                <!-- 
-                <div class="one fields">
-                    <div class="field">
-                            <label>颜色</label>
-                            <input name="color" type="text" maxlength="10">
-                    </div>
-                    <div class="field">
-                            <label>种水</label>
-                            <input name="category" type="text" maxlength="10">
-                    </div>
-                    <div class="field">
-                            <label>款式</label>
-                            <input name="style" type="text" maxlength="10">
-                    </div>
-                    <div class="field">
-                            <label>题材</label>
-                            <input name="theme" type="text" maxlength="10">
-                    </div>
-                    <div class="field">
-                            <label>圈比</label>
-                            <input name="circleRation" type="text" maxlength="10">
-                    </div>
-                </div>
-                 -->
-                <div class="six fields">
-                    <div id="videoDropZone" class="dropbox">
-                        <div class="dz-message">上传视频</div>
-                    </div>
-                </div>
-                <div id="hiddenVideoFile"></div>
-                <div class="six fields">
-                    <div id="imageDropZone" class="dropbox">
-                        <div class="dz-message">上传图片</div>
-                    </div>
-                </div>
-                <div id="hiddenUploadFile"></div>
-            </form>
-                <!-- <div class="dz-message">Add file here</div> -->
-<!--             <form action="" class="dropzone needsclick dz-clickable" id="imagesDropZone" >
-                <div class="dz-message needsclick">
-                Drop files here or click to upload.
-                <span class="note needsclick">
-                (This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)
-                </span>
-                </div>
-            </form> -->
-<!--             <form action="/product/uploadimage" class="dropzone">
-                <div class="fallback">
-                    <input type="file" name="images" multiple />
-                </div>
-            </form> -->
-        </div>
-        <div class="actions">
-            <div class="ui teal ok button" id="btnSave1">保存</div>
-            <div class="ui cancel button" id="btnCancel1">取消</div>
-        </div>
-    </div>
-    <div id="modalEdit" class="ui modal">
-        <div class="header">修改</div>
-        <div class="scrolling content">
-        </div>
+    <div id="modalConfirm" class="ui mini modal">
+      <div class="header">删除数据</div>
+      <div class="content">
+        <p>确定要删除该条数据吗?</p>
+      </div>
+      <div class="actions">
+        <div id="btnDelConfirm" class="ui teal approve button">删除</div>
+        <div class="ui cancel button">取消</div>
+      </div>
     </div>
 </body>
 </html>

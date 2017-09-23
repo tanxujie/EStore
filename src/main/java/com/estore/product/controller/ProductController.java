@@ -41,7 +41,7 @@ public class ProductController {
     /**
      * 保存产品信息
      */
-    @RequestMapping(path = "/product/save")
+    @RequestMapping(path = "/product/save", method = RequestMethod.POST)
     public ResponseResult save(@Valid Product data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());

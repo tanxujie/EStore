@@ -1,133 +1,12 @@
 $(function(){
-    var $addModal = $("#modalAdd");
-    var $hiddenVideoFile = $("#hiddenVideoFile");
-    var $hiddenUploadFile = $("#hiddenUploadFile");
     $("#messageArea").hide();
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
     });
 
-    // auto load major category
-    var $majorCategory;
-    function loadMajorCategory() {
-        var md = $("#selMajorCategory").empty();
-        $.getJSON("/majorcategory/getAllOptions", function(data){
-            var str = "";
-            if (data && data.success) {
-                var items = data.data;
-                for (var i = 0; i < items.length; i++) {
-                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
-                }
-                loadMinorCategory(items[0].value);
-            }
-
-            $majorCategory = md.append(str).dropdown({
-                onChange: function(val) {
-                    loadMinorCategory(val);
-                }
-            });
-        });
-    }
-
-    var $minorCategory = $("#selMinorCategory");
-    function loadMinorCategory(majorCategoryId) {
-        $minorCategory.empty();
-        $.getJSON("/minorcategory/getAllOptions", {majorCategoryId: majorCategoryId}, function(data){
-            var str = "";
-            if (data && data.success) {
-                var items = data.data;
-                for (var i = 0; i < items.length; i++) {
-                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
-                }
-            }
-            $minorCategory.append(str).dropdown();
-        });
-    }
-
-    loadMajorCategory();
-
-//    $("#selMajorCategory").dropdown({
-//        apiSetting: {
-//            url: "//majorcategory/getAllOptions"
-//        }
-//    });
-
-    var dz = new Dropzone("#videoDropZone", {
-        paramName: "videos",
-        maxFilesize: 50,
-        addRemoveLinks: true,
-        uploadMultiple: true,
-        thumbnailWidth:100,
-        thumbnailHeight:100,
-        thumbnailMethod: 'contain',
-        maxFiles:1,
-        //acceptedFiles:"image/*",
-        url: '/upload/video',
-        success: function(file, resp) {
-            $("#messageArea").hide();
-            $hiddenVideoFile.append($('<input type="hidden" name="videoName" value="' + resp.data[0] + '" />'));
-            //file.previewElement.classList.add("dz-success");
-        },
-        error: function(file, response) {
-            //file.previewElement.classList.add("dz-error");
-        }
-/*        ,
-        removedfile: function(file) {
-            //alert("removefile");
-            //alert(file.content[0]);
-            dz.removeFile(file);
-           // return true;
-        }*/
-    });
-
-    var dz = new Dropzone("#imageDropZone", {
-        paramName: "images",
-        maxFilesize: 50,
-        addRemoveLinks: true,
-        uploadMultiple: true,
-        thumbnailWidth:100,
-        thumbnailHeight:100,
-        thumbnailMethod: 'contain',
-        maxFiles:9,
-        //acceptedFiles:"image/*",
-        url: '/upload/image',
-        success: function(file, resp) {
-            $("#messageArea").hide();
-            $hiddenUploadFile.append($('<input type="hidden" name="imageNames" value="' + resp.data[0] + '" />'));
-            //file.previewElement.classList.add("dz-success");
-        },
-        error: function(file, response) {
-            //file.previewElement.classList.add("dz-error");
-        }
-/*        ,
-        removedfile: function(file) {
-            //alert("removefile");
-            //alert(file.content[0]);
-            dz.removeFile(file);
-           // return true;
-        }*/
-    });
-
     $("#btnSearch").click(function(event) {
         searchProduct();
-    });
-
-    $("#btnAdd").click(function(event){
-        $addModal.modal('setting', 'closable', false).modal('show');
-    });
-
-    $("#btnSave1").click(function(event){
-        $.post("/product/save", $("#formAdd").serialize()).done(function(event){
-            clearForm();
-            $addModal.modal('close');
-            searchProduct();
-        });
-    });
-
-    $("#btnCancel1").click(function(event){
-        clearForm();
-        $addModal.modal('close');
     });
 
     function searchProduct() {
@@ -148,7 +27,13 @@ $(function(){
                     $container.append($(imgStr));
                     $(".remove.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
-                        removeProduct(id);
+                        $("#btnDelConfirm").click(function(e){
+                          e.preventDefault();
+                          $.post('/product/remove', {productId: id}, function(){
+                              searchProduct();
+                          });
+                        });
+                        removeProduct();
                     });
                     $(".edit.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
@@ -162,50 +47,7 @@ $(function(){
         });
     }
 
-    function openProductEdit(pid) {
-        $.getJSON("/product/getDetail", {productId: pid}, function(data, textStatus, req) {
-            if (data.success) {
-                var d = data.data;
-                if (d) {
-                    $("#txtCode").val(d.code);
-                    $("#txtName").val(d.name);
-                    $majorCategory.dropdown('set value', 3);
-                    $addModal.modal('setting', 'closable', false).modal('show');
-                    
-                }
-            } else {
-                alert(data.data);
-            }
-        });
+    function removeProduct() {
+        $("#modalConfirm").modal('show');
     }
-
-    function removeProduct(pid) {
-        $.post('/product/remove', {productId: pid}, function(){
-            searchProduct();
-        });
-    }
-
-    function clearForm() {
-        $("#formAdd input").val("");
-        $hiddenUploadFile.empty();
-        dz.removeAllFiles();
-    }
-
-    function validate() {
-        $("#formAdd").form({
-            fields: {
-                code : {
-                    identifier: 'code',
-                    rules: [
-                        {
-                            type: 'number',
-                            prompt: 'Only Number'
-                        }
-                    ]
-                }
-            }
-        });
-    }
-    
-    validate();
 });

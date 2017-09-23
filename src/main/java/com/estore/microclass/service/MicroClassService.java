@@ -21,9 +21,9 @@ public interface MicroClassService {
 
     /**
      * 
-     * @param ids
+     * @param id
      */
-    void remove(int[] ids);
+    void remove(int id);
 
     /**
      * 

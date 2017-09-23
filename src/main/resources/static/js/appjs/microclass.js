@@ -6,56 +6,88 @@ $(function(){
     });
 
     // 初始化查询表格
-    $("#resultsTbl").DataTable({
-        dom: "Bfrtip",
-        info: false,
-        //lengthChange: false,
-        searching: true,
-        ajax: "/microclass/search",
-        serverSide: true,
-        "columnDefs":[
-            { title : '标题', targets: 0, width: '300px', height: '30px' },
-            { title : '描述', targets: 1, width: '400px', height: '30px' }
-        ],
-        "columns": [
-            { data: "title" },
-            { data: "description" }
-        ],
-        "language": {
-            "processing": "处理中...",
-            "lengthMenu": "显示 _MENU_ 项结果",
-            "zeroRecords": "没有匹配结果",
-            "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-            "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-            "infoFiltered": "(由 _MAX_ 项结果过滤)",
-            "infoPostFix": "",
-            "search": "搜索:",
-            "searchPlaceholder": "搜索...",
-            "url": "",
-            "emptyTable": "表中数据为空",
-            "loadingRecords": "载入中...",
-            "infoThousands": ",",
-            "paginate": {
-                "first": "首页",
-                "previous": "上页",
-                "next": "下页",
-                "last": "末页"
+    var $table = $('#resultsTbl').DataTable({
+        'serverSide': false,
+        //'select':true,
+        'paging': true,
+        'bPaginate': true,
+        'iDisplayLength': 10,
+        'bLengthChange': false,
+        'bInfo': false,
+        'stateSave': true,
+        'retrieve': true,
+        'bFilter': false,
+        'sorter': true,
+        'ajax': {
+            'url' : '/microclass/search',
+            'data': function(d) {
             },
-            "aria": {
-                paginate: {
-                    first: '首页',
-                    previous: '上页',
-                    next: '下页',
-                    last: '末页'
-                },
-                "sortAscending": ": 以升序排列此列",
-                "sortDescending": ": 以降序排列此列"
-            },
-            "decimal": "-",
-            "thousands": "."
+            'dataSrc': 'data'
+        },
+        'columns': [
+            { 'title': '序号', 'target': 0, 'width': '5%', 'data': 'id'},
+            { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
+            { 'title': '说明', 'target': 2, 'sortable':false, 'width': '40%', 'data': 'description' }
+        ]
+    });
+
+    $('#resultsTbl tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            $table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+
+    $("#btnAdd").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './addmicroclass.html';
+    });
+
+    $("#btnEdit").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            window.location = './editmicroclass.html?id='+ids[0];
+        } else {
+            $("#selectDataModal").modal('show');
         }
     });
-    
-    $("#btnAdd").click(function(){
+
+    $("#btnDelete").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            $("#deleteModal").modal('show');
+        } else {
+            $("#selectDataModal").modal('show');
+        }
+    });
+
+    $("#btnDeleteConfirm").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            $.post('/microclass/remove', 
+                    {'id': ids[0]}, 
+                    function(data){
+                        if (data.success) {
+                            $table.row('.selected').remove().draw( false );
+                            $("#deleteModal").modal('hide');
+                        }
+                    });
+        }
     });
 });
