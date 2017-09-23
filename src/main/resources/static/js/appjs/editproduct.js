@@ -5,6 +5,67 @@ $(function() {
         return;
     }
 
+    // auto load major category
+    var $majorCategory = $("#selMajorCategory");
+    function loadMajorCategory(defaultMajorId) {
+        $majorCategory.empty();
+        $.getJSON("/majorcategory/getAllOptions", function(data){
+            var str = "";
+            if (data && data.success) {
+                var items = data.data;
+                for (var i = 0; i < items.length; i++) {
+                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
+                }
+            }
+
+//            var mc = $majorCategory.append(str).dropdown();
+            var mc = $majorCategory.append(str).dropdown({
+                onChange: function(val) {
+                    loadMinorCategory(val);
+                }
+            });
+            if (!!defaultMajorId) {
+                mc.dropdown('set selected', defaultMajorId);
+            }
+        });
+    }
+
+//    var $majorCategory = $("#selMajorCategory");
+//    function loadMajorCategory(defaultMajorId) {
+//        $majorCategory.empty();
+//        $.getJSON("/majorcategory/getAllOptions", function(data){
+//            var str = "";
+//            if (data && data.success) {
+//                var items = data.data;
+//                for (var i = 0; i < items.length; i++) {
+//                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
+//                }
+//            }
+//            var mc = $majorCategory.append(str).dropdown();
+//            if (!!defaultMajorId) {
+//                mc.dropdown('set value', defaultMajorId);
+//            }
+//        });
+//    }
+
+    var $minorCategory = $("#selMinorCategory");
+    function loadMinorCategory(defaultMajorId, defaultMinorId) {
+        $minorCategory.empty();
+        $.getJSON("/minorcategory/getAllOptions", {majorCategoryId: defaultMajorId}, function(data){
+            var str = "";
+            if (data && data.success) {
+                var items = data.data;
+                for (var i = 0; i < items.length; i++) {
+                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
+                }
+            }
+            var mc = $minorCategory.append(str).dropdown();
+            if (!!defaultMinorId) {
+                mc.dropdown('set selected', defaultMinorId);
+            }
+        });
+    }
+
     // load product detail
     $.get('/product/getDetail', 
             {'productId': id}, 
@@ -19,6 +80,8 @@ $(function() {
                     $("#txtPrimaryPrice").val(data.data.primaryPrice);
                     $("#txtPhoneNumber").val(data.data.phoneNumber);
                     $("#txtWechatNumber").val(data.data.wechatNumber);
+                    loadMajorCategory(data.data.majorCategoryId);
+                    loadMinorCategory(data.data.majorCategoryId, data.data.minorCategoryId)
                 }
             }
          );
@@ -29,45 +92,6 @@ $(function() {
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
     });
-
-    // auto load major category
-    var $majorCategory;
-    function loadMajorCategory() {
-        var md = $("#selMajorCategory").empty();
-        $.getJSON("/majorcategory/getAllOptions", function(data){
-            var str = "";
-            if (data && data.success) {
-                var items = data.data;
-                for (var i = 0; i < items.length; i++) {
-                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
-                }
-                loadMinorCategory(items[0].value);
-            }
-
-            $majorCategory = md.append(str).dropdown({
-                onChange: function(val) {
-                    loadMinorCategory(val);
-                }
-            });
-        });
-    }
-
-    var $minorCategory = $("#selMinorCategory");
-    function loadMinorCategory(majorCategoryId) {
-        $minorCategory.empty();
-        $.getJSON("/minorcategory/getAllOptions", {majorCategoryId: majorCategoryId}, function(data){
-            var str = "";
-            if (data && data.success) {
-                var items = data.data;
-                for (var i = 0; i < items.length; i++) {
-                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
-                }
-            }
-            $minorCategory.append(str).dropdown();
-        });
-    }
-
-    loadMajorCategory();
 
     var dz = new Dropzone("#videoDropZone", {
         paramName: "videos",
