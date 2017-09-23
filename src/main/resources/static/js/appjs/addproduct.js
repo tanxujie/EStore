@@ -54,6 +54,7 @@ $(function() {
         thumbnailHeight:100,
         thumbnailMethod: 'contain',
         maxFiles:1,
+        acceptedFiles: ".mp4",
         //acceptedFiles:"image/*",
         url: '/upload/video',
         success: function(file, resp) {
@@ -75,17 +76,21 @@ $(function() {
 
     var dz = new Dropzone("#imageDropZone", {
         paramName: "images",
-        maxFilesize: 50,
+        maxFilesize: 10,
         addRemoveLinks: true,
         uploadMultiple: true,
-        thumbnailWidth:100,
-        thumbnailHeight:100,
+        createImageThumbnails: true,
+        thumbnailWidth:120,
+        thumbnailHeight:120,
         thumbnailMethod: 'contain',
+        dictRemoveLinks: "x",
+        dictCancelUpload: "x",
         maxFiles:9,
-        //acceptedFiles:"image/*",
+        //dictDefaultMessage: '上传图片',
+        dictRemoveFile: '删除',
+        acceptedFiles: ".jpg,.jpeg",
         url: '/upload/image',
         success: function(file, resp) {
-            $("#messageArea").hide();
             $hiddenUploadFile.append($('<input type="hidden" name="imageNames" value="' + resp.data[0] + '" />'));
             //file.previewElement.classList.add("dz-success");
         },
@@ -172,7 +177,7 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
-            $.post("/product/save", 
+            $.post("/product/add", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './product.html';

@@ -10,9 +10,15 @@ $(function() {
             {'productId': id}, 
             function(data){
                 if (data.success) {
-                    $("#txtCode").val(data.data.code);
+                    $("#txtId").val(data.data.id);
+                    $("#lblCode").text(data.data.code);
                     $("#txtName").val(data.data.name);
-                    //$("#txtInnerDetail").val(data.data.innerDetail);
+                    $("#txtInnerDetail").val(data.data.innerDetail);
+                    $("#txtExFactoryPricetxt").val(data.data.exFactoryPrice);
+                    $("#txtFavorablePrice").val(data.data.favorablePrice);
+                    $("#txtPrimaryPrice").val(data.data.primaryPrice);
+                    $("#txtPhoneNumber").val(data.data.phoneNumber);
+                    $("#txtWechatNumber").val(data.data.wechatNumber);
                 }
             }
          );
@@ -190,7 +196,7 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
-            $.post("/product/save", 
+            $.post("/product/modify", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './product.html';

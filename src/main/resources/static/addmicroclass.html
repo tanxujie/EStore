@@ -9,7 +9,9 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/semantic.js"></script>
-<script type="text/javascript" src="./js/dropzone.js"></script>
+<script type="text/javascript" src="./js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="./js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="./js/jquery.fileupload.js"></script>
 <script type="text/javascript" src="./js/common.js"></script>
 <script type="text/javascript" src="./js/appjs/addmicroclass.js"></script>
 </head>
@@ -34,6 +36,7 @@
                     <textarea id="txtDescription" name="description" rows="3" cols="60" maxlength="190"></textarea>
                 </div>
             </div>
+            <input id="fileupload" type="file" name="files[]" data-url="/upload/image" multiple>
             <div class="actions">
                 <div class="ui primary submit button" id="btnSave">保存</div>
                 <a href="./microclass.html" class="ui cancel button">取消</a>

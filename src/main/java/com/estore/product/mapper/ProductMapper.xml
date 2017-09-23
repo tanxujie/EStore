@@ -19,6 +19,7 @@
         <result property="minorCategoryId" column="minor_category_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <result property="innerDetail" column="inner_detail"/>
         <result property="exFactoryPrice" column="ex_factory_price"/>
         <result property="favorablePrice" column="favorable_price"/>
         <result property="primaryPrice" column="primary_price"/>
@@ -182,7 +183,8 @@
                 major_category_id, 
                 minor_category_id, 
                 name, 
-                description, 
+                description,
+                inner_detail, 
                 ex_factory_price, 
                 favorable_price, 
                 primary_price, 
@@ -207,6 +209,7 @@
                           minor_category_id, 
                           name, 
                           description, 
+                          inner_detail,
                           ex_factory_price, 
                           favorable_price, 
                           primary_price, 
@@ -230,6 +233,7 @@
             #{minorCategoryId}, 
             #{name}, 
             #{description}, 
+            #{innerDetail},
             #{exFactoryPrice}, 
             #{favorablePrice}, 
             #{primaryPrice}, 
@@ -260,6 +264,7 @@
             minor_category_id = #{minorCategoryId}, 
             name = #{name}, 
             description = #{description}, 
+            inner_detail = #{innerDetail}, 
             ex_factory_price = #{exFactoryPrice}, 
             favorable_price = #{favorablePrice}, 
             primary_price = #{primaryPrice}, 
@@ -272,7 +277,6 @@
             price_range_from = #{priceRangeFrom}, 
             price_range_to = #{priceRangeTo}, 
             cricle_ration = #{circleRation}, 
-            inner_detail = #{innerDetail},
             updated_by = #{updatedBy}, 
             updated_time = NOW(), 
             version = version + 1
