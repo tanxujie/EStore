@@ -5,9 +5,12 @@ $(function(){
         $(this).addClass('active').siblings().removeClass('active');
     });
 
+    var $condition = $("#txtCondition");
+
     // 初始化查询表格
     var $table = $('#resultsTbl').DataTable({
         'serverSide': false,
+        //'searching': false,
         //'select':true,
         'paging': true,
         'bPaginate': true,
@@ -16,19 +19,31 @@ $(function(){
         'bInfo': false,
         'stateSave': true,
         'retrieve': true,
-        'bFilter': false,
+        'bFilter': true,
         'sorter': true,
         'ajax': {
             'url' : '/microclass/search',
             'data': function(d) {
+                condition: $condition.val();
             },
             'dataSrc': 'data'
         },
+//        'columDefs':[{
+//            "targets":[0],
+//            "searchable":false
+//        }],
         'columns': [
             { 'title': '序号', 'target': 0, 'width': '5%', 'data': 'id'},
             { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
             { 'title': '说明', 'target': 2, 'sortable':false, 'width': '40%', 'data': 'description' }
         ]
+    });
+
+    $("#resultsTbl_filter").hide();
+
+    $condition.keyup(function() {
+        var condition = $condition.val();
+        $table.search(condition).draw();
     });
 
     $('#resultsTbl tbody').on( 'click', 'tr', function () {
