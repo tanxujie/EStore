@@ -27,13 +27,7 @@ $(function(){
                         event.preventDefault();
                         event.stopPropagation();
                         var id = $(this).attr("pid");
-                        $("#btnDelConfirm").click(function(e){
-                          e.preventDefault();
-                          e.stopPropagation();
-                          $.post('/product/remove', {productId: id}, function(){
-                              searchProduct();
-                          });
-                        });
+                        removeProductConfirm(id);
                     });
                     $(".edit.icon", $container).click(function(event){
                         var id = $(this).attr("pid");
@@ -48,7 +42,16 @@ $(function(){
         });
     }
 
-    function removeProduct() {
+    function removeProductConfirm(id) {
+        $("#btnDelConfirm").unbind('click');
+        $("#btnDelConfirm").click(function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            $.post('/product/remove', {productId: id}, function(){
+                searchProduct();
+                $("#modalConfirm").modal('hide');
+            });
+        });
         $("#modalConfirm").modal('show');
     }
 
