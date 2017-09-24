@@ -13,6 +13,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class MicroClassVideoController {
      * @param binding
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/save")
+    @RequestMapping(path = "/microclassvideo/save", method = RequestMethod.POST)
     public ResponseResult save(@Valid MicroClassVideo data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());
@@ -54,9 +55,9 @@ public class MicroClassVideoController {
      * @param ids
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/remove")
-    public ResponseResult remove(int[] ids) {
-        this.microClassVideoService.remove(ids);
+    @RequestMapping(path = "/microclassvideo/remove", method = RequestMethod.POST)
+    public ResponseResult remove(int id) {
+        this.microClassVideoService.remove(id);
         return new ResponseResult(true, "微课堂数据删除成功");
     }
 
@@ -66,7 +67,7 @@ public class MicroClassVideoController {
      * @param binding
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/modify")
+    @RequestMapping(path = "/microclassvideo/modify", method = RequestMethod.POST)
     public ResponseResult modify(@Valid MicroClassVideo data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());
@@ -81,9 +82,9 @@ public class MicroClassVideoController {
      * @param microClassId
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/searchByMicroClassId")
-    public ResponseResult searchByMicroClassId(int microClassId) {
-        List<MicroClassVideo> results = this.microClassVideoService.searchByMicroClassId(microClassId);
+    @RequestMapping(path = "/microclassvideo/searchByMicroClassId", method = RequestMethod.GET)
+    public ResponseResult searchByMicroClassId(int id) {
+        List<MicroClassVideo> results = this.microClassVideoService.searchByMicroClassId(id);
         if (CollectionUtils.isEmpty(results)) {
             return new ResponseResult(false, new ArrayList<MicroClassVideo>(0));
         }
@@ -94,7 +95,7 @@ public class MicroClassVideoController {
      * 
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/search")
+    @RequestMapping(path = "/microclassvideo/search", method = RequestMethod.GET)
     public ResponseResult search(@RequestParam(required = false, name = "condition") String condition) {
         List<MicroClassVideo> results = this.microClassVideoService.search(condition);
         if (CollectionUtils.isEmpty(results)) {
@@ -108,7 +109,7 @@ public class MicroClassVideoController {
      * @param id
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/getDetail")
+    @RequestMapping(path = "/microclassvideo/getDetail", method = RequestMethod.GET)
     public ResponseResult getDetail(int id) {
         MicroClassVideo result = this.microClassVideoService.getDetail(id);
         if (null == result) {

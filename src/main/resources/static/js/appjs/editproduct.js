@@ -18,7 +18,6 @@ $(function() {
                 }
             }
 
-//            var mc = $majorCategory.append(str).dropdown();
             var mc = $majorCategory.append(str).dropdown({
                 onChange: function(val) {
                     loadMinorCategory(val);
@@ -29,24 +28,6 @@ $(function() {
             }
         });
     }
-
-//    var $majorCategory = $("#selMajorCategory");
-//    function loadMajorCategory(defaultMajorId) {
-//        $majorCategory.empty();
-//        $.getJSON("/majorcategory/getAllOptions", function(data){
-//            var str = "";
-//            if (data && data.success) {
-//                var items = data.data;
-//                for (var i = 0; i < items.length; i++) {
-//                    str += ("<option value='" + items[i].value + "'>" + items[i].text + "</option>");
-//                }
-//            }
-//            var mc = $majorCategory.append(str).dropdown();
-//            if (!!defaultMajorId) {
-//                mc.dropdown('set value', defaultMajorId);
-//            }
-//        });
-//    }
 
     var $minorCategory = $("#selMinorCategory");
     function loadMinorCategory(defaultMajorId, defaultMinorId) {
@@ -72,6 +53,7 @@ $(function() {
             function(data){
                 if (data.success) {
                     $("#txtId").val(data.data.id);
+                    $("#txtUnderShelf").val(data.data.underShelf);
                     $("#lblCode").text(data.data.code);
                     $("#txtName").val(data.data.name);
                     $("#txtInnerDetail").val(data.data.innerDetail);
@@ -224,13 +206,19 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/product/modify", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './product.html';
             });
         }
+    });
+
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './product.html';
     });
 });

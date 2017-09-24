@@ -107,6 +107,7 @@ $(function() {
     });
 
     $("#formAdd").form({
+        //on: 'submit',
         fields: {
             code: {
                 identifier: 'code',
@@ -176,13 +177,19 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/product/add", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './product.html';
             });
         }
+    });
+
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './product.html';
     });
 });

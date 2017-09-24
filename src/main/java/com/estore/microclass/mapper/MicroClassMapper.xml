@@ -14,11 +14,13 @@
                 description,
                 version
         FROM t_microclass
+        <!-- 
         <where> 
         <if test="condition != null and condition != ''">
         title LIKE '%'||#{condition}||'%' OR description LIKE '%'||#{condition}||'%'
         </if>
         </where>
+         -->
     </select>
 
     <select id="select" resultMap="microClass">

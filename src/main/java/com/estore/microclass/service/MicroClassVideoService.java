@@ -21,9 +21,9 @@ public interface MicroClassVideoService {
 
     /**
      * 
-     * @param ids
+     * @param id
      */
-    void remove(int[] ids);
+    void remove(int id);
 
     /**
      * 

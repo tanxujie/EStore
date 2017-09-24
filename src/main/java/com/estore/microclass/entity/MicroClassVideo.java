@@ -6,6 +6,8 @@ package com.estore.microclass.entity;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import com.estore.base.AbstractBaseEntity;
 import com.estore.utils.Constants;
 
@@ -50,6 +52,13 @@ public class MicroClassVideo extends AbstractBaseEntity {
      * 视频日期
      */
     private Date videoDate;
+
+    public String getVideoDateStr() {
+        if (null == this.videoDate) {
+            return "";
+        }
+        return DateFormatUtils.format(this.videoDate, "yyyy/MM/dd");
+    }
 
     /**
      * 返回微课堂视频Src地址

@@ -7,10 +7,13 @@ package com.estore.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.Filter;
+
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
@@ -31,7 +34,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(this.shiroDbRealm());
         securityManager.setCacheManager(cacheShiroManager);
-//        securityManager.setRememberMeManager(rememberMeManager);
+        securityManager.setRememberMeManager(null);
         securityManager.setSessionManager(sessionManager);
         return securityManager;
     }
@@ -87,8 +90,18 @@ public class ShiroConfig {
         shiroFilter.setLoginUrl("/login");
         shiroFilter.setSuccessUrl("/index.html");
         shiroFilter.setUnauthorizedUrl("/unauthorized.html");
+        Map<String, Filter> filters = new LinkedHashMap<>();
+        MyFormAuthenticationFilter loginFilter = new MyFormAuthenticationFilter();
+        loginFilter.setLoginFailureUrl("/unauthenticated.html");
+        filters.put("mylogin", loginFilter);
+
+        LogoutFilter logoutFilter = new LogoutFilter();
+        logoutFilter.setRedirectUrl("/login.html");
+        filters.put("mylogout", logoutFilter);
+        shiroFilter.setFilters(filters);
+
         // filter settings
-        Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
+        Map<String, String> filterChainDefinitionMap= new LinkedHashMap<>();
         filterChainDefinitionMap.put("/app/**","anon"); // DO NOT check request from mobile application
         filterChainDefinitionMap.put("/privacypolicy.html", "anon");
         filterChainDefinitionMap.put("/techsupport.html", "anon");
@@ -99,11 +112,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/download/**", "anon");
-        //filterChainDefinitionMap.put("/logout*","anon");
+        filterChainDefinitionMap.put("/logout", "mylogout");
         filterChainDefinitionMap.put("/error.html","anon");
-//        filterChainDefinitionMap.put("/*", "authc");
+        filterChainDefinitionMap.put("/login", "authc");
         filterChainDefinitionMap.put("/**", "authc");
-//        filterChainDefinitionMap.put("/*.*", "authc");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilter;
     }

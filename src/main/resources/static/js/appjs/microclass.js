@@ -23,8 +23,8 @@ $(function(){
         'sorter': true,
         'ajax': {
             'url' : '/microclass/search',
-            'data': function(d) {
-                condition: $condition.val();
+            'data': {
+                condition: $condition.val()
             },
             'dataSrc': 'data'
         },

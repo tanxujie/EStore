@@ -8,6 +8,7 @@
         <result property="description" column="description"/>
         <result property="oldName" column="old_name"/>
         <result property="newName" column="new_name"/>
+        <result property="videoDate" column="video_date"/>
         <result property="version" column="version"/>
     </resultMap>
 
@@ -74,7 +75,7 @@
                 #{description}, 
                 #{oldName}, 
                 #{newName}, 
-                NOW(), 
+                #{videoDate}, 
                 #{createdBy}, 
                 NOW(), 
                 #{updatedBy}, 
@@ -83,10 +84,7 @@
     </insert>
 
     <delete id="delete" parameterType="int">
-        DELETE FROM t_microclass_video WHERE id IN
-        <foreach item="id" collection="ids" open="(" separator="," close=")">
-        #{id}
-        </foreach>
+        DELETE FROM t_microclass_video WHERE id = #{id}
     </delete>
 
     <update id="update" parameterType="com.estore.microclass.entity.MicroClassVideo">
@@ -96,7 +94,7 @@
             description = #{description},
             old_name = #{oldName}, 
             new_name = #{newName},
-            video_date = NOW(),
+            video_date = #{videoDate},
             updated_by = #{updatedBy}, 
             updated_time = NOW(), 
             version = version + 1

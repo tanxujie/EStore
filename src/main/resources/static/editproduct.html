@@ -19,13 +19,17 @@
         <div class="ui active item"><a href="./product.html">产品</a></div>
         <div class="ui item"><a href="./microclass.html">微课堂</a></div>
         <div class="ui item"><a href="./agent.html">代理</a></div>
+        <div class="right menu">
+            <div class="ui item"><a href="./logout">退出</a></div>
+        </div>
     </div>
     <div class="ui text container" style="margin-top:75px;">
-        <h4 class="ui top attached block header">修改产品信息</h4>
+        <h4 class="ui top attached block header">修改产品</h4>
         <div class="ui bottom attached segment">
         <form class="ui form" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:auto;">
             <div class="ui error message"></div>
             <input type="hidden" id="txtId" name="id">
+            <input type="hidden" id="txtUnderShelf" name="underShelf">
             <div class="one fields">
                 <div class="field">
                     <label>编码</label>
@@ -89,8 +93,8 @@
                 </div>
             </div>
             <div class="actions">
-                <div class="ui primary submit button" id="btnSave">保存</div>
-                <a href="./product.html" class="ui cancel button">返回</a>
+                <div id="btnSave" class="ui primary submit button"><i class="save icon"></i>保存</div>
+                <div id="btnCancel" class="ui cancel button"><i class="cancel icon"></i>取消</div>
             </div>
         </form>
         </div>

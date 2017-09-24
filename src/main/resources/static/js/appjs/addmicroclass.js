@@ -7,6 +7,7 @@ $(function() {
     });
 
     $("#formAdd").form({
+        on: 'blur',
         fields: {
             title: {
                 identifier: 'title',
@@ -39,8 +40,8 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/microclass/save", 
                     $("#formAdd").serialize(), 
                     function() {
@@ -48,13 +49,10 @@ $(function() {
             });
         }
     });
-
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.data, function (index, file) {
-                $('<p/>').text(file).appendTo(document.body);
-            });
-        }
+ 
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './microclass.html';
     });
 });
