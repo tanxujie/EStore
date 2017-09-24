@@ -71,7 +71,17 @@
         FROM t_user 
         WHERE phone_number = #{phoneNumber}
     </select>
-
+	
+	<select id="select" resultMap="user">
+        SELECT  id,
+                name,
+                phone_number,
+                role_code,
+                enabled
+        FROM t_user
+        WHERE id = #{id}
+    </select>
+    
     <select id="selectAll" resultMap="user">
         SELECT  id, 
                 phone_number,
@@ -144,6 +154,10 @@
         <foreach item="id" collection="ids" open="(" separator="," close=")">
         #{id}
         </foreach>
+    </delete>
+    
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_user WHERE id = #{id}
     </delete>
 
     <update id="update" parameterType="com.estore.user.entity.User">

@@ -133,4 +133,11 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+	@Override
+	public void remove(int id) {
+		// TODO Auto-generated method stub
+		this.userMapper.deleteById(id);
+		
+	}
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.base.ResponseResult;
+import com.estore.microclass.entity.MicroClass;
 import com.estore.user.dto.LowerAgent;
 import com.estore.user.dto.UserPasswordDto;
 import com.estore.user.entity.User;
@@ -66,6 +67,40 @@ public class UserController {
         }
         return new ResponseResult(true, results);
     }
+    
+    @RequestMapping(path = "/agent/search")
+    public ResponseResult searchAgent(@Valid User sdata, BindingResult binding) {
+        List<User> results = this.userService.search(sdata);
+        if (CollectionUtils.isEmpty(results)) {
+            return new ResponseResult(false, "查询数据不存在");
+        }
+        return new ResponseResult(true, results);
+    }
+    
+    @RequestMapping(path = "/agent/getDetail")
+    public ResponseResult getDetail(int id) {
+    	User result = this.userService.getDetail(id);
+        if (null == result) {
+            return new ResponseResult(false, "查询数据不存在");
+        }
+        return new ResponseResult(true, result);
+    }
+    
+    @RequestMapping(path = "/agent/modify")
+    public ResponseResult agentModify(@Valid User data, BindingResult binding) {
+        if (binding.hasErrors()) {
+            return new ResponseResult(false, "代理数据验证错误");
+        }
+        this.userService.modify(data);
+        return new ResponseResult(true, "代理数据更新成功");
+    }
+    
+    @RequestMapping(path = "/agent/remove", method = RequestMethod.POST)
+    public ResponseResult remove(int id) {
+        this.userService.remove(id);
+        return new ResponseResult(true, "代理数据删除成功");
+    }
+
 
     /**
      * 
