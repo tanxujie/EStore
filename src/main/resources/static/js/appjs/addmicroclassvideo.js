@@ -26,16 +26,12 @@ $(function() {
                     }
                 ]
             },
-            description: {
-                identifier: 'description',
+            videoDate: {
+                identifier: 'videoDate',
                 rules:[
                     {
-                        type:'empty',
-                        prompt: '请输入说明'
-                    },
-                    {
-                        type:'maxLength[200]',
-                        prompt: '说明中最多输入200个字符'
+                        type:'regExp[^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$]',
+                        prompt: '请输入正确的日期'
                     }
                 ]
             }
@@ -73,7 +69,6 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
             $.post("/microclassvideo/save", 
                     $("#formAdd").serialize(), 
