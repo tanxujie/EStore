@@ -28,10 +28,10 @@ $(function(){
             },
             'dataSrc': 'data'
         },
-//        'columDefs':[{
-//            "targets":[0],
-//            "searchable":false
-//        }],
+        'columnDefs': [{
+            "targets": 0,
+            "searchable": false
+          }],
         'columns': [
             { 'title': '序号', 'target': 0, 'width': '5%', 'data': 'id'},
             { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
