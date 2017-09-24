@@ -224,7 +224,6 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
             $.post("/product/modify", 
                     $("#formAdd").serialize(), 

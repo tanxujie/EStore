@@ -107,6 +107,7 @@ $(function() {
     });
 
     $("#formAdd").form({
+        //on: 'submit',
         fields: {
             code: {
                 identifier: 'code',
@@ -176,7 +177,6 @@ $(function() {
 
     $("#btnSave").click(function(event) {
         event.preventDefault();
-        event.stopPropagation();
         if ($("#formAdd").form('is valid')) {
             $.post("/product/add", 
                     $("#formAdd").serialize(), 
