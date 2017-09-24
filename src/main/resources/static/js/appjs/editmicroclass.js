@@ -131,11 +131,20 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/microclass/modify", 
                     $("#formAdd").serialize(), 
-                    function() {
-                window.location = './microclass.html';
+                    function(data) {
+                if (data.success) {
+                    window.location = './microclass.html';
+                }
             });
         }
+    });
+
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './microclass.html';
     });
 });

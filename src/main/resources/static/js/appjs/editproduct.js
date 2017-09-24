@@ -225,11 +225,18 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/product/modify", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './product.html';
             });
         }
+    });
+
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './product.html';
     });
 });

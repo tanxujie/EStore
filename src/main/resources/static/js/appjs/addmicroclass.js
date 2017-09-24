@@ -41,11 +41,18 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/microclass/save", 
                     $("#formAdd").serialize(), 
                     function() {
                 window.location = './microclass.html';
             });
         }
+    });
+ 
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './microclass.html';
     });
 });

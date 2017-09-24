@@ -72,6 +72,7 @@ $(function() {
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
+            event.stopPropagation();
             $.post("/microclassvideo/save", 
                     $("#formAdd").serialize(), 
                     function(data) {
@@ -80,5 +81,11 @@ $(function() {
                 }
             });
         }
+    });
+
+    $("#btnCancel").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location = './editmicroclass.html?id='+microclassid;
     });
 });
