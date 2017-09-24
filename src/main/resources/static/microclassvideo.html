@@ -6,39 +6,33 @@
 <link rel="stylesheet" type="text/css" href="/css/semantic.css">
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
 <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
-<link rel="stylesheet" type="text/css" href="/css/dataTables.semanticui.css">
+<link rel="stylesheet" type="text/css" href="/css/datatables.css">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/semantic.js"></script>
 <script type="text/javascript" src="./js/dropzone.js"></script>
-<script type="text/javascript" src="./js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="./js/dataTables.semanticui.js"></script>
+<script type="text/javascript" src="./js/datatables.js"></script>
 <script type="text/javascript" src="./js/common.js"></script>
-<script type="text/javascript" src="./js/appjs/microclassvideo.js"></script>
+<script type="text/javascript" src="./js/appjs/microclass.js"></script>
 </head>
 <body>
     <div id="menuArea" class="ui fixed menu">
-        <div class="header item"><a href="./index.html">阿坤珠宝</a></div>
+        <div class="header item">阿坤珠宝</div>
         <div class="ui item"><a href="./product.html">产品</a></div>
         <div class="ui active item"><a href="./microclass.html">微课堂</a></div>
     </div>
-    <div class="ui container" style="margin-top:50px;">
-        <div class="ui center aligned basic segment">
-            <div class="ui left large icon input focus">
-                <input type="text" class="ui input" placeholder="视频信息" style="width:450px;" id="txtCondition">
-                <i class="search icon"></i>
-            </div>
-            <div id="btnSearch" class="ui large blue submit button">查询</div>
-            <div id="btnAdd" class="ui large teal submit button">添加</div>
+    <div class="ui middle aligned center aligned grid" style="margin-top:0px;">
+        <div id="searchArea" style="margin-top: 60px;">
+                <div class="ui action left input">
+                    <input type="text" class="ui input" placeholder="视频信息" style="width:300px;" id="txtCondition">
+                    <div id="btnAdd" class="ui blue tiny button"><i class="add icon"></i>添加</div>
+                    <div id="btnEdit" class="ui teal tiny button"><i class="edit icon"></i>编辑</div>
+                    <div id="btnDelete" class="ui grey tiny button"><i class="delete icon"></i>删除</div>
+                </div>
         </div>
-        <h4 class="ui horizontal divider header">
-            <i class="grid layout icon"></i>
-        </h4>
-        <div class="scrolling content">
-<!--             <div id="videoContainer" class="ui four cards">
-            </div> -->
-            <table id="resultsTbl"></table>
-        </div>
+    </div>
+    <div class="ui center aligned grid" style="margin-top:60px;">
+        <table id="resultsTbl"></table>
     </div>
     <div id="modalAdd" class="ui modal">
         <div class="header">微客堂视频</div>
