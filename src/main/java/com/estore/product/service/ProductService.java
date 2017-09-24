@@ -59,4 +59,6 @@ public interface ProductService {
      * @return
      */
     ProductDto getDetail(int productId);
+
+    boolean changeShelf(int productId);
 }

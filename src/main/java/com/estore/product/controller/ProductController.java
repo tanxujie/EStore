@@ -82,6 +82,15 @@ public class ProductController {
         return new ResponseResult(true, results);
     }
 
+    @RequestMapping(path = "/product/changeShelf", method = RequestMethod.POST)
+    public ResponseResult changeShelf(@RequestParam(name = "productId", required = true) int productId) {
+        boolean result = this.productService.changeShelf(productId);
+        if (!result) {
+            return new ResponseResult(false, "上架或下架失败");
+        }
+        return new ResponseResult(true, "上架或下架成功");
+    }
+
     /**
      * 取得产品详细信息
      * 

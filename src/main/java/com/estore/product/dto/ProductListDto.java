@@ -46,6 +46,12 @@ public class ProductListDto extends AbstractBaseDto {
      */
     private String imageName;
 
+    private boolean underShelf;
+
+    public String getShelfStatus() {
+        return (this.underShelf ? "<a class=\"ui red label shelf\" pid=\""+this.getId()+"\">下架</a>" : "<a class=\"ui green label shelf\" pid=\""+this.getId()+"\">上架</a>");
+    }
+
     public String getImageName() {
         return Constants.WEB_SERVICE_ROOT_URL + "/download/image/" + this.imageName;
     }
