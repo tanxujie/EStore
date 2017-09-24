@@ -17,7 +17,7 @@ $(function(){
                 if (pinfos && pinfos.length) {
                     var imgStr = '';
                     $.each(pinfos, function(i, d) {
-                        imgStr = imgStr + '<div class="card" style="width:260px;height:300px;"><div class="image" style="height:200px;"><img class="ui wireframe image" style="width:260px;height:200px;" src="'+d.imageName+'"></div><div class="content" style="height:50px;"><div class="header">'+(d.code||'')+'</div><div class="meta">'+(d.name||'')+'</div></div><div class="extra content"><div class="left aligned">价格：'+(d.price||'')+'</div><div class="right aligned"><i class="large edit icon" style="cursor:pointer;" pid="'+d.id+'"></i><i class="large remove icon" style="cursor:pointer;" pid="'+d.id+'"></i></div></div></div>';
+                        imgStr = imgStr + '<div class="card" style="width:260px;height:300px;"><div class="image" style="height:200px;"><img class="ui wireframe image" style="width:260px;height:200px;" src="'+d.imageName+'"></div><div class="content" style="height:50px;"><div class="header">'+(d.code||'')+'&nbsp;&nbsp;'+d.shelfStatus+'</div><div class="meta">'+(d.name||'')+'</div></div><div class="extra content"><div class="left aligned">价格：'+(d.price||'')+'</div><div class="right aligned"><i class="large edit icon" title="编辑该产品" style="cursor:pointer;" pid="'+d.id+'"></i><i class="large remove icon" title="删除该产品" style="cursor:pointer;" pid="'+d.id+'"></i></div></div></div>';
                     });
 
                     $container.append($(imgStr));
@@ -33,6 +33,14 @@ $(function(){
                         var id = $(this).attr("pid");
                         window.location = './editproduct.html?id=' + id;
                         return;
+                    });
+                    $(".ui.shelf", $container).click(function(event){
+                        var id = $(this).attr("pid");
+                        $.post('/product/changeShelf', {productId: id}, function(d){
+                            if (d.success) {
+                                searchProduct();
+                            }
+                        });
                     });
                 }
             } else {

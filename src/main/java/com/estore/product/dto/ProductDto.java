@@ -134,6 +134,8 @@ public class ProductDto extends AbstractBaseDto {
      */
     private String circleRation;
 
+    private boolean underShelf;
+
     /**
      * 产品图片
      */

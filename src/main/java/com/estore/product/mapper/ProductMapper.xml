@@ -9,6 +9,7 @@
         <result property="description" column="description"/>
         <result property="exFactoryPrice" column="ex_factory_price"/>
         <result property="imageName" column="new_name"/>
+        <result property="underShelf" column="undershelf"/>
         <result property="version" column="version"/>
     </resultMap>
 
@@ -29,6 +30,7 @@
         <result property="category" column="category"/>
         <result property="style" column="style"/>
         <result property="theme" column="theme"/>
+        <result property="underShelf" column="undershelf"/>
         <result property="priceRangeFrom" column="price_range_from"/>
         <result property="priceRangeTo" column="price_range_to"/>
         <result property="circleRation" column="circle_ration"/>
@@ -53,6 +55,7 @@
         <result property="category" column="category"/>
         <result property="style" column="style"/>
         <result property="theme" column="theme"/>
+        <result property="underShelf" column="undershelf"/>
         <result property="priceRangeFrom" column="price_range_from"/>
         <result property="priceRangeTo" column="price_range_to"/>
         <result property="circleRation" column="circle_ration"/>
@@ -68,6 +71,7 @@
                 A.name,
                 A.description,
                 A.ex_factory_price, 
+                A.undershelf,
                 A.version,
                 B.new_name
         FROM t_product A
@@ -124,6 +128,7 @@
                 A.category, 
                 A.style, 
                 A.theme, 
+                A.undershelf,
                 A.price_range_from, 
                 A.price_range_to, 
                 A.cricle_ration, 
@@ -135,6 +140,7 @@
         LEFT JOIN
              t_product_image B
         ON A.id = B.product_id 
+        AND A.undershelf = false
         AND B.display_order = 1
         LEFT JOIN
              t_product_video E
@@ -194,6 +200,7 @@
                 category, 
                 style, 
                 theme, 
+                undershelf,
                 price_range_from, 
                 price_range_to, 
                 cricle_ration, 
@@ -201,6 +208,19 @@
         FROM t_product
         WHERE id = #{id}
     </select>
+
+    <select id="selectShelf" parameterType="int" resultMap="product">
+        SELECT  id, 
+                undershelf
+        FROM t_product
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateShelf" parameterType="com.estore.product.entity.Product">
+        UPDATE t_product
+        SET undershelf = #{underShelf}
+        WHERE id = #{id}
+    </update>
 
     <insert id="insert" parameterType="com.estore.product.entity.Product" 
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
@@ -219,6 +239,7 @@
                           category, 
                           style, 
                           theme, 
+                          undershelf,
                           price_range_from, 
                           price_range_to, 
                           cricle_ration, 
@@ -242,6 +263,7 @@
             #{category}, 
             #{style}, 
             #{theme}, 
+            #{underShelf},
             #{priceRangeFrom}, 
             #{priceRangeTo}, 
             #{circleRation}, 
@@ -272,6 +294,7 @@
             category = #{category}, 
             style = #{style}, 
             theme = #{theme}, 
+            undershelf = #{underShelf},
             price_range_from = #{priceRangeFrom}, 
             price_range_to = #{priceRangeTo}, 
             cricle_ration = #{circleRation}, 

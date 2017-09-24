@@ -57,4 +57,8 @@ public interface ProductMapper {
      * @return
      */
     ProductDto select(int id);
+
+    Product selectShelf(int id);
+
+    int updateShelf(Product entity);
 }

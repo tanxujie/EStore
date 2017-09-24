@@ -154,4 +154,14 @@ public class ProductServiceImpl implements ProductService {
     public void modify(Product product) {
         this.productMapper.update(product);
     }
+
+    @Override
+    public boolean changeShelf(int productId) {
+        Product entity = this.productMapper.selectShelf(productId);
+        if (null == entity) {
+            return false;
+        }
+        entity.setUnderShelf(!entity.isUnderShelf());
+        return (this.productMapper.updateShelf(entity) == 1);
+    }
 }

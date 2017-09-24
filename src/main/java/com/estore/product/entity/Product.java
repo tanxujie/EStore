@@ -82,6 +82,11 @@ public class Product extends AbstractBaseEntity {
     private String[] subConditions;
 
     /**
+     * 下架
+     */
+    private boolean underShelf;
+
+    /**
      * 新品
      */
     private boolean newProduct;
