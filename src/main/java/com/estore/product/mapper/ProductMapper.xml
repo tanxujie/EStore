@@ -140,6 +140,7 @@
         LEFT JOIN
              t_product_image B
         ON A.id = B.product_id 
+        AND A.undershelf = false
         AND B.display_order = 1
         LEFT JOIN
              t_product_video E
