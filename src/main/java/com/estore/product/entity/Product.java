@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.estore.base.AbstractBaseEntity;
 import com.estore.utils.Constants;
 import com.estore.utils.MoneyUtils;
+import com.estore.utils.UserUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -204,7 +205,12 @@ public class Product extends AbstractBaseEntity {
     }
 
     public String getFavorablePriceStr() {
-        return MoneyUtils.format(this.favorablePrice);
+        if (UserUtils.isLevel2Agent()) {
+            // 二级代理显示价格
+            return MoneyUtils.format(this.primaryPrice);
+        } else {
+            return MoneyUtils.format(this.favorablePrice);
+        }
     }
 
     public String getPrimaryPriceStr() {
