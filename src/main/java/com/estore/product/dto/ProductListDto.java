@@ -49,7 +49,7 @@ public class ProductListDto extends AbstractBaseDto {
     private boolean underShelf;
 
     public String getShelfStatus() {
-        return (this.underShelf ? "<a class=\"ui red label shelf\" pid=\""+this.getId()+"\">下架</a>" : "<a class=\"ui green label shelf\" pid=\""+this.getId()+"\">上架</a>");
+        return (this.underShelf ? "<a class=\"ui red label shelf\" title=\"点击【上架】该产品\" pid=\""+this.getId()+"\">下架</a>" : "<a class=\"ui green label shelf\" title=\"点击【下架】该产品\" pid=\""+this.getId()+"\">上架</a>");
     }
 
     public String getImageName() {
