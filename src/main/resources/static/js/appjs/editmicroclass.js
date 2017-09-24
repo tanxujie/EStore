@@ -22,7 +22,7 @@ $(function() {
         'serverSide': false,
         'paging': true,
         'bPaginate': true,
-        'iDisplayLength': 10,
+        'iDisplayLength': 2,
         'bLengthChange': false,
         'bInfo': false,
         'stateSave': true,
