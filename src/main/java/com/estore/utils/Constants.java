@@ -96,6 +96,26 @@ public final class Constants {
      */
     public static final long MAX_UPLOAD_VIDEO_SIZE = (long)1.5*1024*1024*1024;
 
+    /**
+     * 管理员帐户
+     */
+    public static final String ROLE_CODE_ADMIN = "admin";
+
+    /**
+     * 普通用户
+     */
+    public static final String ROLE_CODE_USER = "user";
+
+    /**
+     * 1级代理
+     */
+    public static final String ROLE_CODE_LEVEL1_AGENT = "l1agent";
+
+    /**
+     * 2级代理
+     */
+    public static final String ROLE_CODE_LEVEL2_AGENT = "l2agent";
+
     public static final int RECORD_COUNT_PER_PAGE = 24;
 
     //public static final int MAJOR_CATEGORY_HAND_ON = 2;
