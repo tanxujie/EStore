@@ -22,10 +22,10 @@ public interface MicroClassVideoMapper {
 
     /**
      * 
-     * @param ids
+     * @param id
      * @return
      */
-    int delete(int[] ids);
+    int delete(int id);
 
     /**
      * 

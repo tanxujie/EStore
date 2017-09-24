@@ -129,6 +129,24 @@ $(function() {
         }
     });
 
+    $("#btnDeleteConfirm").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var ids = $.map($table.rows('.selected').data(), function (item) {
+            return item['id'];
+        });
+        if (ids && ids.length) {
+            $.post('/microclassvideo/remove', 
+                    {'id': ids[0]}, 
+                    function(data){
+                        if (data.success) {
+                            $table.row('.selected').remove().draw( false );
+                            $("#deleteModal").modal('hide');
+                        }
+                    });
+        }
+    });
+
     $("#btnSave").click(function(event) {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {

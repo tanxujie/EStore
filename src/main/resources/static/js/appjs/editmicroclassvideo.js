@@ -88,7 +88,7 @@ $(function() {
         event.preventDefault();
         if ($("#formAdd").form('is valid')) {
             event.stopPropagation();
-            $.post("/microclassvideo/save", 
+            $.post("/microclassvideo/modify", 
                     $("#formAdd").serialize(), 
                     function(data) {
                 if (data.success) {

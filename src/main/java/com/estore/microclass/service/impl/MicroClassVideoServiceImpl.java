@@ -28,8 +28,8 @@ public class MicroClassVideoServiceImpl implements MicroClassVideoService {
     }
 
     @Override
-    public void remove(int[] ids) {
-        this.microClassVideoMapper.delete(ids);
+    public void remove(int id) {
+        this.microClassVideoMapper.delete(id);
     }
 
     @Override

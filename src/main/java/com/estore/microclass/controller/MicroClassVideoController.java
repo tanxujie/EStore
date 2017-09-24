@@ -56,8 +56,8 @@ public class MicroClassVideoController {
      * @return
      */
     @RequestMapping(path = "/microclassvideo/remove", method = RequestMethod.POST)
-    public ResponseResult remove(int[] ids) {
-        this.microClassVideoService.remove(ids);
+    public ResponseResult remove(int id) {
+        this.microClassVideoService.remove(id);
         return new ResponseResult(true, "微课堂数据删除成功");
     }
 
