@@ -75,7 +75,7 @@
                 #{description}, 
                 #{oldName}, 
                 #{newName}, 
-                NOW(), 
+                #{videoDate}, 
                 #{createdBy}, 
                 NOW(), 
                 #{updatedBy}, 
@@ -94,7 +94,7 @@
             description = #{description},
             old_name = #{oldName}, 
             new_name = #{newName},
-            video_date = NOW(),
+            video_date = #{videoDate},
             updated_by = #{updatedBy}, 
             updated_time = NOW(), 
             version = version + 1

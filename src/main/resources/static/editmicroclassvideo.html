@@ -5,10 +5,12 @@
 <title>阿坤珠宝</title>
 <link rel="stylesheet" type="text/css" href="/css/semantic.css">
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/calendar.css">
 <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/calendar.js"></script>
 <script type="text/javascript" src="./js/dropzone.js"></script>
 <script type="text/javascript" src="./js/common.js"></script>
 <script type="text/javascript" src="./js/appjs/editmicroclassvideo.js"></script>
@@ -38,7 +40,12 @@
             <div class="one fields">
                 <div class="field">
                     <label>日期</label>
-                    <input name="videoDate" type="text" id="txtVideoDate" style="width:300px;">
+                    <div class="ui calendar" id="videoCalendar">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input name="videoDate" type="text" id="txtVideoDate" style="width:180px;">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="one fields">

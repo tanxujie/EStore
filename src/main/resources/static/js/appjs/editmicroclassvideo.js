@@ -8,7 +8,22 @@ $(function() {
 
     $("#txtMicroClassId").val(microclassid);
     $("#txtMicroClassVideoId").val(microclassvideoid);
-
+    var $videoCalendar = $("#videoCalendar").calendar({
+        type: 'date', 
+        today: true,
+        formatter: {
+            datetime: function (date, settings) {
+                if (!date) {
+                  return '';
+                }
+                var day = date.getDate();
+                var month = (date.getMonth()+1);
+                var year = date.getFullYear();
+                return year + "/" + month + "/" + day;
+              }
+        }
+    });
+    
     // load details
     $.get('/microclassvideo/getDetail', 
             {'id': microclassvideoid}, 
@@ -16,7 +31,8 @@ $(function() {
                 if (data.success) {
                     $("#txtMicroClassVideoId").val(data.data.id);
                     $("#txtTitle").val(data.data.title);
-                    $("#txtVideoDate").val(data.data.videoDateStr);
+                    //$("#txtVideoDate").val(data.data.videoDateStr);
+                    $videoCalendar.calendar('set date', data.data.videoDateStr);
                     $("#txtDescription").val(data.data.description);
                 }
             }

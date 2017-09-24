@@ -6,6 +6,21 @@ $(function() {
     }
 
     $("#txtMicroClassId").val(microclassid);
+    $("#videoCalendar").calendar({
+        type: 'date', 
+        today: true,
+        formatter: {
+            datetime: function (date, settings) {
+                if (!date) {
+                  return '';
+                }
+                var day = date.getDate();
+                var month = (date.getMonth()+1);
+                var year = date.getFullYear();
+                return year + "/" + month + "/" + day;
+              }
+        }
+    });
 
     var $hiddenVideoFile = $("#hiddenVideoFile");
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
