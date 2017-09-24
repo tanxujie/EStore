@@ -20,26 +20,42 @@
         <div class="ui item"><a href="./microclass.html">微课堂</a></div>
         <div class="ui active item"><a href="./agent.html">代理</a></div>
     </div>
-    <div class="ui container" style="margin-top:75px;">
-        <form class="ui form segment" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
+    <div class="ui text container" style="margin-top:75px;">
+        <h4 class="ui top attached block header">修改代理信息</h4>
+        <div class="ui bottom attached segment">
+        <form class="ui form" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
             <div class="ui error message"></div>
             <div class="one fields">
                 <div class="field">
-                    <label>标题</label>
-                    <input name="title" type="text" id="txtTitle" style="width:300px;" maxlength="50">
+                    <label>姓名</label>
+                    <input name="name" type="text" id="txtName" style="width:300px;" maxlength="50">
                 </div>
             </div>
             <div class="one fields">
                 <div class="field">
-                    <label>说明</label>
-                    <textarea id="txtDescription" name="description" rows="3" cols="60" maxlength="190"></textarea>
+                    <label>手机号</label>
+                    <input name="phoneNumber" type="text" id="txtPhoneNumber" style="width:300px;" maxlength="50"></input>
+                </div>
+            </div>
+            <div class="one fields">
+                <div class="field">
+                    <label>等级</label>
+                    <label style="color:red">admin:管理员；user:普通用户；l1agent:一级代理；l2agent:二级代理</label>
+                    <input name="roleCode" type="text" id="txtRoleCode" style="width:300px;" maxlength="50">
+                </div>
+            </div>
+            <div class="one fields">
+                <div class="field">
+                    <label>状态</label><label style="color:red">true:可用；false：不可用</label>
+                    <input name="enabled" type="text" id="txtEnabled" style="width:300px;" maxlength="50">
                 </div>
             </div>
             <input type="hidden" name="id" id="txtId">
             <div class="actions">
                 <div class="ui primary submit button" id="btnSave">保存</div>
-                <a href="./microclass.html" class="ui cancel button">取消</a>
+                <a href="./agent.html" class="ui cancel button">取消</a>
             </div>
         </form>
+        </div>
     </div>
 </body>

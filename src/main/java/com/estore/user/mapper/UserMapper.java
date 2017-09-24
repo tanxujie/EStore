@@ -91,4 +91,6 @@ public interface UserMapper {
     int countLowerAgents(@Param("supperAgentId") int supperAgentId);
 
     int countByIdAndPassword(UserPasswordDto data);
+
+	void deleteById(int id);
 }

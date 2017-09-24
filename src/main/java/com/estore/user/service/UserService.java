@@ -89,4 +89,6 @@ public interface UserService {
      * @return
      */
     int getLowerAgentsCount(int supperAgentId);
+
+	void remove(int id);
 }

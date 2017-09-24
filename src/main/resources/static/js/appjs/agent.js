@@ -4,10 +4,13 @@ $(function(){
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
     });
-
+    
+    var $condition = $("#txtCondition");
+    
     // 初始化查询表格
     var $table = $('#resultsTbl').DataTable({
         'serverSide': false,
+        //'searching': false,
         //'select':true,
         'paging': true,
         'bPaginate': true,
@@ -16,19 +19,33 @@ $(function(){
         'bInfo': false,
         'stateSave': true,
         'retrieve': true,
-        'bFilter': false,
+        'bFilter': true,
         'sorter': true,
         'ajax': {
             'url' : '/agent/search',
             'data': function(d) {
+            	condition: $condition.val();
             },
             'dataSrc': 'data'
         },
+        'columnDefs': [{
+            "targets": 0,
+            "searchable": false
+          }],
         'columns': [
-            { 'title': '序号', 'target': 0, 'width': '5%', 'data': 'id'},
-            { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
-            { 'title': '说明', 'target': 2, 'sortable':false, 'width': '40%', 'data': 'description' }
+            { 'title': '序号', 'target': 0, 'width': '10%', 'data': 'id'},
+            { 'title': '姓名', 'target': 1, 'width': '15%', 'data': 'name'},
+            { 'title': '手机号', 'target': 2, 'width': '20%', 'data': 'phoneNumber'},
+            { 'title': '等级', 'target': 3, 'width': '10%', 'data': 'roleCode' },
+            { 'title': '状态', 'target': 3, 'width': '15%', 'data': 'enabled' }
         ]
+    });
+    
+    $("#resultsTbl_filter").hide();
+    
+    $condition.keyup(function() {
+        var condition = $condition.val();
+        $table.search(condition).draw();
     });
 
     $('#resultsTbl tbody').on( 'click', 'tr', function () {
@@ -41,11 +58,11 @@ $(function(){
         }
     } );
 
-    $("#btnAdd").click(function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        window.location = './addagent.html';
-    });
+//    $("#btnAdd").click(function(event){
+//        event.preventDefault();
+//        event.stopPropagation();
+//        window.location = './addagent.html';
+//    });
 
     $("#btnEdit").click(function(event){
         event.preventDefault();
