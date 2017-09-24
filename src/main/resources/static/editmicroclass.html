@@ -41,15 +41,37 @@
             <div class="one fields">
                 <div class="field">
                     <label>视频</label>
+                    <div id="btnAdd" class="ui blue tiny button"><i class="add icon"></i>添加</div>
+                    <div id="btnEdit" class="ui teal tiny button"><i class="edit icon"></i>编辑</div>
+                    <div id="btnDelete" class="ui grey tiny button"><i class="remove icon"></i>删除</div>
                     <table id="resultsTbl" style="width: 600px;"></table>
                 </div>
             </div>
             <input type="hidden" name="id" id="txtId">
             <div class="actions">
-                <div class="ui primary submit button" id="btnSave">保存</div>
-                <a href="./microclass.html" class="ui cancel button">取消</a>
+                <div class="ui primary submit button" id="btnSave"><i class="save icon"></i>保存</div>
+                <a href="./microclass.html" class="ui cancel button"><i class="cancel icon"></i>取消</a>
             </div>
         </form>
         </div>
+            <div id="selectDataModal" class="ui mini modal">
+        <div class="header"><i class="blue large info circle icon"></i>提示</div>
+        <div class="content">
+            <p>请先选择一条数据</p>
+        </div>
+        <div class="actions">
+            <div class="ui ok button">确认</div>
+        </div>
+    </div>
+    <div id="deleteModal" class="ui mini modal">
+        <div class="header"><i class="red large warning circle icon"></i>删除</div>
+        <div class="content">
+            <p>确定要删除该条数据吗?</p>
+        </div>
+        <div class="actions">
+            <div id="btnDeleteConfirm" class="ui blue button">确定</div>
+            <div class="ui cancel button">Cancel</div>
+        </div>
+    </div>
     </div>
 </body>
