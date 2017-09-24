@@ -5,12 +5,13 @@ $(function() {
         return;
     }
 
+    $("#txtId").val(id);
+
     // load details
     $.get('/microclass/getDetail', 
             {'id': id}, 
             function(data){
                 if (data.success) {
-                    $("#txtId").val(data.data.id);
                     $("#txtTitle").val(data.data.title);
                     $("#txtDescription").val(data.data.description);
                 }
@@ -109,7 +110,7 @@ $(function() {
             return item['id'];
         });
         if (ids && ids.length) {
-            window.location = './editmicroclassvideo.html?id='+ids[0];
+            window.location = './editmicroclassvideo.html?microclassid='+id+'&microclassvideoid='+ids[0];
         } else {
             $("#selectDataModal").modal('show');
         }
