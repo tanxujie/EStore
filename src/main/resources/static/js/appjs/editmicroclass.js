@@ -17,6 +17,37 @@ $(function() {
             }
          );
 
+    var $table = $('#resultsTbl').DataTable({
+        'serverSide': false,
+        'paging': true,
+        'bPaginate': true,
+        'iDisplayLength': 10,
+        'bLengthChange': false,
+        'bInfo': false,
+        'stateSave': true,
+        'retrieve': true,
+        'bFilter': true,
+        'sorter': true,
+        'ajax': {
+            'url' : '/microclassvideo/searchByMicroClassId',
+            'data': {
+                id: id
+                },
+            'dataSrc': 'data'
+        },
+        'columnDefs': [{
+            "targets": 0,
+            "searchable": false
+          }],
+        'columns': [
+            { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
+            { 'title': '时间', 'target': 2, 'width': '20%', 'data': 'videoDate'},
+            { 'title': '说明', 'target': 3, 'sortable':false, 'data': 'description' }
+        ]
+    });
+
+    $("#resultsTbl_filter").hide();
+
     var $hiddenVideoFile = $("#hiddenVideoFile");
     var $hiddenUploadFile = $("#hiddenUploadFile");
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});

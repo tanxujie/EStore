@@ -13,6 +13,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -81,9 +82,9 @@ public class MicroClassVideoController {
      * @param microClassId
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/searchByMicroClassId")
-    public ResponseResult searchByMicroClassId(int microClassId) {
-        List<MicroClassVideo> results = this.microClassVideoService.searchByMicroClassId(microClassId);
+    @RequestMapping(path = "/microclassvideo/searchByMicroClassId", method = RequestMethod.GET)
+    public ResponseResult searchByMicroClassId(int id) {
+        List<MicroClassVideo> results = this.microClassVideoService.searchByMicroClassId(id);
         if (CollectionUtils.isEmpty(results)) {
             return new ResponseResult(false, new ArrayList<MicroClassVideo>(0));
         }
