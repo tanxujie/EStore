@@ -5,6 +5,8 @@ $(function() {
         return;
     }
 
+    $("#txtMicroClassId").val(microclassid);
+
     var $hiddenVideoFile = $("#hiddenVideoFile");
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
     $('.ui.menu a.item').on('click', function() {
@@ -25,16 +27,16 @@ $(function() {
                         prompt: '标题中最多输入50个字符'
                     }
                 ]
-            },
-            videoDate: {
-                identifier: 'videoDate',
-                rules:[
-                    {
-                        type:'regExp[^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$]',
-                        prompt: '请输入正确的日期'
-                    }
-                ]
-            }
+            }//,
+//            videoDate: {
+//                identifier: 'videoDate',
+//                rules:[
+//                    {
+//                        type:'regExp[^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$]',
+//                        prompt: '请输入正确的日期'
+//                    }
+//                ]
+//            }
         }
     });
 
@@ -72,8 +74,10 @@ $(function() {
         if ($("#formAdd").form('is valid')) {
             $.post("/microclassvideo/save", 
                     $("#formAdd").serialize(), 
-                    function() {
-                window.location = './editmicroclass.html?id='+microclassid;
+                    function(data) {
+                if (data.success) {
+                    window.location = './editmicroclass.html?id='+microclassid;
+                }
             });
         }
     });

@@ -40,9 +40,9 @@ $(function() {
             "searchable": false
           }],
         'columns': [
-            { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
-            { 'title': '时间', 'target': 2, 'width': '20%', 'data': 'videoDate'},
-            { 'title': '说明', 'target': 3, 'sortable':false, 'data': 'description' }
+            { 'title': '标题', 'target': 0, 'width': '20%', 'data': 'title'},
+            { 'title': '日期', 'target': 1, 'width': '20%', 'data': 'videoDateStr'},
+            { 'title': '说明', 'target': 2, 'sortable':false, 'data': 'description' }
         ]
     });
 

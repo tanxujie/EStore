@@ -8,6 +8,7 @@
         <result property="description" column="description"/>
         <result property="oldName" column="old_name"/>
         <result property="newName" column="new_name"/>
+        <result property="videoDate" column="video_date"/>
         <result property="version" column="version"/>
     </resultMap>
 

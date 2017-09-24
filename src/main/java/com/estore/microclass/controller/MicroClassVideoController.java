@@ -40,7 +40,7 @@ public class MicroClassVideoController {
      * @param binding
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/save")
+    @RequestMapping(path = "/microclassvideo/save", method = RequestMethod.POST)
     public ResponseResult save(@Valid MicroClassVideo data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());
@@ -55,7 +55,7 @@ public class MicroClassVideoController {
      * @param ids
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/remove")
+    @RequestMapping(path = "/microclassvideo/remove", method = RequestMethod.POST)
     public ResponseResult remove(int[] ids) {
         this.microClassVideoService.remove(ids);
         return new ResponseResult(true, "微课堂数据删除成功");
@@ -67,7 +67,7 @@ public class MicroClassVideoController {
      * @param binding
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/modify")
+    @RequestMapping(path = "/microclassvideo/modify", method = RequestMethod.POST)
     public ResponseResult modify(@Valid MicroClassVideo data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());
@@ -95,7 +95,7 @@ public class MicroClassVideoController {
      * 
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/search")
+    @RequestMapping(path = "/microclassvideo/search", method = RequestMethod.GET)
     public ResponseResult search(@RequestParam(required = false, name = "condition") String condition) {
         List<MicroClassVideo> results = this.microClassVideoService.search(condition);
         if (CollectionUtils.isEmpty(results)) {
@@ -109,7 +109,7 @@ public class MicroClassVideoController {
      * @param id
      * @return
      */
-    @RequestMapping(path = "/microclassvideo/getDetail")
+    @RequestMapping(path = "/microclassvideo/getDetail", method = RequestMethod.GET)
     public ResponseResult getDetail(int id) {
         MicroClassVideo result = this.microClassVideoService.getDetail(id);
         if (null == result) {
