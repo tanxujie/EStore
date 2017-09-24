@@ -48,13 +48,4 @@ $(function() {
             });
         }
     });
-
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.data, function (index, file) {
-                $('<p/>').text(file).appendTo(document.body);
-            });
-        }
-    });
 });

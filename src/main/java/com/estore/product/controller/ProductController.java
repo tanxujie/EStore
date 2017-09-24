@@ -41,13 +41,29 @@ public class ProductController {
     /**
      * 保存产品信息
      */
-    @RequestMapping(path = "/product/save", method = RequestMethod.POST)
-    public ResponseResult save(@Valid Product data, BindingResult binding) {
+    @RequestMapping(path = "/product/add", method = RequestMethod.POST)
+    public ResponseResult add(@Valid Product data, BindingResult binding) {
         if (binding.hasErrors()) {
             log.error("Data validation failed.", binding.getAllErrors());
             return new ResponseResult(false, "保存产品信息验证失败");
         }
         this.productService.save(data);
+        return new ResponseResult(false, "产品信息保存成功");
+    }
+
+    /**
+     * 
+     * @param data
+     * @param binding
+     * @return
+     */
+    @RequestMapping(path = "/product/modify", method = RequestMethod.POST)
+    public ResponseResult modify(@Valid Product data, BindingResult binding) {
+        if (binding.hasErrors()) {
+            log.error("Data validation failed.", binding.getAllErrors());
+            return new ResponseResult(false, "保存产品信息验证失败");
+        }
+        this.productService.modify(data);
         return new ResponseResult(false, "产品信息保存成功");
     }
 

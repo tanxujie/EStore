@@ -47,6 +47,8 @@ public class ProductDto extends AbstractBaseDto {
      */
     private String description;
 
+    private String innerDetail;
+
     /**
      * 出厂价格
      */

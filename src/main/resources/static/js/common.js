@@ -11,3 +11,7 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); 
     return null;
 }
+
+function isNumber(val) {
+    return /^-?[\d.]+(?:e-?\d+)?$/.test(val);; 
+}

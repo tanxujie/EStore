@@ -5,12 +5,9 @@ $(function(){
         $(this).addClass('active').siblings().removeClass('active');
     });
 
-    var $condition = $("#txtCondition");
-
     // 初始化查询表格
     var $table = $('#resultsTbl').DataTable({
         'serverSide': false,
-        //'searching': false,
         //'select':true,
         'paging': true,
         'bPaginate': true,
@@ -19,31 +16,19 @@ $(function(){
         'bInfo': false,
         'stateSave': true,
         'retrieve': true,
-        'bFilter': true,
+        'bFilter': false,
         'sorter': true,
         'ajax': {
-            'url' : '/microclass/search',
+            'url' : '/agent/search',
             'data': function(d) {
-                condition: $condition.val();
             },
             'dataSrc': 'data'
         },
-//        'columDefs':[{
-//            "targets":[0],
-//            "searchable":false
-//        }],
         'columns': [
             { 'title': '序号', 'target': 0, 'width': '5%', 'data': 'id'},
             { 'title': '标题', 'target': 1, 'width': '20%', 'data': 'title'},
             { 'title': '说明', 'target': 2, 'sortable':false, 'width': '40%', 'data': 'description' }
         ]
-    });
-
-    $("#resultsTbl_filter").hide();
-
-    $condition.keyup(function() {
-        var condition = $condition.val();
-        $table.search(condition).draw();
     });
 
     $('#resultsTbl tbody').on( 'click', 'tr', function () {
@@ -59,7 +44,7 @@ $(function(){
     $("#btnAdd").click(function(event){
         event.preventDefault();
         event.stopPropagation();
-        window.location = './addmicroclass.html';
+        window.location = './addagent.html';
     });
 
     $("#btnEdit").click(function(event){
@@ -69,7 +54,7 @@ $(function(){
             return item['id'];
         });
         if (ids && ids.length) {
-            window.location = './editmicroclass.html?id='+ids[0];
+            window.location = './editagent.html?id='+ids[0];
         } else {
             $("#selectDataModal").modal('show');
         }
@@ -95,7 +80,7 @@ $(function(){
             return item['id'];
         });
         if (ids && ids.length) {
-            $.post('/microclass/remove', 
+            $.post('/agent/remove', 
                     {'id': ids[0]}, 
                     function(data){
                         if (data.success) {
