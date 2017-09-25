@@ -88,7 +88,8 @@ public class UserServiceImpl implements UserService {
         if (account != null) {
             String token = UUID.randomUUID().toString();
             // token有效期为1个月
-            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).put(token, LocalDate.now().plusMonths(1));
+            account.setLastAccessDate(LocalDate.now());
+            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).put(token, account);
             account.setAuthToken(token);
             return account;
         }

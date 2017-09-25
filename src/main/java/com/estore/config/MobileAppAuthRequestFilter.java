@@ -18,7 +18,9 @@ import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.estore.user.dto.LoginAccount;
 import com.estore.utils.Constants;
+import com.estore.utils.UserUtils;
 
 /**
  * 
@@ -48,7 +50,18 @@ public class MobileAppAuthRequestFilter extends OncePerRequestFilter {
 
     private boolean validateAuthToken(String authToken) {
         ValueWrapper vw = this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).get(authToken);
-        if (vw != null && ((LocalDate)vw.get()).isAfter(LocalDate.now())) {
+        if (vw != null) {
+            LoginAccount account = (LoginAccount)vw.get();
+            if (account == null) {
+                return false;
+            }
+            if (account.getLastAccessDate() == null 
+                    || LocalDate.now().minusMonths(1).isAfter(account.getLastAccessDate())) {
+                return false;
+            }
+            account.setLastAccessDate(LocalDate.now());
+            UserUtils.setLoginAccount(account);
+            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).put(authToken, account);
             return true;
         }
         return false;

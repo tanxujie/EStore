@@ -5,6 +5,7 @@
 package com.estore.user.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -47,4 +48,8 @@ public class LoginAccount implements Serializable {
      * 登录识别Token
      */
     private String authToken;
+
+    private String roleCode;
+
+    private LocalDate lastAccessDate;
 }

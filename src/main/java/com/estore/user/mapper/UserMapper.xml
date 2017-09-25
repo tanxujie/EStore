@@ -22,6 +22,7 @@
         <result property="wechatNumber" column="wechat_number"/>
         <result property="idCard" column="id_card"/>
         <result property="bankCard" column="bank_card"/>
+        <result property="roleCode" column="role_code"/>
     </resultMap>
 
     <resultMap id="lowerAgent" type="com.estore.user.dto.LowerAgent">
@@ -38,7 +39,8 @@
                 alias_name,
                 wechat_number,
                 id_card,
-                bank_card
+                bank_card,
+                role_code
         FROM t_user 
         WHERE phone_number = #{phoneNumber} 
         AND password = #{password}
