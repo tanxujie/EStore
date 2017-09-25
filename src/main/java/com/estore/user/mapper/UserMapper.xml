@@ -42,7 +42,8 @@
                 bank_card,
                 role_code
         FROM t_user 
-        WHERE phone_number = #{phoneNumber} 
+        WHERE enabled is true 
+        AND phone_number = #{phoneNumber} 
         AND password = #{password}
     </select>
 
@@ -71,7 +72,8 @@
                 enabled,
                 role_code 
         FROM t_user 
-        WHERE phone_number = #{phoneNumber}
+        WHERE enabled is true 
+        AND phone_number = #{phoneNumber}
     </select>
 	
 	<select id="select" resultMap="user">

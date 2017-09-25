@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User data) {
+        data.setEnabled(true);
         this.userMapper.insert(data);
     }
 
@@ -109,6 +110,7 @@ public class UserServiceImpl implements UserService {
         user.setWechatNumber(agent.getWechatNumber());
         user.setName(agent.getName());
         user.setSupperAgentId(agent.getSuperAgentId());
+        user.setEnabled(false);
         this.userMapper.insert(user);
     }
 
@@ -137,7 +139,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void remove(int id) {
-		// TODO Auto-generated method stub
 		this.userMapper.deleteById(id);
 		
 	}
