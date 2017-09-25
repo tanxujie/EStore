@@ -24,6 +24,12 @@
         <h4 class="ui top attached block header">添加微课堂</h4>
         <div class="ui bottom attached segment">
         <form class="ui form" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
+            <div class="one fields">
+            <div class="field actions">
+                <div id="btnSave" class="ui primary submit button"><i class="save icon"></i>保存</div>
+                <div id="btnCancel" class="ui cancel button"><i class="cancel icon"></i>取消</div>
+            </div>
+            </div>
             <div class="ui error message"></div>
             <div class="one fields">
                 <div class="field">
@@ -36,10 +42,6 @@
                     <label>说明</label>
                     <textarea id="txtDescription" name="description" rows="3" cols="60" maxlength="190"></textarea>
                 </div>
-            </div>
-            <div class="actions">
-                <div id="btnSave" class="ui primary submit button"><i class="save icon"></i>保存</div>
-                <div id="btnCancel" class="ui cancel button"><i class="cancel icon"></i>取消</div>
             </div>
         </form>
         </div>
