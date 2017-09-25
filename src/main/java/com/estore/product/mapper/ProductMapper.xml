@@ -151,7 +151,7 @@
         LEFT JOIN 
              t_minor_category D
         ON A.minor_category_id = D.id
-        <where> 
+        WHERE A.undershelf IS false
         <if test="condition != null and condition != ''">
         AND (A.code LIKE '%'||#{condition}||'%' OR A.name LIKE '%'||#{condition}||'%' OR A.description LIKE '%'||#{condition}||'%')
         </if>
@@ -164,7 +164,6 @@
         <if test="minorCategoryId > 0">
         AND A.minor_category_id = #{minorCategoryId}
         </if>
-        </where>
         <choose>
             <when test="orderBy != null and orderBy != ''">
                 <choose>
