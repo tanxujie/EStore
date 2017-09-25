@@ -27,6 +27,12 @@
         <h4 class="ui top attached block header">修改代理信息</h4>
         <div class="ui bottom attached segment">
         <form class="ui form" id="formAdd" method="post" enctype="multipart/form-data" style="heigth:60%; width:80%;">
+            <div class="one fields">
+            <div class="actions">
+                <div class="ui primary submit button" id="btnSave">保存</div>
+                <a href="./agent.html" class="ui cancel button">取消</a>
+            </div>
+            </div>
             <div class="ui error message"></div>
             <div class="one fields">
                 <div class="field">
@@ -43,21 +49,32 @@
             <div class="one fields">
                 <div class="field">
                     <label>等级</label>
-                    <label style="color:red">admin:管理员；user:普通用户；l1agent:一级代理；l2agent:二级代理</label>
-                    <input name="roleCode" type="text" id="txtRoleCode" style="width:300px;" maxlength="50">
+<!--                     <label style="color:red">admin:管理员；user:普通用户；l1agent:一级代理；l2agent:二级代理</label>
+                    <input name="roleCode" type="text" id="txtRoleCode" style="width:300px;" maxlength="50"> -->
+                    <select id="cbxRoleCode" name="roleCode">
+                        <option value="admin">管理员</option>
+                        <option value="user">普通用户</option>
+                        <option value="l1agent">一级代理</option>
+                        <option value="l2agent">二级代理</option>
+                    </select>
                 </div>
             </div>
             <div class="one fields">
                 <div class="field">
-                    <label>状态</label><label style="color:red">true:可用；false：不可用</label>
-                    <input name="enabled" type="text" id="txtEnabled" style="width:300px;" maxlength="50">
+                    <label>状态</label>
+<!--                     <label style="color:red">true:可用；false：不可用</label>
+                    <input name="enabled" type="text" id="txtEnabled" style="width:300px;" maxlength="50"> -->
+                    <div id="rdEnabled" class="ui radio checkbox">
+                        <input type="radio" name="enabled" value="true">
+                        <label>有效</label>
+                    </div>
+                    <div id="rdDisabled" class="ui radio checkbox">
+                        <input type="radio" name="enabled" value="false">
+                        <label>无效</label>
+                    </div>
                 </div>
             </div>
             <input type="hidden" name="id" id="txtId">
-            <div class="actions">
-                <div class="ui primary submit button" id="btnSave">保存</div>
-                <a href="./agent.html" class="ui cancel button">取消</a>
-            </div>
         </form>
         </div>
     </div>

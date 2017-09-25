@@ -23,7 +23,7 @@ $(function(){
         'sorter': true,
         'ajax': {
             'url' : '/agent/search',
-            'data': function(d) {
+            'data': function() {
             	condition: $condition.val();
             },
             'dataSrc': 'data'
@@ -36,8 +36,14 @@ $(function(){
             { 'title': '序号', 'target': 0, 'width': '10%', 'data': 'id'},
             { 'title': '姓名', 'target': 1, 'width': '15%', 'data': 'name'},
             { 'title': '手机号', 'target': 2, 'width': '20%', 'data': 'phoneNumber'},
-            { 'title': '等级', 'target': 3, 'width': '10%', 'data': 'roleCode' },
-            { 'title': '状态', 'target': 3, 'width': '15%', 'data': 'enabled' }
+            { 'title': '等级', 'target': 3, 'width': '10%', 'data': 'roleName' },
+            { 'title': '状态', 'target': 4, 'width': '15%', 'data': function(data){
+                if (!!data.enabled) {
+                    return '<a class="ui green label">有效</a>';
+                } else {
+                    return '<a class="ui red label">无效</a>';
+                }
+            }}
         ]
     });
     

@@ -7,6 +7,7 @@ package com.estore.user.entity;
 import java.time.ZonedDateTime;
 
 import com.estore.base.AbstractBaseEntity;
+import com.estore.utils.Constants;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -73,4 +74,18 @@ public class User extends AbstractBaseEntity {
      * 角色编码
      */
     private String roleCode;
+
+    public String getRoleName() {
+        String roleName = "";
+        if (Constants.ROLE_CODE_ADMIN.equals(this.roleCode)) {
+            roleName = "管理员";
+        } else if (Constants.ROLE_CODE_USER.equals(this.roleCode)) {
+            roleName = "普通用户";
+        } else if (Constants.ROLE_CODE_LEVEL1_AGENT.equals(this.roleCode)) {
+            roleName = "一级代理";
+        } else if (Constants.ROLE_CODE_LEVEL2_AGENT.equals(this.roleCode)) {
+            roleName = "二级代理";
+        }
+        return roleName;
+    }
 }
