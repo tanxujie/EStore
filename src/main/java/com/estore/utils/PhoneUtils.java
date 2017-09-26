@@ -20,7 +20,7 @@ public final class PhoneUtils {
     /**
      * 正则表达式：验证手机号
      */
-    private static final String REGEX_MOBILE_PHONE_NO = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,4-9]))\\d{8}$";
+    private static final String REGEX_MOBILE_PHONE_NO = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$";
 
     /**
      * 
