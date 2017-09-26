@@ -56,7 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public Jackson2ObjectMapperBuilder objectMapperBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-        builder.serializationInclusion(JsonInclude.Include.NON_NULL);
+        builder.serializationInclusion(JsonInclude.Include.ALWAYS);
         //builder.propertyNamingStrategy(PropertyNamingStrategy.);
         builder.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         return builder;

@@ -12,13 +12,17 @@ import javax.servlet.Filter;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * @author Tan XuJie
@@ -29,13 +33,12 @@ public class ShiroConfig {
 
     @Bean
     public DefaultWebSecurityManager securityManager(
-            CacheManager cacheShiroManager, 
-            SessionManager sessionManager) {
+            CacheManager cacheShiroManager/*, SessionManager sessionManager*/) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(this.shiroDbRealm());
         securityManager.setCacheManager(cacheShiroManager);
         securityManager.setRememberMeManager(null);
-        securityManager.setSessionManager(sessionManager);
+//        securityManager.setSessionManager(sessionManager);
         return securityManager;
     }
 
@@ -76,18 +79,19 @@ public class ShiroConfig {
 //        return simpleCookie;
 //    }
 
-    @Bean
-    public DefaultWebSessionManager sessionManager(CacheManager cacheShiroManager) {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setCacheManager(cacheShiroManager);
-        return sessionManager;
-    }
+//    @Bean
+//    public DefaultWebSessionManager sessionManager(CacheManager cacheShiroManager) {
+//        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+//        sessionManager.setCacheManager(cacheShiroManager);
+//        sessionManager.setSessionIdCookieEnabled(false);
+//        return sessionManager;
+//    }
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
-        shiroFilter.setLoginUrl("/login");
+        shiroFilter.setLoginUrl("/login.do");
         shiroFilter.setSuccessUrl("/index.html");
         shiroFilter.setUnauthorizedUrl("/unauthorized.html");
         Map<String, Filter> filters = new LinkedHashMap<>();
@@ -114,7 +118,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/download/**", "anon");
         filterChainDefinitionMap.put("/logout", "mylogout");
         filterChainDefinitionMap.put("/error.html","anon");
-        filterChainDefinitionMap.put("/login", "authc");
+        filterChainDefinitionMap.put("/login.do", "authc");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilter;
@@ -135,11 +139,11 @@ public class ShiroConfig {
 //    /**
 //     * 保证实现了Shiro内部lifecycle函数的bean执行
 //     */
-//    @Bean
-//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-//        return new LifecycleBeanPostProcessor();
-//    }
-//
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
+
 //    /**
 //     * 启用shrio授权注解拦截方式，AOP式方法级权限检查
 //     */
