@@ -35,7 +35,7 @@
         <logger name="com.estore.user.mapper" level="DEBUG"/>
         <logger name="com.estore.product.mapper" level="DEBUG"/>
         <logger name="com.estore.microclass.mapper" level="DEBUG"/>
-        <Root level="INFO">
+        <Root level="TRACE">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="ConsoleFile"/>
         </Root>

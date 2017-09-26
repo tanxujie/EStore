@@ -56,7 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public Jackson2ObjectMapperBuilder objectMapperBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-        builder.serializationInclusion(JsonInclude.Include.NON_NULL);
+        builder.serializationInclusion(JsonInclude.Include.ALWAYS);
         //builder.propertyNamingStrategy(PropertyNamingStrategy.);
         builder.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         return builder;
@@ -73,26 +73,26 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return registrationBean;
     }
 
-    @Bean(name="mobileAppAuthDelegatingFilterProxy")
-    public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
-        registrationBean.setFilter(httpBasicFilter);
-        //registrationBean.setFilter(new MobileAppAuthRequestFilter());
-        //registrationBean.addUrlPatterns("/app/*");
-        Map<String,String> m = new HashMap<String,String>();
-        m.put("targetBeanName","mobileAppAuthRequestFilter");
-        m.put("targetFilterLifecycle","true");
-        registrationBean.setInitParameters(m);
-        registrationBean.addUrlPatterns("/app/*");
-        registrationBean.setOrder(1);
-        return registrationBean;
-    }
-
-    @Bean(name="mobileAppAuthRequestFilter")
-    public MobileAppAuthRequestFilter mobileAppAuthRequestFilter() {
-        return new MobileAppAuthRequestFilter();
-    }
+//    @Bean(name="mobileAppAuthDelegatingFilterProxy")
+//    public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
+//        registrationBean.setFilter(httpBasicFilter);
+//        //registrationBean.setFilter(new MobileAppAuthRequestFilter());
+//        //registrationBean.addUrlPatterns("/app/*");
+//        Map<String,String> m = new HashMap<String,String>();
+//        m.put("targetBeanName","mobileAppAuthRequestFilter");
+//        m.put("targetFilterLifecycle","true");
+//        registrationBean.setInitParameters(m);
+//        registrationBean.addUrlPatterns("/app/*");
+//        registrationBean.setOrder(1);
+//        return registrationBean;
+//    }
+//
+//    @Bean(name="mobileAppAuthRequestFilter")
+//    public MobileAppAuthRequestFilter mobileAppAuthRequestFilter() {
+//        return new MobileAppAuthRequestFilter();
+//    }
 
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
