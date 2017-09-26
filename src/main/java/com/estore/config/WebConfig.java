@@ -73,26 +73,26 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return registrationBean;
     }
 
-//    @Bean(name="mobileAppAuthDelegatingFilterProxy")
-//    public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
-//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-//        DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
-//        registrationBean.setFilter(httpBasicFilter);
-//        //registrationBean.setFilter(new MobileAppAuthRequestFilter());
-//        //registrationBean.addUrlPatterns("/app/*");
-//        Map<String,String> m = new HashMap<String,String>();
-//        m.put("targetBeanName","mobileAppAuthRequestFilter");
-//        m.put("targetFilterLifecycle","true");
-//        registrationBean.setInitParameters(m);
-//        registrationBean.addUrlPatterns("/app/*");
-//        registrationBean.setOrder(1);
-//        return registrationBean;
-//    }
-//
-//    @Bean(name="mobileAppAuthRequestFilter")
-//    public MobileAppAuthRequestFilter mobileAppAuthRequestFilter() {
-//        return new MobileAppAuthRequestFilter();
-//    }
+    @Bean(name="mobileAppAuthDelegatingFilterProxy")
+    public FilterRegistrationBean mobileAppAuthDelegatingFilterProxy() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        DelegatingFilterProxy httpBasicFilter = new DelegatingFilterProxy();
+        registrationBean.setFilter(httpBasicFilter);
+        //registrationBean.setFilter(new MobileAppAuthRequestFilter());
+        //registrationBean.addUrlPatterns("/app/*");
+        Map<String,String> m = new HashMap<String,String>();
+        m.put("targetBeanName","mobileAppAuthRequestFilter");
+        m.put("targetFilterLifecycle","true");
+        registrationBean.setInitParameters(m);
+        registrationBean.addUrlPatterns("/app/*");
+        registrationBean.setOrder(1);
+        return registrationBean;
+    }
+
+    @Bean(name="mobileAppAuthRequestFilter")
+    public MobileAppAuthRequestFilter mobileAppAuthRequestFilter() {
+        return new MobileAppAuthRequestFilter();
+    }
 
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
