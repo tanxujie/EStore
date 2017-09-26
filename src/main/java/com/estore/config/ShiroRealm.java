@@ -34,7 +34,6 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         UserDto userDto = (UserDto)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo();
-        //authInfo.addStringPermissions(userDto.getPermissionCodes());
         authInfo.addRole(userDto.getRoleCode());
         return authInfo;
     }

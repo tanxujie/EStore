@@ -35,6 +35,10 @@ public interface UserService {
      */
     void save(User data);
 
+    /**
+     * 
+     * @param agent
+     */
     void save(LowerAgent agent);
 
     /**

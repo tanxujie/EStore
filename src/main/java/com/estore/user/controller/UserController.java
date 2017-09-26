@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.base.ResponseResult;
-import com.estore.microclass.entity.MicroClass;
 import com.estore.user.dto.LowerAgent;
 import com.estore.user.dto.UserPasswordDto;
 import com.estore.user.entity.User;

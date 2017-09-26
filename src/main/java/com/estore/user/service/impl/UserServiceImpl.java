@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User data) {
+        data.setEnabled(true);
         this.userMapper.insert(data);
     }
 
@@ -88,7 +89,8 @@ public class UserServiceImpl implements UserService {
         if (account != null) {
             String token = UUID.randomUUID().toString();
             // token有效期为1个月
-            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).put(token, LocalDate.now().plusMonths(1));
+            account.setLastAccessDate(LocalDate.now());
+            this.cacheManager.getCache(Constants.GLOBAL_AUTH_TOKENS_CACHE).put(token, account);
             account.setAuthToken(token);
             return account;
         }
@@ -108,6 +110,7 @@ public class UserServiceImpl implements UserService {
         user.setWechatNumber(agent.getWechatNumber());
         user.setName(agent.getName());
         user.setSupperAgentId(agent.getSuperAgentId());
+        user.setEnabled(false);
         this.userMapper.insert(user);
     }
 
@@ -136,7 +139,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void remove(int id) {
-		// TODO Auto-generated method stub
 		this.userMapper.deleteById(id);
 		
 	}

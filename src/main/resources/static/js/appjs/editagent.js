@@ -5,6 +5,9 @@ $(function() {
         return;
     }
 
+    var $cbxRoleCode = $("#cbxRoleCode").dropdown();
+    var $rdEnabled = $("#rdEnabled").checkbox();
+    var $rdDisabled = $("#rdDisabled").checkbox();
     // load details
     $.get('/agent/getDetail', 
             {'id': id}, 
@@ -13,8 +16,14 @@ $(function() {
                     $("#txtId").val(data.data.id);
                     $("#txtName").val(data.data.name);
                     $("#txtPhoneNumber").val(data.data.phoneNumber);
-                    $("#txtRoleCode").val(data.data.roleCode);
-                    $("#txtEnabled").val(data.data.enabled);
+                    $cbxRoleCode.dropdown('set selected', data.data.roleCode);
+                    if (!!data.data.enabled) {
+                        $rdEnabled.checkbox('check');
+                        $rdDisabled.checkbox('uncheck');
+                    } else {
+                        $rdEnabled.checkbox('uncheck');
+                        $rdDisabled.checkbox('check');
+                    }
                 }
             }
          );
