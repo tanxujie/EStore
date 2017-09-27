@@ -153,6 +153,29 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void modify(Product product) {
         this.productMapper.update(product);
+
+        String[] imageNames = product.getImageNames();
+        if (ArrayUtils.isNotEmpty(imageNames)) {
+            this.productImageMapper.deleteByProductId(product.getId());
+            int displayOrder = 1;
+            for (String imageName : imageNames) {
+                ProductImage productImage = new ProductImage();
+                productImage.setProductId(product.getId());
+                productImage.setNewName(imageName);
+                productImage.setDisplayOrder(displayOrder);
+                this.productImageMapper.insert(productImage);
+                displayOrder++;
+            }
+        }
+
+        if (StringUtils.isNotBlank(product.getVideoName())) {
+            this.productVideoMapper.deleteByProductId(product.getId());
+            ProductVideo productVideo = new ProductVideo();
+            productVideo.setProductId(product.getId());
+            productVideo.setDisplayOrder(1);
+            productVideo.setName(product.getVideoName());
+            this.productVideoMapper.insert(productVideo);
+        }
     }
 
     @Override

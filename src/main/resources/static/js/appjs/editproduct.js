@@ -89,7 +89,7 @@ $(function() {
         url: '/upload/video',
         success: function(file, resp) {
             $("#messageArea").hide();
-            $hiddenVideoFile.append($('<input type="hidden" name="videoName" value="' + resp.data[0] + '" />'));
+            $hiddenVideoFile.append('<input type="hidden" name="videoName" value="' + resp.data[0] + '" />');
             //file.previewElement.classList.add("dz-success");
         },
         error: function(file, response) {
@@ -121,7 +121,7 @@ $(function() {
         acceptedFiles: ".jpg,.jpeg",
         url: '/upload/image',
         success: function(file, resp) {
-            $hiddenUploadFile.append($('<input type="hidden" name="imageNames" value="' + resp.data[0] + '" />'));
+            $hiddenUploadFile.append('<input type="hidden" name="imageNames" value="' + resp.data[0] + '" />');
             //file.previewElement.classList.add("dz-success");
         },
         error: function(file, response) {
