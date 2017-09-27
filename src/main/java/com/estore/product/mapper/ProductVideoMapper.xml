@@ -21,4 +21,9 @@
                 #{name}, 
                 1)
     </insert>
+
+    <delete id="deleteByProductId" parameterType="int">
+        DELETE FROM t_product_video 
+        WHERE product_id = #{productId}
+    </delete>
 </mapper>
