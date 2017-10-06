@@ -88,6 +88,14 @@ public class ProductServiceImpl implements ProductService {
         return this.productMapper.selectAll(sdata);
     }
 
+    @Override
+    public List<ProductListDto> searchUnderShelf(ProductSearchDto sdata) {
+        if (StringUtils.isNotBlank(sdata.getOrderBy())) {
+            sdata.setOrderBy("A." + sdata.getOrderBy());
+        }
+        return this.productMapper.selectAllUnderShelf(sdata);
+    }
+
     /**
      * 手机端产品信息查询
      */
