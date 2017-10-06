@@ -60,8 +60,6 @@ $(function() {
                     $("#txtExFactoryPricetxt").val(data.data.exFactoryPrice);
                     $("#txtFavorablePrice").val(data.data.favorablePrice);
                     $("#txtPrimaryPrice").val(data.data.primaryPrice);
-                    $("#txtPhoneNumber").val(data.data.phoneNumber);
-                    $("#txtWechatNumber").val(data.data.wechatNumber);
                     loadMajorCategory(data.data.majorCategoryId);
                     loadMinorCategory(data.data.majorCategoryId, data.data.minorCategoryId)
                 }
@@ -180,15 +178,6 @@ $(function() {
                     {
                         type:'number',
                         prompt: '请输入正确的二级代理价格'
-                    }
-                ]
-            },
-            phoneNumber: {
-                identifier: 'phoneNumber',
-                rules:[
-                    {
-                        type:'regExp[^$|^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,4-9]))\\d{8}$]',
-                        prompt: '请输入正确的手机号码'
                     }
                 ]
             },

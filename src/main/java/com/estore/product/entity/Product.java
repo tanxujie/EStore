@@ -201,7 +201,7 @@ public class Product extends AbstractBaseEntity {
     }
 
     public String getExFactoryPriceStr() {
-        if (UserUtils.isAdmin() || UserUtils.isUser() || UserUtils.isLevel1Agent()) {
+        if (UserUtils.isAdmin() || UserUtils.isLevel1Agent()) {
             // 一级价格
             return MoneyUtils.format(this.exFactoryPrice);
         } else {
@@ -211,7 +211,7 @@ public class Product extends AbstractBaseEntity {
     }
 
     public String getFavorablePriceStr() {
-        if (UserUtils.isAdmin() || UserUtils.isUser() || UserUtils.isLevel1Agent()) {
+        if (UserUtils.isAdmin() || UserUtils.isLevel1Agent()) {
             // 一级价格
             return MoneyUtils.format(this.favorablePrice);
         } else {
