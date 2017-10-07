@@ -154,15 +154,6 @@ $(function() {
                     }
                 ]
             },
-            phoneNumber: {
-                identifier: 'phoneNumber',
-                rules:[
-                    {
-                        type:'regExp[^$|^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,4-9]))\\d{8}$]',
-                        prompt: '请输入正确的手机号码'
-                    }
-                ]
-            },
             imageNames: {
                 identifier: 'imageNames',
                 rules:[

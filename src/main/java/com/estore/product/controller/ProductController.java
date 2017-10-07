@@ -82,6 +82,16 @@ public class ProductController {
         return new ResponseResult(true, results);
     }
 
+    @RequestMapping(path = "/product/searchUnderShelf", method = RequestMethod.GET)
+    @CrossOrigin
+    public ResponseResult searchUnderShelf(ProductSearchDto sdata) {
+        List<ProductListDto> results = this.productService.searchUnderShelf(sdata);
+        if (CollectionUtils.isEmpty(results)) {
+            return new ResponseResult(false, "查询数据不存在");
+        }
+        return new ResponseResult(true, results);
+    }
+
     @RequestMapping(path = "/product/changeShelf", method = RequestMethod.POST)
     public ResponseResult changeShelf(@RequestParam(name = "productId", required = true) int productId) {
         boolean result = this.productService.changeShelf(productId);

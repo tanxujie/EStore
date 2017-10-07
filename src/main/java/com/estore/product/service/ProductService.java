@@ -45,6 +45,8 @@ public interface ProductService {
      */
     List<ProductListDto> search(ProductSearchDto sdata);
 
+    List<ProductListDto> searchUnderShelf(ProductSearchDto sdata);
+
     /**
      * 
      * @param sdata

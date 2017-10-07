@@ -49,6 +49,13 @@ public interface ProductMapper {
      * @param condition
      * @return
      */
+    List<ProductListDto> selectAllUnderShelf(ProductSearchDto condition);
+
+    /**
+     * 
+     * @param condition
+     * @return
+     */
     List<Product> selectAllForApp(ProductSearchDto condition);
 
     /**
