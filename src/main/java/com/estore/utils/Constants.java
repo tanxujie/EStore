@@ -94,7 +94,7 @@ public final class Constants {
     /**
      * 最大视频大小
      */
-    public static final long MAX_UPLOAD_VIDEO_SIZE = (long)2.0*1024*1024;
+    public static final long MAX_UPLOAD_VIDEO_SIZE = (long)10.0*1024*1024;
 
     /**
      * 管理员帐户
