@@ -17,7 +17,7 @@
     <script type="text/javascript" src="./js/zh.js"></script>
     <script type="text/javascript">
     $(function(){
-        $("#fileUploader").fileinput({
+/*         $("#fileUploader").fileinput({
             theme: "explorer",
             'uploadUrl':'/upload/image',
             'uploadAsync': true,
@@ -39,7 +39,7 @@
             'allowedPreviewTypes': ['image'],  
             'allowedFileTypes': ['image'],
             'allowedFileExtensions' : ['jpg', 'jpeg']
-            });
+            }); */
         
         $("#input-ke-1").fileinput({
             theme: "explorer",
@@ -72,10 +72,9 @@
 </head>
 <body>
     <div class="ui text container" style="margin-top:75px; height:auto;">
-        <input type="file" name="fileUploader" id="fileUploader" multiple class="file" />
-    </div>
-    <div class="file-loading">
-        <input id="input-ke-1" name="input-ke-1[]" type="file" multiple accept="image">
+        <div class="file-loading">
+            <input id="input-ke-1" name="input-ke-1[]" type="file" multiple accept="image">
+        </div>
     </div>
 </body>
 </html>
