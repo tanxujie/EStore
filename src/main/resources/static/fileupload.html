@@ -44,14 +44,28 @@
         $("#input-ke-1").fileinput({
             theme: "explorer",
             uploadUrl: "/upload/image",
+            deleteUrl: "/upload/image/remove/",
+            uploadAsync: true,
             language: 'zh',
             showUpload: true,
+            showRemove: true,
+            showClose: false,
             allowedPreviewTypes: ['image'],
             allowedFileTypes: ['image'],
             allowedFileExtensions: ['jpg', 'jpeg'],
             hiddenThumbnailContent: true,
             overwriteInitial: false,
-            initialPreviewAsData: true
+            initialPreviewAsData: true,
+            maxFileCount: 9,
+            initialPreview: [
+                "/download/image/0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg"
+            ],
+            initialPreviewConfig: [
+                {caption: "nature-1.jpg", size: 329892, width: "120px", key: '0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg'}
+            ],
+            initialPreviewDownloadUrl: '/download/image/{key}'
+        }).on("fileuploaded", function(event, data){
+            alert(data.response.data);
         });
     });
     </script>

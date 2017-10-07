@@ -135,14 +135,14 @@ public final class Constants {
     /**
      * 产品图片目录路径
      */
-    //public static final String PRODUCT_IMAGE_DIR_PATH = "/usr/local/share/applications/EStoreStorage/Images/";
-    public static final String PRODUCT_IMAGE_DIR_PATH = "C:/EStoreStorage/Images/";
+    //public static final String IMAGE_DIR_PATH = "/usr/local/share/applications/EStoreStorage/Images/";
+    public static final String IMAGE_DIR_PATH = "C:/EStoreStorage/Images/";
 
     /**
      * 微课堂视频路径
      */
-    //public static final String MICRO_CLASS_VIDEO_DIR_PATH = "/usr/local/share/applications/EStoreStorage/Videos/";
-    public static final String MICRO_CLASS_VIDEO_DIR_PATH = "C:/EStoreStorage/Videos/";
+    //public static final String VIDEO_DIR_PATH = "/usr/local/share/applications/EStoreStorage/Videos/";
+    public static final String VIDEO_DIR_PATH = "C:/EStoreStorage/Videos/";
 
     /**
      * 后台应用服务根URL地址。

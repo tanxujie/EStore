@@ -144,7 +144,7 @@ public class ProductServiceImpl implements ProductService {
         if (CollectionUtils.isNotEmpty(productImageNames)) {
             for (String imageName : productImageNames) {
                 try {
-                    FileUtils.forceDelete(new File(Constants.PRODUCT_IMAGE_DIR_PATH + imageName));
+                    FileUtils.forceDelete(new File(Constants.IMAGE_DIR_PATH + imageName));
                 } catch (IOException e) {
                     log.error("文件删除失败", e);
                     continue;
