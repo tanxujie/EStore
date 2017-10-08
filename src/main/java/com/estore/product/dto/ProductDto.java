@@ -140,4 +140,8 @@ public class ProductDto extends AbstractBaseDto {
      * 产品图片
      */
     private List<ProductImage> images;
+
+    private List<String> imageInitialPreview;
+
+    private List<PreviewConfig> imagePreviewConfig;
 }

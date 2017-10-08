@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>阿坤珠宝</title>
-<link rel="stylesheet" type="text/css" href="/css/semantic.css">
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/dropzone.css">
-<link rel="stylesheet" type="text/css" href="/css/common.css">
-<script type="text/javascript" src="./js/jquery.js"></script>
-<script type="text/javascript" src="./js/semantic.js"></script>
-<script type="text/javascript" src="./js/dropzone.js"></script>
-<script type="text/javascript" src="./js/common.js"></script>
-<script type="text/javascript" src="./js/appjs/addproduct.js"></script>
+    <meta charset="UTF-8">
+    <title>阿坤珠宝</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/css/fileinput.css">
+    <link rel="stylesheet" type="text/css" href="/css/explorer/theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/all-krajee.css">
+    <link rel="stylesheet" type="text/css" href="/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/semantic.js"></script>
+    <script type="text/javascript" src="./js/popper.js"></script>
+    <script type="text/javascript" src="./js/fileinput.js"></script>
+    <script type="text/javascript" src="./js/explorer/theme.js"></script>
+    <script type="text/javascript" src="./js/zh.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/appjs/addproduct.js"></script>
 </head>
 <body>
     <div id="menuArea" class="ui fixed menu">
@@ -77,14 +83,22 @@
                     <input name="primaryPrice" type="text" maxlength="8" style="width:125px;">
                 </div>
             </div>
-            <div id="hiddenVideoFile"></div>
-            <div id="hiddenUploadFile"></div>
-            <div class="two fields">
-                <div id="videoDropZone" class="dropbox" style="height:50px;width:150px;">
-                    <div class="dz-message" style="width:100%;height:100%;text-align:center;">上传视频</div>
+<!--             <div id="hiddenVideoFile"></div>
+            <div id="hiddenUploadFile"></div> -->
+            <div class="one fields">
+                <div class="field">
+                    <label>图片</label>
+                    <div class="file-loading">
+                        <input id="imageFile" name="imageFile[]" type="file" multiple accept="image">
+                    </div>
                 </div>
-                <div id="imageDropZone" class="dropbox needsclick" style="height:50px;width:150px;">
-                    <div class="dz-message" style="width:100%;height:100%;text-align:center;">上传图片</div>
+            </div>
+            <div class="one fields">
+                <div class="field">
+                    <label>视频</label>
+                    <div class="file-loading">
+                        <input id="videoFile" name="videoFile[]" type="file" multiple accept="mp4">
+                    </div>
                 </div>
             </div>
         </form>
