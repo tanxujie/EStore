@@ -2347,7 +2347,9 @@
                     keys = $h.isEmpty(data) || $h.isEmpty(data.errorkeys) ? [] : data.errorkeys;
 
                 if ($h.isEmpty(data) || $h.isEmpty(data.error)) {
-                    self._raise('filebatchuploadsuccess', [outData]);
+                    // add hidden for estore
+                    //var fc = $thumbs.children(".kv-file-content");
+                    self._raise('filebatchuploadsuccess', [outData, $thumbs.children(".kv-file-content")]);
                     setAllUploaded();
                     if (self.showPreview) {
                         $thumbs.each(function () {

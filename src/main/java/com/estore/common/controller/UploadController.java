@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,18 +51,23 @@ public class UploadController {
             Iterator<String> itr = request.getFileNames();
             while (itr.hasNext()) {
                 String imageFile = itr.next();
-                MultipartFile file = request.getFile(imageFile);
-                if (null == file || file.isEmpty()) {
+                List<MultipartFile> files = request.getFiles(imageFile);
+                if (CollectionUtils.isEmpty(files)) {
                     continue;
                 }
-                if (file.getSize() > Constants.MAX_UPLOAD_IMAGE_SIZE) {
-                    continue;
+                for (MultipartFile file : files) {
+                    if (null == file || file.isEmpty()) {
+                        continue;
+                    }
+                    if (file.getSize() > Constants.MAX_UPLOAD_IMAGE_SIZE) {
+                        continue;
+                    }
+                    String fileName = file.getOriginalFilename();
+                    String suffix = fileName.substring(fileName.lastIndexOf("."));
+                    String newFileName = UUID.randomUUID() + suffix;
+                    fileNames.add(newFileName);
+                    file.transferTo(new File(Constants.IMAGE_DIR_PATH + newFileName));
                 }
-                String fileName = file.getOriginalFilename();
-                String suffix = fileName.substring(fileName.lastIndexOf("."));
-                String newFileName = UUID.randomUUID() + suffix;
-                fileNames.add(newFileName);
-                file.transferTo(new File(Constants.IMAGE_DIR_PATH + newFileName));
             }
 
             return new ResponseResult(true, fileNames);
