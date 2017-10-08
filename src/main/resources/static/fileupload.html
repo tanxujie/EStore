@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>阿坤珠宝后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/fileinput.css">
+    <link rel="stylesheet" type="text/css" href="css/explorer/theme.css">
+    <link rel="stylesheet" type="text/css" href="css/all-krajee.css">
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/popper.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/fileinput.js"></script>
+    <script type="text/javascript" src="./js/explorer/theme.js"></script>
+    <!-- <script type="text/javascript" src="./js/all-krajee.js"></script> -->
+    <script type="text/javascript" src="./js/zh.js"></script>
+    <script type="text/javascript">
+    $(function(){
+/*         $("#fileUploader").fileinput({
+            theme: "explorer",
+            'uploadUrl':'/upload/image',
+            'uploadAsync': true,
+            'language': 'zh',
+            'showUpload':true, 
+            'showCaption':true,
+            'showRemove':true,
+            'showClose': false,
+            showBrowse: false,
+            'hiddenThumbnailContent': true,
+            //'dropZoneEnabled': false,
+            'showUploadedThumbs': true,
+            'browseOnZoneClick': true,
+            'initialPreviewShowDelete': true,
+            'browseClass': "btn btn-primary",
+            'previewFileType':'any',
+            'maxFileCount': 9,
+            'enctype': 'multipart/form-data',
+            'allowedPreviewTypes': ['image'],  
+            'allowedFileTypes': ['image'],
+            'allowedFileExtensions' : ['jpg', 'jpeg']
+            }); */
+        
+        $("#input-ke-1").fileinput({
+            theme: "explorer",
+            uploadUrl: "/upload/image",
+            deleteUrl: "/upload/image/remove/",
+            uploadAsync: true,
+            language: 'zh',
+            showUpload: true,
+            showRemove: true,
+            showClose: false,
+            allowedPreviewTypes: ['image'],
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'jpeg'],
+            hiddenThumbnailContent: true,
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            maxFileCount: 9,
+            initialPreview: [
+                "/download/image/0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg"
+            ],
+            initialPreviewConfig: [
+                {caption: "nature-1.jpg", size: 329892, width: "120px", key: '0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg'}
+            ],
+            initialPreviewDownloadUrl: '/download/image/{key}'
+        }).on("fileuploaded", function(event, data){
+            alert(data.response.data);
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="ui text container" style="margin-top:75px; height:auto;">
+        <div class="file-loading">
+            <input id="input-ke-1" name="input-ke-1[]" type="file" multiple accept="image">
+        </div>
+    </div>
+</body>
+</html>

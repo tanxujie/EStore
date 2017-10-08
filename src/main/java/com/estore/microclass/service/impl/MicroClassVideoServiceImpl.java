@@ -40,7 +40,7 @@ public class MicroClassVideoServiceImpl implements MicroClassVideoService {
         MicroClassVideo mcv = this.microClassVideoMapper.select(id);
         if (null != mcv && StringUtils.isNotBlank(mcv.getNewName())) {
             try {
-                FileUtils.forceDelete(new File(Constants.MICRO_CLASS_VIDEO_DIR_PATH + mcv.getNewName()));
+                FileUtils.forceDelete(new File(Constants.VIDEO_DIR_PATH + mcv.getNewName()));
             } catch (IOException e) {
                 log.error("文件删除失败", e);
             }

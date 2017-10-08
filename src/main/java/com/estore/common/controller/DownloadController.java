@@ -48,9 +48,9 @@ public class DownloadController {
     public Resource downloadImage(@PathVariable("filename") String filename, HttpServletRequest request) {
         try {
             return this.resourceLoader.getResource(
-                    "file:" + Paths.get(Constants.PRODUCT_IMAGE_DIR_PATH, filename).toString());
+                    "file:" + Paths.get(Constants.IMAGE_DIR_PATH, filename).toString());
         } catch (Exception ex) {
-            log.error("Download Image failed. "+ Paths.get(Constants.PRODUCT_IMAGE_DIR_PATH, filename).toString() +"Caused by ", ex);
+            log.error("Download Image failed. "+ Paths.get(Constants.IMAGE_DIR_PATH, filename).toString() +"Caused by ", ex);
             return null;
         }
     }
@@ -66,7 +66,7 @@ public class DownloadController {
     public ResourceRegion downloadVideo(@PathVariable("filename") String filename, HttpServletRequest request) {
         try {
             Resource resource = this.resourceLoader.getResource(
-                    "file:" + Paths.get(Constants.MICRO_CLASS_VIDEO_DIR_PATH, filename).toString());
+                    "file:" + Paths.get(Constants.VIDEO_DIR_PATH, filename).toString());
             if (null == resource || !resource.exists() || resource.contentLength() == 0) {
                 return new ResourceRegion(null, 0, 0);
             }
@@ -95,7 +95,7 @@ public class DownloadController {
 
             // get current request video resource region
             ResourceRegion resourceRegion = new ResourceRegion(
-                    this.resourceLoader.getResource("file:" + Paths.get(Constants.MICRO_CLASS_VIDEO_DIR_PATH, filename).toString()), 
+                    this.resourceLoader.getResource("file:" + Paths.get(Constants.VIDEO_DIR_PATH, filename).toString()), 
                     start,
                     (end - start + 1));
 
