@@ -2723,7 +2723,9 @@
                     'footer': footer,
                     'data': d,
                     'template': templ || cat,
-                    'style': styleAttribs ? 'style="' + styleAttribs + '"' : ''
+                    'style': styleAttribs ? 'style="' + styleAttribs + '"' : '',
+                     'hiddenname': 'imageNames',
+                     'hiddenvalue': d.substring(d.lastIndexOf("/")+1)
                 });
             };
             ind = ind || previewId.slice(previewId.lastIndexOf('-') + 1);

@@ -16,6 +16,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estore.product.dto.PreviewConfig;
 import com.estore.product.dto.ProductDto;
 import com.estore.product.dto.ProductListDto;
 import com.estore.product.dto.ProductPair;
@@ -132,7 +133,22 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDto getDetail(int productId) {
-        return this.productMapper.select(productId);
+        ProductDto productDto = this.productMapper.select(productId);
+        List<ProductImage> productImages = this.productImageMapper.selectByProductId(productId);
+        List<String> imageInitialPreview = new ArrayList<>();
+        List<PreviewConfig> imagePreviewConfig = new ArrayList<>();
+        PreviewConfig previewConfig = null;
+        for (ProductImage image : productImages) {
+            imageInitialPreview.add("/download/image/" + image.getNewName());
+            previewConfig = new PreviewConfig();
+            previewConfig.setCaption(image.getOldName());
+            previewConfig.setKey(image.getNewName());
+            imagePreviewConfig.add(previewConfig);
+        }
+        productDto.setImageInitialPreview(imageInitialPreview);
+        productDto.setImagePreviewConfig(imagePreviewConfig);
+
+        return productDto;
     }
 
     /**
@@ -162,12 +178,16 @@ public class ProductServiceImpl implements ProductService {
     public void modify(Product product) {
         this.productMapper.update(product);
 
+        this.productImageMapper.deleteByProductId(product.getId());
         String[] imageNames = product.getImageNames();
         if (ArrayUtils.isNotEmpty(imageNames)) {
-            this.productImageMapper.deleteByProductId(product.getId());
             int displayOrder = 1;
+            ProductImage productImage = null;
             for (String imageName : imageNames) {
-                ProductImage productImage = new ProductImage();
+                if (StringUtils.substringBeforeLast(imageName, ".").length() != 36) {
+                    continue;
+                }
+                productImage = new ProductImage();
                 productImage.setProductId(product.getId());
                 productImage.setNewName(imageName);
                 productImage.setDisplayOrder(displayOrder);
@@ -176,8 +196,8 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
+        this.productVideoMapper.deleteByProductId(product.getId());
         if (StringUtils.isNotBlank(product.getVideoName())) {
-            this.productVideoMapper.deleteByProductId(product.getId());
             ProductVideo productVideo = new ProductVideo();
             productVideo.setProductId(product.getId());
             productVideo.setDisplayOrder(1);

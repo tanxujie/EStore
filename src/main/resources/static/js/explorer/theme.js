@@ -13,7 +13,7 @@
 (function ($) {
     "use strict";
     var teTagBef = '<tr class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' data-template="{template}"', teContent = '<td class="kv-file-content">\n';
+        ' data-template="{template}"', teContent = '<td class="kv-file-content">\n<input type="hidden" name="{hiddenname}" value="{hiddenvalue}"/>';
     $.fn.fileinputThemes.explorer = {
         layoutTemplates: {
             preview: '<div class="file-preview {class}">\n' +

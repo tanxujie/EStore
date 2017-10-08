@@ -201,7 +201,8 @@ $(function() {
         var len = children.length;
         var newFileNames = data.response.data;
         for (var i = 0; i < len; i++) {
-            $(children[i]).append('<input type="hidden" name="imageNames" value="' + newFileNames[i] +  '"/>');
+            //$(children[i]).append('<input type="hidden" name="imageNames" value="' + newFileNames[i] +  '"/>');
+            $('[name="imageNames"]', children[i]).val(newFileNames[i]);
         }
     });
 /*    .on("filesuccessremove", function(id, fileidx){

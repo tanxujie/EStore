@@ -61,7 +61,8 @@ $(function() {
                     $("#txtFavorablePrice").val(data.data.favorablePrice);
                     $("#txtPrimaryPrice").val(data.data.primaryPrice);
                     loadMajorCategory(data.data.majorCategoryId);
-                    loadMinorCategory(data.data.majorCategoryId, data.data.minorCategoryId)
+                    loadMinorCategory(data.data.majorCategoryId, data.data.minorCategoryId);
+                    initImageFileUploader(data.data.imageInitialPreview, data.data.imagePreviewConfig);
                 }
             }
          );
@@ -194,46 +195,44 @@ $(function() {
         }
     });
 
-    var $imageFile = $("#imageFile").fileinput({
-        theme: "explorer",
-        uploadUrl: "/upload/image",
-        deleteUrl: "/upload/image/remove/",
-        uploadAsync: false,
-        language: 'zh',
-        showUpload: false,
-        showRemove: false,
-        showClose: false,
-        showCancel: false,
-        showZoom: false,
-        showDownload: false,
-        showBrowse: false,
-        browseOnZoneClick: true,
-        allowedPreviewTypes: ['image'],
-        allowedFileTypes: ['image'],
-        allowedFileExtensions: ['jpg', 'jpeg'],
-        hiddenThumbnailContent: true,
-        overwriteInitial: false,
-        initialPreviewAsData: true,
-        minFileCount: 1,
-        maxFileCount: 9,
-        initialPreview: [
-            //"/download/image/0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg"
-        ],
-        initialPreviewConfig: [
-            //{caption: "nature-1.jpg", size: 329892, width: "120px", key: '0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg'}
-        ]
-        //initialPreviewDownloadUrl: '/download/image/{key}'
-    }).on("filebatchselected", function(event, files){
-        $imageFile.fileinput("upload");
-    }).on("filebatchuploadsuccess", function(event, data, children) {
-        var len = children.length;
-        var newFileNames = data.response.data;
-        for (var i = 0; i < len; i++) {
-            $(children[i]).append('<input type="hidden" name="imageNames" value="' + newFileNames[i] +  '"/>');
-        }
-    });
-/*    .on("filesuccessremove", function(id, fileidx){
-    });*/
+    function initImageFileUploader(initPrews, initPrewCfgs) {
+        var $imageFile = $("#imageFile").fileinput({
+            theme: "explorer",
+            uploadUrl: "/upload/image",
+            deleteUrl: "/upload/image/remove/",
+            uploadAsync: false,
+            language: 'zh',
+            showUpload: false,
+            showRemove: false,
+            showClose: false,
+            showCancel: false,
+            showZoom: false,
+            showDownload: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            allowedPreviewTypes: ['image'],
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'jpeg'],
+            hiddenThumbnailContent: true,
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            minFileCount: 1,
+            maxFileCount: 9,
+            initialPreview: initPrews,
+            initialPreviewConfig: initPrewCfgs
+            //initialPreviewDownloadUrl: '/download/image/{key}'
+        }).on("filebatchselected", function(event, files){
+            $imageFile.fileinput("upload");
+        }).on("filebatchuploadsuccess", function(event, data, children) {
+            var len = children.length;
+            var newFileNames = data.response.data;
+            for (var i = 0; i < len; i++) {
+                $('[name="imageNames"]', children[i]).val(newFileNames[i]);
+            }
+        }).on("filedeleted", function(vKey, jqXHR, extraData){
+            //alert(vKey);
+        });
+    }
 
     var $videoFile = $("#videoFile").fileinput({
         theme: "explorer",
