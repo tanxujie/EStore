@@ -22,7 +22,6 @@ $(function() {
         }
     });
 
-    var $hiddenVideoFile = $("#hiddenVideoFile");
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
@@ -42,46 +41,35 @@ $(function() {
                         prompt: '标题中最多输入50个字符'
                     }
                 ]
-            }//,
-//            videoDate: {
-//                identifier: 'videoDate',
-//                rules:[
-//                    {
-//                        type:'regExp[^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$]',
-//                        prompt: '请输入正确的日期'
-//                    }
-//                ]
-//            }
+            }
         }
     });
 
-    var dz = new Dropzone("#videoDropZone", {
-        paramName: "videos",
-        maxFilesize: 50,
-        addRemoveLinks: true,
-        uploadMultiple: true,
-        thumbnailWidth:100,
-        thumbnailHeight:100,
-        thumbnailMethod: 'contain',
-        maxFiles:1,
-        acceptedFiles: ".mp4",
-        //acceptedFiles:"image/*",
-        url: '/upload/video',
-        success: function(file, resp) {
-            $("#messageArea").hide();
-            $hiddenVideoFile.append('<input type="hidden" name="videoName" value="' + resp.data[0] + '" />');
-            //file.previewElement.classList.add("dz-success");
-        },
-        error: function(file, response) {
-            //file.previewElement.classList.add("dz-error");
-        }
-/*        ,
-        removedfile: function(file) {
-            //alert("removefile");
-            //alert(file.content[0]);
-            dz.removeFile(file);
-           // return true;
-        }*/
+    var $videoFile = $("#videoFile").fileinput({
+        theme: "explorer",
+        uploadUrl: "/upload/image",
+        deleteUrl: "/upload/image/remove/",
+        uploadAsync: false,
+        language: 'zh',
+        showUpload: false,
+        showRemove: false,
+        showClose: false,
+        showCancel: false,
+        showZoom: false,
+        showDownload: false,
+        showBrowse: false,
+        browseOnZoneClick: true,
+        allowedPreviewTypes: ['video'],
+        allowedFileTypes: ['video'],
+        allowedFileExtensions: ['mp4'],
+        hiddenThumbnailContent: true,
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        maxFileCount: 1
+    }).on("filebatchselected", function(event, files){
+        $imageFile.fileinput("upload");
+    }).on("filebatchuploadsuccess", function(event, data, first){
+        first.append('<input type="hidden" name="videoName" value="' + data.response.data +  '"/>');
     });
 
     $("#btnSave").click(function(event) {

@@ -59,9 +59,9 @@ public class UploadController {
                     if (null == file || file.isEmpty()) {
                         continue;
                     }
-                    if (file.getSize() > Constants.MAX_UPLOAD_IMAGE_SIZE) {
+/*                    if (file.getSize() > Constants.MAX_UPLOAD_IMAGE_SIZE) {
                         continue;
-                    }
+                    }*/
                     String fileName = file.getOriginalFilename();
                     String suffix = fileName.substring(fileName.lastIndexOf("."));
                     String newFileName = UUID.randomUUID() + suffix;
@@ -98,9 +98,9 @@ public class UploadController {
                 if (null == file || file.isEmpty()) {
                     continue;
                 }
-                if (file.getSize() > Constants.MAX_UPLOAD_VIDEO_SIZE) {
+/*                if (file.getSize() > Constants.MAX_UPLOAD_VIDEO_SIZE) {
                     continue;
-                }
+                }*/
                 String filename = file.getOriginalFilename();
                 String suffix = filename.substring(filename.lastIndexOf("."));
                 String newfilename = UUID.randomUUID() + suffix;
