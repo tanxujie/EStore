@@ -30,6 +30,7 @@ import com.estore.product.mapper.ProductMapper;
 import com.estore.product.mapper.ProductVideoMapper;
 import com.estore.product.service.ProductService;
 import com.estore.utils.Constants;
+import com.estore.utils.ImageUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,15 +58,19 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseResult save(Product product) {
         if (this.productMapper.hasSameCodeProduct(product.getCode())) {
-            return new ResponseResult(false, "相同编码的产品已经存在，请输入新编码。"); 
+            return new ResponseResult(false, "相同编码的产品已经存在，请输入新编码。");
         }
         this.productMapper.insert(product);
 
-        String[] imageNames = product.getImageNames();
+        String[] imageNames = ImageUtils.removeDuplicate(product.getImageNames());
         if (ArrayUtils.isNotEmpty(imageNames)) {
             int displayOrder = 1;
+            ProductImage productImage = null;
             for (String imageName : imageNames) {
-                ProductImage productImage = new ProductImage();
+                if (StringUtils.substringBeforeLast(imageName, ".").length() != 36) {
+                    continue;
+                }
+                productImage = new ProductImage();
                 productImage.setProductId(product.getId());
                 productImage.setNewName(imageName);
                 productImage.setDisplayOrder(displayOrder);
@@ -74,7 +79,8 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-        if (StringUtils.isNotBlank(product.getVideoName())) {
+        if (StringUtils.isNotBlank(product.getVideoName()) 
+                && StringUtils.substringBeforeLast(product.getVideoName(), ".").length() == 36) {
             ProductVideo productVideo = new ProductVideo();
             productVideo.setProductId(product.getId());
             productVideo.setDisplayOrder(1);
@@ -160,7 +166,7 @@ public class ProductServiceImpl implements ProductService {
         PreviewConfig videopreviewConfig = null;
         for (ProductVideo video : productVideos) {
             videoInitialPreview.add("/download/image/" + video.getName());
-            
+
             videopreviewConfig = new PreviewConfig();
             videopreviewConfig.setCaption("");
             videopreviewConfig.setKey(video.getName());
@@ -200,7 +206,7 @@ public class ProductServiceImpl implements ProductService {
         this.productMapper.update(product);
 
         this.productImageMapper.deleteByProductId(product.getId());
-        String[] imageNames = product.getImageNames();
+        String[] imageNames = ImageUtils.removeDuplicate(product.getImageNames());
         if (ArrayUtils.isNotEmpty(imageNames)) {
             int displayOrder = 1;
             ProductImage productImage = null;

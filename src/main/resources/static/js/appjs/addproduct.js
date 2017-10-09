@@ -44,67 +44,6 @@ $(function() {
 
     loadMajorCategory();
 
-/*    var dz = new Dropzone("#videoDropZone", {
-        paramName: "videos",
-        maxFilesize: 50,
-        addRemoveLinks: true,
-        uploadMultiple: true,
-        thumbnailWidth:100,
-        thumbnailHeight:100,
-        thumbnailMethod: 'contain',
-        maxFiles:1,
-        acceptedFiles: ".mp4",
-        //acceptedFiles:"image/*",
-        url: '/upload/video',
-        success: function(file, resp) {
-            $("#messageArea").hide();
-            $hiddenVideoFile.append('<input type="hidden" name="videoName" value="' + resp.data[0] + '" />');
-            //file.previewElement.classList.add("dz-success");
-        },
-        error: function(file, response) {
-            //file.previewElement.classList.add("dz-error");
-        }
-        ,
-        removedfile: function(file) {
-            //alert("removefile");
-            //alert(file.content[0]);
-            dz.removeFile(file);
-           // return true;
-        }
-    });
-
-    var dz = new Dropzone("#imageDropZone", {
-        paramName: "images",
-        maxFilesize: 10,
-        addRemoveLinks: true,
-        uploadMultiple: true,
-        createImageThumbnails: true,
-        thumbnailWidth:120,
-        thumbnailHeight:120,
-        thumbnailMethod: 'contain',
-        dictRemoveLinks: "x",
-        dictCancelUpload: "x",
-        maxFiles:9,
-        //dictDefaultMessage: '上传图片',
-        dictRemoveFile: '删除',
-        acceptedFiles: ".jpg,.jpeg",
-        url: '/upload/image',
-        success: function(file, resp) {
-            $hiddenUploadFile.append('<input type="hidden" name="imageNames" value="' + resp.data[0] + '" />');
-            //file.previewElement.classList.add("dz-success");
-        },
-        error: function(file, response) {
-            //file.previewElement.classList.add("dz-error");
-        }
-        ,
-        removedfile: function(file) {
-            //alert("removefile");
-            //alert(file.content[0]);
-            dz.removeFile(file);
-           // return true;
-        }
-    });*/
-
     $("#formAdd").form({
         //on: 'submit',
         fields: {

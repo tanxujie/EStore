@@ -4,6 +4,12 @@
  */
 package com.estore.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -44,5 +50,22 @@ public final class ImageUtils {
             }
         }
         return false;
+    }
+
+    public static String[] removeDuplicate(String[] fileNames) {
+        if (ArrayUtils.isEmpty(fileNames)) {
+            return fileNames;
+        }
+
+        Map<String, Object> cache = new HashMap<>();
+        List<String> rtFiles = new ArrayList<>();
+        for (String fileName : fileNames) {
+            if (cache.containsKey(fileName)) {
+                continue;
+            }
+            rtFiles.add(fileName);
+            cache.put(fileName, null);
+        }
+        return rtFiles.toArray(new String[0]);
     }
 }

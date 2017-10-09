@@ -1,4 +1,5 @@
 $(function() {
+    $("#messageArea").hide();
     var id = getUrlParam('id');
     if (!isNumber(id)) {
         window.location = './product.html';
@@ -207,8 +208,14 @@ $(function() {
             event.stopPropagation();
             $.post("/product/modify", 
                     $("#formAdd").serialize(), 
-                    function() {
-                window.location = './product.html';
+                    function(data) {
+                if (data && data.success) {
+                    $("#messageArea").hide();
+                    window.location = './product.html';
+                } else {
+                    $("#message").text(data.data);
+                    $("#messageArea").show();
+                }
             });
         }
     });

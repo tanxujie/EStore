@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,6 +48,9 @@ public class ProductController {
             log.error("Data validation failed.", binding.getAllErrors());
             return new ResponseResult(false, "保存产品信息验证失败");
         }
+        if (ArrayUtils.isEmpty(data.getImageNames())) {
+            return new ResponseResult(false, "请上传至少一张产品图片。");
+        }
         return this.productService.save(data);
     }
 
@@ -62,8 +66,11 @@ public class ProductController {
             log.error("Data validation failed.", binding.getAllErrors());
             return new ResponseResult(false, "保存产品信息验证失败");
         }
+        if (ArrayUtils.isEmpty(data.getImageNames())) {
+            return new ResponseResult(false, "请上传至少一张产品图片。");
+        }
         this.productService.modify(data);
-        return new ResponseResult(false, "产品信息保存成功");
+        return new ResponseResult(true, "产品信息保存成功");
     }
 
     /**
