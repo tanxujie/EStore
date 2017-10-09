@@ -1,6 +1,5 @@
 $(function() {
-/*    var $hiddenVideoFile = $("#hiddenVideoFile");
-    var $hiddenUploadFile = $("#hiddenUploadFile");*/
+    $("#messageArea").hide();
     $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
     $('.ui.menu a.item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
@@ -187,14 +186,7 @@ $(function() {
         overwriteInitial: false,
         initialPreviewAsData: true,
         minFileCount: 1,
-        maxFileCount: 9,
-        initialPreview: [
-            //"/download/image/0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg"
-        ],
-        initialPreviewConfig: [
-            //{caption: "nature-1.jpg", size: 329892, width: "120px", key: '0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg'}
-        ]
-        //initialPreviewDownloadUrl: '/download/image/{key}'
+        maxFileCount: 9
     }).on("filebatchselected", function(event, files){
         $imageFile.fileinput("upload");
     }).on("filebatchuploadsuccess", function(event, data, children) {
@@ -228,14 +220,7 @@ $(function() {
         hiddenThumbnailContent: true,
         overwriteInitial: false,
         initialPreviewAsData: true,
-        maxFileCount: 1,
-        initialPreview: [
-            //"/download/image/0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg"
-        ],
-        initialPreviewConfig: [
-            //{caption: "nature-1.jpg", size: 329892, width: "120px", key: '0d9a99bc-9fb4-491d-8f04-f45c08f55cfc.jpg'}
-        ],
-        initialPreviewDownloadUrl: '/download/image/{key}'
+        maxFileCount: 1
     }).on("filebatchselected", function(event, files){
         $imageFile.fileinput("upload");
     }).on("filebatchuploadsuccess", function(event, data, first){
@@ -248,8 +233,14 @@ $(function() {
             event.stopPropagation();
             $.post("/product/add", 
                     $("#formAdd").serialize(), 
-                    function() {
-                window.location = './product.html';
+                    function(data) {
+                if (data && data.success) {
+                    $("#messageArea").hide();
+                    window.location = './product.html';
+                } else {
+                    $("#message").text(data.data);
+                    $("#messageArea").show();
+                }
             });
         }
     });

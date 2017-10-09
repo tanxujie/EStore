@@ -6,6 +6,7 @@ package com.estore.product.service;
 
 import java.util.List;
 
+import com.estore.base.ResponseResult;
 import com.estore.product.dto.ProductDto;
 import com.estore.product.dto.ProductListDto;
 import com.estore.product.dto.ProductPair;
@@ -22,7 +23,7 @@ public interface ProductService {
      * 
      * @param product
      */
-    void save(Product product);
+    ResponseResult save(Product product);
 
     /**
      * 删除产品信息

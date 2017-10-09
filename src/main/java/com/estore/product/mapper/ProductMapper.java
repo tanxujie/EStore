@@ -23,6 +23,8 @@ public interface ProductMapper {
      */
     int insert(Product entity);
 
+    boolean hasSameCodeProduct(String code);
+
     /**
      * 
      * @param id

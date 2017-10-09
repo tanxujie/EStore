@@ -10,6 +10,16 @@
         <result property="version" column="version"/>
     </resultMap>
 
+    <select id="selectByProductId" parameterType="int" resultMap="productVideo">
+        SELECT  id, 
+                product_id, 
+                display_order, 
+                name, 
+                version
+        FROM t_product_video
+        WHERE product_id = #{productId}
+    </select>
+
     <insert id="insert" parameterType="com.estore.product.entity.ProductImage" 
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO t_product_video(product_id, 

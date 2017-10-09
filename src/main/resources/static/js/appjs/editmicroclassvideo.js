@@ -33,7 +33,7 @@ $(function() {
                     $("#txtTitle").val(data.data.title);
                     $videoCalendar.calendar('set date', data.data.videoDateStr);
                     $("#txtDescription").val(data.data.description);
-                    initVideoFileUploader();
+                    initVideoFileUploader(data.data.videoInitialPreview, data.data.videoPreviewConfig);
                 }
             }
          );

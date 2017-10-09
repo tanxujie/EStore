@@ -251,6 +251,12 @@
         WHERE id = #{id}
     </select>
 
+    <select id="hasSameCodeProduct" parameterType="string" resultType="boolean">
+        SELECT COUNT(1) &gt;= 1
+        FROM t_product
+        WHERE code = #{code}
+    </select>
+
     <select id="selectShelf" parameterType="int" resultMap="product">
         SELECT  id, 
                 undershelf

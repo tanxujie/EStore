@@ -16,6 +16,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estore.base.ResponseResult;
 import com.estore.product.dto.PreviewConfig;
 import com.estore.product.dto.ProductDto;
 import com.estore.product.dto.ProductListDto;
@@ -51,9 +52,13 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 保存新的产品等相关信息
+     * @return 
      */
     @Override
-    public void save(Product product) {
+    public ResponseResult save(Product product) {
+        if (this.productMapper.hasSameCodeProduct(product.getCode())) {
+            return new ResponseResult(false, "相同编码的产品已经存在，请输入新编码。"); 
+        }
         this.productMapper.insert(product);
 
         String[] imageNames = product.getImageNames();
@@ -76,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
             productVideo.setName(product.getVideoName());
             this.productVideoMapper.insert(productVideo);
         }
+        return new ResponseResult(true, "产品信息保存成功");
     }
 
     /**
@@ -141,12 +147,27 @@ public class ProductServiceImpl implements ProductService {
         for (ProductImage image : productImages) {
             imageInitialPreview.add("/download/image/" + image.getNewName());
             previewConfig = new PreviewConfig();
-            previewConfig.setCaption(image.getOldName());
+            previewConfig.setCaption("");
             previewConfig.setKey(image.getNewName());
             imagePreviewConfig.add(previewConfig);
         }
         productDto.setImageInitialPreview(imageInitialPreview);
         productDto.setImagePreviewConfig(imagePreviewConfig);
+
+        List<ProductVideo> productVideos = this.productVideoMapper.selectByProductId(productId);
+        List<String> videoInitialPreview = new ArrayList<>();
+        List<PreviewConfig> videoPreviewConfig = new ArrayList<>();
+        PreviewConfig videopreviewConfig = null;
+        for (ProductVideo video : productVideos) {
+            videoInitialPreview.add("/download/image/" + video.getName());
+            
+            videopreviewConfig = new PreviewConfig();
+            videopreviewConfig.setCaption("");
+            videopreviewConfig.setKey(video.getName());
+            videoPreviewConfig.add(videopreviewConfig);
+        }
+        productDto.setVideoInitialPreview(videoInitialPreview);
+        productDto.setVideoPreviewConfig(videoPreviewConfig);
 
         return productDto;
     }

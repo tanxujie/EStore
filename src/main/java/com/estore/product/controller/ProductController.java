@@ -47,8 +47,7 @@ public class ProductController {
             log.error("Data validation failed.", binding.getAllErrors());
             return new ResponseResult(false, "保存产品信息验证失败");
         }
-        this.productService.save(data);
-        return new ResponseResult(false, "产品信息保存成功");
+        return this.productService.save(data);
     }
 
     /**

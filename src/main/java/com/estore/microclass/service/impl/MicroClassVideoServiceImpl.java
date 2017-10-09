@@ -6,6 +6,7 @@ package com.estore.microclass.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.estore.microclass.entity.MicroClassVideo;
 import com.estore.microclass.mapper.MicroClassVideoMapper;
 import com.estore.microclass.service.MicroClassVideoService;
+import com.estore.product.dto.PreviewConfig;
 import com.estore.utils.Constants;
 
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +62,24 @@ public class MicroClassVideoServiceImpl implements MicroClassVideoService {
 
     @Override
     public MicroClassVideo getDetail(int id) {
-        return this.microClassVideoMapper.select(id);
+        MicroClassVideo result = this.microClassVideoMapper.select(id);
+        if (null == result) {
+            return null;
+        }
+
+        List<String> videoInitialPreview = new ArrayList<>();
+        videoInitialPreview.add("/download/image/" + result.getNewName());
+
+        List<PreviewConfig> videoPreviewConfig = new ArrayList<>();
+        PreviewConfig videopreviewConfig = new PreviewConfig();
+        videopreviewConfig.setCaption("");
+        videopreviewConfig.setKey(result.getNewName());
+        videoPreviewConfig.add(videopreviewConfig);
+
+        result.setVideoInitialPreview(videoInitialPreview);
+        result.setVideoPreviewConfig(videoPreviewConfig);
+
+        return result;
     }
 
     @Override

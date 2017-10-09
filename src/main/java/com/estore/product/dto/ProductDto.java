@@ -144,4 +144,8 @@ public class ProductDto extends AbstractBaseDto {
     private List<String> imageInitialPreview;
 
     private List<PreviewConfig> imagePreviewConfig;
+
+    private List<String> videoInitialPreview;
+
+    private List<PreviewConfig> videoPreviewConfig;
 }

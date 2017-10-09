@@ -5,10 +5,12 @@
 package com.estore.microclass.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import com.estore.base.AbstractBaseEntity;
+import com.estore.product.dto.PreviewConfig;
 import com.estore.utils.Constants;
 
 import lombok.Data;
@@ -52,6 +54,11 @@ public class MicroClassVideo extends AbstractBaseEntity {
      * 视频日期
      */
     private Date videoDate;
+
+
+    private List<String> videoInitialPreview;
+
+    private List<PreviewConfig> videoPreviewConfig;
 
     public String getVideoDateStr() {
         if (null == this.videoDate) {
