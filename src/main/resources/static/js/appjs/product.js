@@ -17,7 +17,7 @@ $(function(){
                 if (pinfos && pinfos.length) {
                     var imgStr = '';
                     $.each(pinfos, function(i, d) {
-                        imgStr = imgStr + '<div class="card" style="width:260px;height:300px;"><div class="image" style="height:200px;"><img class="ui wireframe image" style="width:260px;height:200px;" src="'+d.imageName+'"></div><div class="content" style="height:50px;"><div class="header">'+(d.code||'')+'&nbsp;&nbsp;'+d.shelfStatus+'</div><div class="extra content"><div class="meta">'+(d.name||'')+'</div><div class="meta">价格：'+(d.price||'')+'</div></div></div><div class="footer"><div class="right aligned"><i class="large edit icon" title="编辑该产品" style="cursor:pointer;" pid="'+d.id+'"></i><i class="large remove icon" title="删除该产品" style="cursor:pointer;" pid="'+d.id+'"></i></div></div></div>';
+                        imgStr = imgStr + '<div class="card" style="width:260px;height:360px;"><div class="image" style="height:200px;"><img class="ui wireframe image" style="width:260px;height:200px;" src="'+d.imageName+'"></div><div class="content" style="height:50px;"><div class="header">'+(d.code||'')+'</div><div class="extra content"><div class="meta">'+(d.name||'')+'</div><div class="meta">价格：'+(d.price||'')+'</div></div></div><div class="footer"><div class="right aligned"><i>'+d.shelfStatus+'</i>&nbsp;&nbsp;&nbsp;<i class="large edit icon" title="编辑该产品" style="cursor:pointer;" pid="'+d.id+'"></i><i class="large remove icon" title="删除该产品" style="cursor:pointer;" pid="'+d.id+'"></i></div></div><br></div>';
                     });
 
                     $container.append($(imgStr));
