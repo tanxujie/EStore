@@ -66,26 +66,36 @@ public class ProductServiceImpl implements ProductService {
         if (ArrayUtils.isNotEmpty(imageNames)) {
             int displayOrder = 1;
             ProductImage productImage = null;
+            String[] imageFileNames = null;
             for (String imageName : imageNames) {
-                if (StringUtils.substringBeforeLast(imageName, ".").length() != 36) {
+                if (StringUtils.isBlank(imageName)) {
+                    continue;
+                }
+                imageFileNames = StringUtils.split(imageName, Constants.FILE_NAME_SEPARATOR);
+                if (StringUtils.substringBeforeLast(imageFileNames[0], ".").length() != 36) {
                     continue;
                 }
                 productImage = new ProductImage();
                 productImage.setProductId(product.getId());
-                productImage.setNewName(imageName);
+                productImage.setNewName(imageFileNames[0]);
+                if (imageFileNames.length == 2) {
+                    productImage.setOldName(imageFileNames[1]);
+                }
                 productImage.setDisplayOrder(displayOrder);
                 this.productImageMapper.insert(productImage);
                 displayOrder++;
             }
         }
 
-        if (StringUtils.isNotBlank(product.getVideoName()) 
-                && StringUtils.substringBeforeLast(product.getVideoName(), ".").length() == 36) {
-            ProductVideo productVideo = new ProductVideo();
-            productVideo.setProductId(product.getId());
-            productVideo.setDisplayOrder(1);
-            productVideo.setName(product.getVideoName());
-            this.productVideoMapper.insert(productVideo);
+        if (StringUtils.isNotBlank(product.getVideoName())) {
+            String[] videoFileNames = StringUtils.split(product.getVideoName(), Constants.FILE_NAME_SEPARATOR);
+            if (StringUtils.substringBeforeLast(videoFileNames[0], ".").length() == 36) {
+                ProductVideo productVideo = new ProductVideo();
+                productVideo.setProductId(product.getId());
+                productVideo.setDisplayOrder(1);
+                productVideo.setName(videoFileNames[0]);
+                this.productVideoMapper.insert(productVideo);
+            }
         }
         return new ResponseResult(true, "产品信息保存成功");
     }
@@ -153,7 +163,11 @@ public class ProductServiceImpl implements ProductService {
         for (ProductImage image : productImages) {
             imageInitialPreview.add("/download/image/" + image.getNewName());
             previewConfig = new PreviewConfig();
-            previewConfig.setCaption("");
+            if (StringUtils.isBlank(image.getOldName())) {
+                previewConfig.setCaption(image.getNewName());
+            } else {
+                previewConfig.setCaption(image.getOldName());
+            }
             previewConfig.setKey(image.getNewName());
             imagePreviewConfig.add(previewConfig);
         }
@@ -210,13 +224,21 @@ public class ProductServiceImpl implements ProductService {
         if (ArrayUtils.isNotEmpty(imageNames)) {
             int displayOrder = 1;
             ProductImage productImage = null;
+            String[] imageFileNames = null;
             for (String imageName : imageNames) {
-                if (StringUtils.substringBeforeLast(imageName, ".").length() != 36) {
+                if (StringUtils.isBlank(imageName)) {
+                    continue;
+                }
+                imageFileNames = StringUtils.split(imageName, Constants.FILE_NAME_SEPARATOR);
+                if (StringUtils.substringBeforeLast(imageFileNames[0], ".").length() != 36) {
                     continue;
                 }
                 productImage = new ProductImage();
                 productImage.setProductId(product.getId());
-                productImage.setNewName(imageName);
+                productImage.setNewName(imageFileNames[0]);
+                if (imageFileNames.length == 2) {
+                    productImage.setOldName(imageFileNames[1]);
+                }
                 productImage.setDisplayOrder(displayOrder);
                 this.productImageMapper.insert(productImage);
                 displayOrder++;
@@ -225,11 +247,14 @@ public class ProductServiceImpl implements ProductService {
 
         this.productVideoMapper.deleteByProductId(product.getId());
         if (StringUtils.isNotBlank(product.getVideoName())) {
-            ProductVideo productVideo = new ProductVideo();
-            productVideo.setProductId(product.getId());
-            productVideo.setDisplayOrder(1);
-            productVideo.setName(product.getVideoName());
-            this.productVideoMapper.insert(productVideo);
+            String[] videoFileNames = StringUtils.split(product.getVideoName(), Constants.FILE_NAME_SEPARATOR);
+            if (StringUtils.substringBeforeLast(videoFileNames[0], ".").length() == 36) {
+                ProductVideo productVideo = new ProductVideo();
+                productVideo.setProductId(product.getId());
+                productVideo.setDisplayOrder(1);
+                productVideo.setName(videoFileNames[0]);
+                this.productVideoMapper.insert(productVideo);
+            }
         }
     }
 

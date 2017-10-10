@@ -23,7 +23,7 @@ $(function() {
               }
         }
     });
-    
+
     // load details
     $.get('/microclassvideo/getDetail', 
             {'id': microclassvideoid}, 
@@ -57,16 +57,7 @@ $(function() {
                         prompt: '标题中最多输入50个字符'
                     }
                 ]
-            }//,
-//            videoDate: {
-//                identifier: 'videoDate',
-//                rules:[
-//                    {
-//                        type:'regExp[^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$]',
-//                        prompt: '请输入正确的日期'
-//                    }
-//                ]
-//            }
+            }
         }
     });
 
@@ -97,12 +88,8 @@ $(function() {
         }).on("filebatchselected", function(event, files){
         	$videoFile.fileinput("upload");
         }).on("filebatchuploadsuccess", function(event, data, children) {
-            var len = children.length;
-            var newFileNames = data.response.data;
-            for (var i = 0; i < len; i++) {
-                $('[name="imageNames"]', children[i]).val(newFileNames[i]);
-            }
-        }).on("filedeleted", function(vKey, jqXHR, extraData){
+            var filenames = data.response.data;
+            $('[name="videoName"]', children[0]).val(filenames[0]);
         });
     }
 

@@ -129,15 +129,11 @@ $(function() {
     }).on("filebatchselected", function(event, files){
         $imageFile.fileinput("upload");
     }).on("filebatchuploadsuccess", function(event, data, children) {
-        var len = children.length;
-        var newFileNames = data.response.data;
-        for (var i = 0; i < len; i++) {
-            //$(children[i]).append('<input type="hidden" name="imageNames" value="' + newFileNames[i] +  '"/>');
-            $('[name="imageNames"]', children[i]).val(newFileNames[i]);
+        var filenames = data.response.data;
+        for (var i = 0, len = (children.length <= filenames.length ? children.length : filenames.length); i < len; i++) {
+            $('[name="imageNames"]', children[i]).val(filenames[i]);
         }
     });
-/*    .on("filesuccessremove", function(id, fileidx){
-    });*/
 
     var $videoFile = $("#videoFile").fileinput({
         theme: "explorer",
@@ -161,9 +157,10 @@ $(function() {
         initialPreviewAsData: true,
         maxFileCount: 1
     }).on("filebatchselected", function(event, files){
-        $imageFile.fileinput("upload");
-    }).on("filebatchuploadsuccess", function(event, data, first){
-        first.append('<input type="hidden" name="videoName" value="' + data.response.data +  '"/>');
+        $videoFile.fileinput("upload");
+    }).on("filebatchuploadsuccess", function(event, data, children){
+        var filenames = data.response.data;
+        $('[name="videoName"]', children[0]).val(filenames[0]);
     });
 
     $("#btnSave").click(function(event) {

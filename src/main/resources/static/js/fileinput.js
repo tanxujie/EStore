@@ -2724,8 +2724,9 @@
                     'data': d,
                     'template': templ || cat,
                     'style': styleAttribs ? 'style="' + styleAttribs + '"' : '',
-                     'hiddenname': 'imageNames',
-                     'hiddenvalue': d.substring(d.lastIndexOf("/")+1)
+                     //'hiddenname': 'imageNames',
+                     'hiddenImageValue': ('image' === c ? d.substring(d.lastIndexOf("/")+1) : ''),
+                     'hiddenVideoValue': ('video' === c ? d.substring(d.lastIndexOf("/")+1) : '')
                 });
             };
             ind = ind || previewId.slice(previewId.lastIndexOf('-') + 1);

@@ -65,7 +65,7 @@ public class UploadController {
                     String fileName = file.getOriginalFilename();
                     String suffix = fileName.substring(fileName.lastIndexOf("."));
                     String newFileName = UUID.randomUUID() + suffix;
-                    fileNames.add(newFileName);
+                    fileNames.add(newFileName + Constants.FILE_NAME_SEPARATOR + fileName);
                     file.transferTo(new File(Constants.IMAGE_DIR_PATH + newFileName));
                 }
             }
@@ -104,7 +104,7 @@ public class UploadController {
                 String filename = file.getOriginalFilename();
                 String suffix = filename.substring(filename.lastIndexOf("."));
                 String newfilename = UUID.randomUUID() + suffix;
-                filenames.add(newfilename);
+                filenames.add(newfilename + Constants.FILE_NAME_SEPARATOR + filename);
                 file.transferTo(new File(Constants.VIDEO_DIR_PATH + newfilename));
             }
 

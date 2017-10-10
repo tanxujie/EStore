@@ -130,6 +130,9 @@ public final class Constants {
     public static final int MAJOR_CATEGORY_108_PRODUCTS = 2;
     public static final int MAJOR_CATEGORY_ENGRAVING = 6;
 
+    public static final String FILE_NAME_SEPARATOR = "|";
+    public static final String HIDDEN_TAG = "{hiddenTag}";
+
     public static final String GLOBAL_AUTH_TOKENS_CACHE = "EStoreAuthTokensCache";
 
     /**

@@ -68,8 +68,9 @@ $(function() {
         maxFileCount: 1
     }).on("filebatchselected", function(event, files){
         $imageFile.fileinput("upload");
-    }).on("filebatchuploadsuccess", function(event, data, first){
-        first.append('<input type="hidden" name="videoName" value="' + data.response.data +  '"/>');
+    }).on("filebatchuploadsuccess", function(event, data, children){
+        var filenames = data.response.data;
+        $('[name="videoName"]', children[0]).val(filenames[0]);
     });
 
     $("#btnSave").click(function(event) {
