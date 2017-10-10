@@ -4,6 +4,7 @@
  */
 package com.estore.microclass.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,9 +57,9 @@ public class MicroClassVideo extends AbstractBaseEntity {
     private Date videoDate;
 
 
-    private List<String> videoInitialPreview;
+    private List<String> videoInitialPreview = new ArrayList<>(0);
 
-    private List<PreviewConfig> videoPreviewConfig;
+    private List<PreviewConfig> videoPreviewConfig = new ArrayList<>(0);
 
     public String getVideoDateStr() {
         if (null == this.videoDate) {

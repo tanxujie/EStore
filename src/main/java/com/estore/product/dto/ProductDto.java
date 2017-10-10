@@ -5,6 +5,7 @@
 package com.estore.product.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.estore.base.AbstractBaseDto;
@@ -141,11 +142,11 @@ public class ProductDto extends AbstractBaseDto {
      */
     private List<ProductImage> images;
 
-    private List<String> imageInitialPreview;
+    private List<String> imageInitialPreview = new ArrayList<>(0);
 
-    private List<PreviewConfig> imagePreviewConfig;
+    private List<PreviewConfig> imagePreviewConfig = new ArrayList<>(0);
 
-    private List<String> videoInitialPreview;
+    private List<String> videoInitialPreview = new ArrayList<>(0);
 
-    private List<PreviewConfig> videoPreviewConfig;
+    private List<PreviewConfig> videoPreviewConfig = new ArrayList<>(0);
 }

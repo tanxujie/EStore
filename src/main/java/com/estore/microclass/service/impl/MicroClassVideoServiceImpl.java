@@ -67,17 +67,19 @@ public class MicroClassVideoServiceImpl implements MicroClassVideoService {
             return null;
         }
 
-        List<String> videoInitialPreview = new ArrayList<>();
-        videoInitialPreview.add("/download/image/" + result.getNewName());
+        if (StringUtils.isNotBlank(result.getNewName())) {
+            List<String> videoInitialPreview = new ArrayList<>();
+            videoInitialPreview.add("/download/image/" + result.getNewName());
 
-        List<PreviewConfig> videoPreviewConfig = new ArrayList<>();
-        PreviewConfig videopreviewConfig = new PreviewConfig();
-        videopreviewConfig.setCaption("");
-        videopreviewConfig.setKey(result.getNewName());
-        videoPreviewConfig.add(videopreviewConfig);
+            List<PreviewConfig> videoPreviewConfig = new ArrayList<>();
+            PreviewConfig videopreviewConfig = new PreviewConfig();
+            videopreviewConfig.setCaption("");
+            videopreviewConfig.setKey(result.getNewName());
+            videoPreviewConfig.add(videopreviewConfig);
 
-        result.setVideoInitialPreview(videoInitialPreview);
-        result.setVideoPreviewConfig(videoPreviewConfig);
+            result.setVideoInitialPreview(videoInitialPreview);
+            result.setVideoPreviewConfig(videoPreviewConfig);
+        }
 
         return result;
     }
