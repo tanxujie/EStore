@@ -5,6 +5,7 @@
 package com.estore.user.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,13 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping(path = "/initLogin", method = RequestMethod.POST)
+    public void initLogin() {
+        if (SecurityUtils.getSubject() != null && SecurityUtils.getSubject().getSession() != null) {
+            SecurityUtils.getSubject().logout();
+        }
+    }
 
     @RequestMapping(path = "/welcome")
     public String welcome() {
