@@ -16,6 +16,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estore.base.PaginationDto;
 import com.estore.base.ResponseResult;
 import com.estore.product.dto.PreviewConfig;
 import com.estore.product.dto.ProductDto;
@@ -104,19 +105,47 @@ public class ProductServiceImpl implements ProductService {
      * 
      */
     @Override
-    public List<ProductListDto> search(ProductSearchDto sdata) {
+    public PaginationDto<ProductListDto> search(ProductSearchDto sdata) {
         if (StringUtils.isNotBlank(sdata.getOrderBy())) {
             sdata.setOrderBy("A." + sdata.getOrderBy());
         }
-        return this.productMapper.selectAll(sdata);
+        PaginationDto<ProductListDto> result = new PaginationDto<ProductListDto>();
+        int totalCount = this.productMapper.countAll(sdata);
+        if (totalCount == 0) {
+        	result.setCurrentPage(1);
+        	result.setTotalPages(0);
+        	return result;
+        }
+        // 先向上取整，再向下取整
+        result.setTotalPages(new Double(Math.ceil((double)totalCount/(double)Constants.RECORD_COUNT_PER_PAGE)).intValue());
+        sdata.setCurrentPage(sdata.getCurrentPage() <= result.getTotalPages() ? sdata.getCurrentPage() : result.getTotalPages());
+        result.setCurrentPage(sdata.getCurrentPage());
+        List<ProductListDto> list = this.productMapper.selectAll(sdata);
+        result.setRecords(list);
+
+        return result;
     }
 
     @Override
-    public List<ProductListDto> searchUnderShelf(ProductSearchDto sdata) {
+    public PaginationDto<ProductListDto> searchUnderShelf(ProductSearchDto sdata) {
         if (StringUtils.isNotBlank(sdata.getOrderBy())) {
             sdata.setOrderBy("A." + sdata.getOrderBy());
         }
-        return this.productMapper.selectAllUnderShelf(sdata);
+        PaginationDto<ProductListDto> result = new PaginationDto<ProductListDto>();
+        int totalCount = this.productMapper.countAllUnderShelf(sdata);
+        if (totalCount == 0) {
+        	result.setCurrentPage(1);
+        	result.setTotalPages(0);
+        	return result;
+        }
+        // 先向上取整，再向下取整
+        result.setTotalPages(new Double(Math.ceil((double)totalCount/(double)Constants.RECORD_COUNT_PER_PAGE)).intValue());
+        sdata.setCurrentPage(sdata.getCurrentPage() <= result.getTotalPages() ? sdata.getCurrentPage() : result.getTotalPages());
+        result.setCurrentPage(sdata.getCurrentPage());
+        List<ProductListDto> list = this.productMapper.selectAllUnderShelf(sdata);
+        result.setRecords(list);
+        
+        return result;
     }
 
     /**

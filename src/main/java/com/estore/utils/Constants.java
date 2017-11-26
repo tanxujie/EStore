@@ -116,7 +116,7 @@ public final class Constants {
      */
     public static final String ROLE_CODE_LEVEL2_AGENT = "l2agent";
 
-    public static final int RECORD_COUNT_PER_PAGE = 24;
+    public static final int RECORD_COUNT_PER_PAGE = 2;
 
     //public static final int MAJOR_CATEGORY_HAND_ON = 2;
     //public static final int MAJOR_CATEGORY_WATER_DROP = 3;

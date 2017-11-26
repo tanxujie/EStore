@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estore.base.PaginationDto;
 import com.estore.base.ResponseResult;
 import com.estore.product.dto.ProductDto;
 import com.estore.product.dto.ProductListDto;
@@ -81,8 +82,8 @@ public class ProductController {
     @RequestMapping(path = "/product/search", method = RequestMethod.GET)
     @CrossOrigin
     public ResponseResult search(ProductSearchDto sdata) {
-        List<ProductListDto> results = this.productService.search(sdata);
-        if (CollectionUtils.isEmpty(results)) {
+    	PaginationDto<ProductListDto> results = this.productService.search(sdata);
+        if (results.getTotalPages() == 0) {
             return new ResponseResult(false, "查询数据不存在");
         }
         return new ResponseResult(true, results);
@@ -91,8 +92,8 @@ public class ProductController {
     @RequestMapping(path = "/product/searchUnderShelf", method = RequestMethod.GET)
     @CrossOrigin
     public ResponseResult searchUnderShelf(ProductSearchDto sdata) {
-        List<ProductListDto> results = this.productService.searchUnderShelf(sdata);
-        if (CollectionUtils.isEmpty(results)) {
+    	PaginationDto<ProductListDto> results = this.productService.searchUnderShelf(sdata);
+        if (results.getTotalPages() == 0) {
             return new ResponseResult(false, "查询数据不存在");
         }
         return new ResponseResult(true, results);

@@ -39,6 +39,7 @@ public interface ProductMapper {
      */
     int update(Product entity);
 
+    int countAll(ProductSearchDto condition);
     /**
      * 
      * @param condition
@@ -46,6 +47,9 @@ public interface ProductMapper {
      */
     List<ProductListDto> selectAll(ProductSearchDto condition);
 
+    int countAllUnderShelf(ProductSearchDto condition);
+
+    
     /**
      * 
      * @param condition

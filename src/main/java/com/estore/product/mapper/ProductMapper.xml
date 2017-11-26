@@ -65,6 +65,28 @@
         <result property="innerDetail" column="inner_detail"/>
     </resultMap>
 
+    <select id="countAll" resultType="int" parameterType="com.estore.product.dto.ProductSearchDto">
+        SELECT COUNT(1)
+        FROM t_product A
+        LEFT JOIN
+             t_product_image B
+        ON A.id = B.product_id 
+        AND B.display_order = 1
+        WHERE undershelf IS FALSE   
+        <if test="condition != null and condition != ''">
+        AND (A.code LIKE '%'||#{condition}||'%' OR A.name LIKE '%'||#{condition}||'%' OR A.description LIKE '%'||#{condition}||'%')
+        </if>
+        <if test="newProduct">
+        AND A.created_time &gt;= (NOW()-INTERVAL'5 day')
+        </if>
+        <if test="majorCategoryId > 0">
+        AND A.major_category_id = #{majorCategoryId}
+        </if>
+        <if test="minorCategoryId > 0">
+        AND A.minor_category_id = #{minorCategoryId}
+        </if>
+    </select>
+    
     <select id="selectAll" resultMap="productListDto" parameterType="com.estore.product.dto.ProductSearchDto">
         SELECT  A.id, 
                 A.code,
@@ -107,6 +129,29 @@
             ORDER BY A.created_time DESC
             </otherwise>
         </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAllUnderShelf" resultType="int" parameterType="com.estore.product.dto.ProductSearchDto">
+        SELECT COUNT(1)
+        FROM t_product A
+        LEFT JOIN
+             t_product_image B
+        ON A.id = B.product_id 
+        AND B.display_order = 1
+        WHERE undershelf IS TRUE  
+        <if test="condition != null and condition != ''">
+        AND (A.code LIKE '%'||#{condition}||'%' OR A.name LIKE '%'||#{condition}||'%' OR A.description LIKE '%'||#{condition}||'%')
+        </if>
+        <if test="newProduct">
+        AND A.created_time &gt;= (NOW()-INTERVAL'5 day')
+        </if>
+        <if test="majorCategoryId > 0">
+        AND A.major_category_id = #{majorCategoryId}
+        </if>
+        <if test="minorCategoryId > 0">
+        AND A.minor_category_id = #{minorCategoryId}
+        </if>
     </select>
 
     <select id="selectAllUnderShelf" resultMap="productListDto" parameterType="com.estore.product.dto.ProductSearchDto">
@@ -151,6 +196,7 @@
             ORDER BY A.created_time DESC
             </otherwise>
         </choose>
+        LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <select id="selectAllForApp" resultMap="product" parameterType="com.estore.product.dto.ProductSearchDto">

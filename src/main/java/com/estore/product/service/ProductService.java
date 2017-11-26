@@ -6,6 +6,7 @@ package com.estore.product.service;
 
 import java.util.List;
 
+import com.estore.base.PaginationDto;
 import com.estore.base.ResponseResult;
 import com.estore.product.dto.ProductDto;
 import com.estore.product.dto.ProductListDto;
@@ -44,9 +45,9 @@ public interface ProductService {
      * @param sdata
      * @return
      */
-    List<ProductListDto> search(ProductSearchDto sdata);
+    PaginationDto<ProductListDto> search(ProductSearchDto sdata);
 
-    List<ProductListDto> searchUnderShelf(ProductSearchDto sdata);
+    PaginationDto<ProductListDto> searchUnderShelf(ProductSearchDto sdata);
 
     /**
      * 

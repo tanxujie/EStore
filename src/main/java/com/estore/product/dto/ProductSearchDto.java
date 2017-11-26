@@ -79,7 +79,7 @@ public class ProductSearchDto {
 
     private int limit = Constants.RECORD_COUNT_PER_PAGE;
 
-    private int page;
+    private int currentPage;
 
     public int getMajorCategoryId() {
         int rt = this.majorCategoryId;
@@ -97,7 +97,10 @@ public class ProductSearchDto {
         return rt;
     }
     public int getOffset() {
-        return limit * page;
+    	if (this.currentPage <= 1) {
+    		return 0;
+    	}
+        return limit * (currentPage -1);
     }
     public boolean isDesc() {
         return Constants.ORDER_DESC.equalsIgnoreCase(this.orderDirection);
